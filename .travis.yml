@@ -4,6 +4,9 @@ jdk: openjdk11
  
 git:
   depth: 9999999
+
+before_install:
+- chmod +x gradlew
  
 addons:
   sonarcloud:
