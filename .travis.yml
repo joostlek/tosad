@@ -14,9 +14,12 @@ addons:
     token: $SONAR_TOKEN
  
 script:
-  - mvn clean package sonar:sonar -Dsonar.projectKey=joostlek_tosad -Dsonar.organization=joostlek-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
- 
+  - ./gradlew test
+  - ./gradlew sonarqube
+
 cache:
   directories:
     - '$HOME/.m2/repository'
     - '$HOME/.sonar/cache'
+    - '$HOME/.gradle'
+    - '.gradle'
