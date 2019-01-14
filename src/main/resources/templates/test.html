@@ -6,10 +6,15 @@
 </head>
 <body>
 <table>
-    <tr th:each="businessRule: ${businessRules}">
-        <td th:text="${businessRule.getId()}"/>
-        <td th:text="${businessRule.getName()}"/>
+    <tr th:each="br: ${businessRules}">
+        <td th:text="${br.getId()}"/>
+        <td th:text="${br.getName()}"/>
     </tr>
 </table>
+<form action="#" th:action="@{/addRule}" th:object="${businessRule}" method="post">
+    <p>Id: <input type="text" th:field="*{name}"/></p>
+    <p>Id: <input type="text" th:field="*{range}"/></p>
+    <input type="submit">
+</form>
 </body>
 </html>
