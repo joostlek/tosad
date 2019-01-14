@@ -1,6 +1,7 @@
 package nl.hu.tosad.entities;
 
 import nl.hu.tosad.entities.domain.AttributeRangeRule;
+import nl.hu.tosad.entities.domain.BusinessRule;
 
 public class AttributeRangeRuleBuilder implements BusinessRuleBuilder {
     private AttributeRangeRule attributeRangeRule;
@@ -19,5 +20,10 @@ public class AttributeRangeRuleBuilder implements BusinessRuleBuilder {
     public BusinessRuleBuilder setRange(String range) {
         this.attributeRangeRule.setRange(range);
         return this;
+    }
+
+    @Override
+    public BusinessRule build() {
+        return attributeRangeRule;
     }
 }

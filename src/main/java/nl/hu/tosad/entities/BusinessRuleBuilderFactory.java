@@ -1,12 +1,15 @@
 package nl.hu.tosad.entities;
 
+import org.springframework.stereotype.Component;
+
 import javax.naming.OperationNotSupportedException;
 
+@Component
 public class BusinessRuleBuilderFactory implements BusinessRuleBuilderFactoryInterface {
     public BusinessRuleBuilder getBuilder(BusinessRuleTypes type) throws OperationNotSupportedException {
         switch (type) {
             case ATTRIBUTE_RANGE_RULE:
-                throw new OperationNotSupportedException();
+                return new AttributeRangeRuleBuilder();
             case ATTRIBUTE_COMPARE_RULE:
                 return new AttributeRangeRuleBuilder();
             case ATTRIBUTE_LIST_RULE:
