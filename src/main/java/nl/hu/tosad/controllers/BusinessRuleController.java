@@ -13,7 +13,7 @@ public class BusinessRuleController {
 
     @GetMapping("/")
     public String test(Model model) {
-        model.addAttribute("businessRule", businessRuleService.getBusinessRuleById(2L));
+        model.addAttribute("businessRules", businessRuleService.getAllBusinessRules());
         return "test";
     }
 }

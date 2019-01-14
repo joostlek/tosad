@@ -22,7 +22,7 @@ public class TosadApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         BusinessRule businessRule = new AttributeRangeRule();
         businessRule.setName("asd");
-        businessRuleService.save(businessRule);
+        businessRuleService.saveBusinessRule(businessRule);
     }
 }
 

@@ -5,6 +5,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<p th:text="'Hello, ' + ${businessRule.getName()} + '!'"/>
+<table>
+    <tr th:each="businessRule: ${businessRules}">
+        <td th:text="${businessRule.getId()}"/>
+        <td th:text="${businessRule.getName()}"/>
+    </tr>
+</table>
 </body>
 </html>

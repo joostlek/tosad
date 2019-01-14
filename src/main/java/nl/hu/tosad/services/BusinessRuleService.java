@@ -5,6 +5,8 @@ import nl.hu.tosad.repositories.BusinessRuleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BusinessRuleService implements BusinessRuleServiceInterface {
 
@@ -21,7 +23,12 @@ public class BusinessRuleService implements BusinessRuleServiceInterface {
     }
 
     @Override
-    public BusinessRule save(BusinessRule businessRule) {
+    public BusinessRule saveBusinessRule(BusinessRule businessRule) {
         return businessRuleRepository.save(businessRule);
+    }
+
+    @Override
+    public List<BusinessRule> getAllBusinessRules() {
+        return businessRuleRepository.findAll();
     }
 }
