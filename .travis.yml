@@ -1,18 +1,21 @@
 sudo: required
 language: java
 jdk: openjdk11
- 
+
 git:
   depth: 9999999
 
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+
 before_install:
-- chmod +x gradlew
- 
+  - chmod +x gradlew
+
 addons:
   sonarcloud:
     organization: "joostlek-github"
     token: $SONAR_TOKEN
- 
+
 script:
   - ./gradlew test
   - ./gradlew sonarqube
