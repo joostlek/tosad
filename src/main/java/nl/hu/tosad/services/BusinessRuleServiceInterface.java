@@ -1,6 +1,6 @@
 package nl.hu.tosad.services;
 
-import nl.hu.tosad.entities.BusinessRule;
+import nl.hu.tosad.entities.domain.BusinessRule;
 
 import java.util.List;
 

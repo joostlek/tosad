@@ -1,4 +1,4 @@
-package nl.hu.tosad.entities;
+package nl.hu.tosad.entities.domain;
 
 import javax.persistence.*;
 

@@ -1,6 +1,6 @@
 package nl.hu.tosad.services;
 
-import nl.hu.tosad.entities.BusinessRule;
+import nl.hu.tosad.entities.domain.BusinessRule;
 import nl.hu.tosad.repositories.BusinessRuleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

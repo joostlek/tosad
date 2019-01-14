@@ -1,6 +1,6 @@
 package nl.hu.tosad.repositories;
 
-import nl.hu.tosad.entities.BusinessRule;
+import nl.hu.tosad.entities.domain.BusinessRule;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

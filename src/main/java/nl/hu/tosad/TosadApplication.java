@@ -1,7 +1,7 @@
 package nl.hu.tosad;
 
-import nl.hu.tosad.entities.AttributeRangeRule;
-import nl.hu.tosad.entities.BusinessRule;
+import nl.hu.tosad.entities.domain.AttributeRangeRule;
+import nl.hu.tosad.entities.domain.BusinessRule;
 import nl.hu.tosad.services.BusinessRuleServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

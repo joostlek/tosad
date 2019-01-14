@@ -1,4 +1,6 @@
-package nl.hu.tosad.entities;
+package nl.hu.tosad.entities.domain;
+
+import nl.hu.tosad.entities.BusinessRuleTypes;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
