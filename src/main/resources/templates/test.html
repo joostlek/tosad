@@ -11,6 +11,7 @@
         <td th:text="${br.getName()}"/>
     </tr>
 </table>
+<h1>Define a Attribute Range Rule:</h1>
 <form action="#" th:action="@{/addRule}" th:object="${businessRule}" method="post">
     <p>Column: <input type="text" th:field="*{name}"/></p>
     <p>Number: <input type="text" th:field="*{rangeStart}"/></p>
