@@ -24,9 +24,9 @@ public class BusinessRuleController {
     BusinessRuleBuilderFactoryInterface businessRuleBuilderFactoryInterface;
 
     @GetMapping("/")
-    public String list(Model model) {
+    public String ruleList(Model model) {
         model.addAttribute("businessRules", businessRuleService.getAllBusinessRules());
-        return "list";
+        return "ruleList";
     }
 
     @GetMapping("/add")
