@@ -20,7 +20,7 @@ addons:
     token: $SONAR_TOKEN
 
 script:
-  - TERM=dumb ./gradlew test
+  - TERM=dumb ./gradlew :webserver:test
   - TERM=dumb ./gradlew sonarqube
 
 cache:
