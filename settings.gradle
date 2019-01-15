@@ -1,1 +1,5 @@
 rootProject.name = 'tosad'
+
+include 'generator'
+include 'webserver'
+

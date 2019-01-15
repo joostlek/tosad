@@ -1,0 +1,19 @@
+buildscript {
+    repositories { mavenCentral() }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+jar {
+    baseName = 'generator'
+    version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 11
+
+repositories { mavenCentral() }
+
+dependencies {
+    runtimeOnly('org.postgresql:postgresql')
+    compile project(':webserver')
+}
