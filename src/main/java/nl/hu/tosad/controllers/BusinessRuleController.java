@@ -30,11 +30,10 @@ public class BusinessRuleController {
         return "test";
     }
 
+
     @PostMapping("/addRule")
-    public String greetingSubmit(@ModelAttribute AttributeRangeRuleDTO businessRule) {
-        try {
+    public String greetingSubmit(@ModelAttribute AttributeRangeRuleDTO businessRule, Model model) throws OperationNotSupportedException {
             BusinessRuleBuilder businessRuleBuilder = businessRuleBuilderFactoryInterface.getBuilder(BusinessRuleTypes.ATTRIBUTE_RANGE_RULE);
-            System.out.println(businessRule.getOperator());
             BusinessRule businessRule1 = businessRuleBuilder
                     .setName(businessRule.getName())
                     .setRangeStart(businessRule.getRangeStart())
@@ -42,11 +41,8 @@ public class BusinessRuleController {
                     .setOperator(businessRule.getOperator())
                     .build();
             BusinessRule businessRule2 = businessRuleService.saveBusinessRule(businessRule1);
-            System.out.println(businessRule2);
-        } catch (OperationNotSupportedException e) {
-            e.printStackTrace();
-        }
-        return "test";
+            model.addAttribute("MadeBusinessRule", businessRule2);
+            return "define_rule_succeed";
     }
 
 }
