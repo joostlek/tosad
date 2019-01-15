@@ -24,12 +24,16 @@ public class BusinessRuleController {
     BusinessRuleBuilderFactoryInterface businessRuleBuilderFactoryInterface;
 
     @GetMapping("/")
-    public String test(Model model) {
-        model.addAttribute("businessRule", new AttributeRangeRuleDTO());
+    public String list(Model model) {
         model.addAttribute("businessRules", businessRuleService.getAllBusinessRules());
-        return "test";
+        return "list";
     }
 
+    @GetMapping("/add")
+    public String add(Model model) {
+        model.addAttribute("businessRule", new AttributeRangeRuleDTO());
+        return "add";
+    }
 
     @PostMapping("/addRule")
     public String greetingSubmit(@ModelAttribute AttributeRangeRuleDTO businessRule, Model model) throws OperationNotSupportedException {
