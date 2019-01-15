@@ -34,9 +34,12 @@ public class BusinessRuleController {
     public String greetingSubmit(@ModelAttribute AttributeRangeRuleDTO businessRule) {
         try {
             BusinessRuleBuilder businessRuleBuilder = businessRuleBuilderFactoryInterface.getBuilder(BusinessRuleTypes.ATTRIBUTE_RANGE_RULE);
+            System.out.println(businessRule.getOperator());
             BusinessRule businessRule1 = businessRuleBuilder
                     .setName(businessRule.getName())
-                    .setRange(businessRule.getRange())
+                    .setRangeStart(businessRule.getRangeStart())
+                    .setRangeEnd(businessRule.getRangeEnd())
+                    .setOperator(businessRule.getOperator())
                     .build();
             BusinessRule businessRule2 = businessRuleService.saveBusinessRule(businessRule1);
             System.out.println(businessRule2);

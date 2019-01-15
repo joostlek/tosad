@@ -1,8 +1,13 @@
 package nl.hu.tosad.entities.domain.dto;
 
+import nl.hu.tosad.entities.domain.AttributeRangeRule;
 import nl.hu.tosad.entities.domain.Operator;
 
+import java.util.List;
+
 public class AttributeRangeRuleDTO {
+    private List<Operator> operators = AttributeRangeRule.POSSIBLE_OPERATORS;
+
     private String name;
 
     private Operator operator;
@@ -41,5 +46,9 @@ public class AttributeRangeRuleDTO {
 
     public void setRangeEnd(int rangeEnd) {
         this.rangeEnd = rangeEnd;
+    }
+
+    public List<Operator> getPossibleOperators() {
+        return this.operators;
     }
 }

@@ -13,7 +13,14 @@
 </table>
 <form action="#" th:action="@{/addRule}" th:object="${businessRule}" method="post">
     <p>Id: <input type="text" th:field="*{name}"/></p>
-    <p>Id: <input type="text" th:field="*{range}"/></p>
+    <p>Id: <input type="text" th:field="*{rangeStart}"/></p>
+    <select th:field="*{operator}">
+        <option th:each="state : ${businessRule.getPossibleOperators()}"
+                th:value="${state}"
+                th:text="${state}">
+        </option>
+    </select>
+    <p>Id: <input type="text" th:field="*{rangeEnd}"/></p>
     <input type="submit">
 </form>
 </body>
