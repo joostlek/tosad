@@ -1,14 +1,27 @@
 buildscript {
-    repositories { mavenCentral() }
+    repositories { 
+        mavenCentral() 
+    }
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'application'
 
 jar {
     baseName = 'generator'
     version = '0.0.1-SNAPSHOT'
+    manifest {
+        attributes(
+                'Main-Class': 'nl.hu.generator.Main'
+        )
+    }
 }
+
+run {
+    main = 'nl.hu.generator.Main'
+}
+
 sourceCompatibility = 11
 
 repositories { mavenCentral() }
