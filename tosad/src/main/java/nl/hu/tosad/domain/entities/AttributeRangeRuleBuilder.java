@@ -3,6 +3,7 @@ package nl.hu.tosad.domain.entities;
 import nl.hu.tosad.domain.entities.domain.AttributeRangeRule;
 import nl.hu.tosad.domain.entities.domain.BusinessRule;
 import nl.hu.tosad.domain.entities.domain.Operator;
+import nl.hu.tosad.domain.entities.domain.database.DbColumn;
 
 public class AttributeRangeRuleBuilder implements BusinessRuleBuilder {
     private AttributeRangeRule attributeRangeRule;
@@ -32,6 +33,12 @@ public class AttributeRangeRuleBuilder implements BusinessRuleBuilder {
     @Override
     public BusinessRuleBuilder setRangeEnd(int rangeEnd) {
         this.attributeRangeRule.setRangeEnd(rangeEnd);
+        return this;
+    }
+
+    @Override
+    public BusinessRuleBuilder setColumn(DbColumn dbColumn) {
+        this.attributeRangeRule.setColumn(dbColumn);
         return this;
     }
 
