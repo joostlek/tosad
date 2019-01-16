@@ -11,6 +11,6 @@ public class AttributeRangeRulePostgresqlTemplate implements Template {
 
     @Override
     public String getSQL() {
-        return "CHECK (" + attributeRangeRule.getName() + " " + attributeRangeRule.getOperator().name() + " " + attributeRangeRule.getRangeStart() + " AND " + attributeRangeRule.getRangeEnd() + ")";
+        return "CHECK (" + attributeRangeRule.getName() + " " + attributeRangeRule.getOperator().getString() + " " + attributeRangeRule.getRangeStart() + " AND " + attributeRangeRule.getRangeEnd() + ")";
     }
 }
