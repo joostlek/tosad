@@ -19,4 +19,9 @@ public class DbTable {
 
     @OneToMany(mappedBy = "table")
     private List<DbColumn> columns;
+
+    public DbTable(String name, Database database) {
+        this.name = name;
+        this.database = database;
+    }
 }
