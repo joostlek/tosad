@@ -1,6 +1,9 @@
 package nl.hu.tosad.domain.entities.domain.database;
 
+import nl.hu.tosad.domain.entities.domain.BusinessRule;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "db_column")
@@ -17,5 +20,11 @@ public class DbColumn {
     @JoinColumn(name = "fk_table")
     private DbTable table;
 
+    @OneToMany
+    private List<BusinessRule> businessRules;
 
+    public DbColumn(String name, DbTable table) {
+        this.name = name;
+        this.table = table;
+    }
 }
