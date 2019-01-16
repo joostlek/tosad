@@ -1,5 +1,7 @@
 package nl.hu.tosad.domain.entities.domain.database;
 
+import javax.persistence.*;
+
 @Entity
 @Table(name = "db_column")
 public class DbColumn {

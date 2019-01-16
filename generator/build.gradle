@@ -8,6 +8,8 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'application'
 
+mainClassName = 'nl.hu.tosad.generator.Main'
+
 jar {
     baseName = 'generator'
     version = '0.0.1-SNAPSHOT'
@@ -19,7 +21,7 @@ jar {
 }
 
 run {
-    main = 'nl.hu.generator.Main'
+    main = 'nl.hu.tosad.generator.Main'
 }
 
 sourceCompatibility = 11
@@ -28,5 +30,6 @@ repositories { mavenCentral() }
 
 dependencies {
     runtimeOnly('org.postgresql:postgresql:42.2.5')
+    implementation('org.springframework.boot:spring-boot-starter-data-jpa:2.1.2.RELEASE')
     compile project(':tosad')
 }

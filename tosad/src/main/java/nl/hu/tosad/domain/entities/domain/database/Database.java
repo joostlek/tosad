@@ -1,5 +1,6 @@
 package nl.hu.tosad.domain.entities.domain.database;
 
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
