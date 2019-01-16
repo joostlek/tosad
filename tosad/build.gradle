@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+}
+
+group 'nl.hu'
+version '0.0.0'
+
+sourceCompatibility = 11
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+}

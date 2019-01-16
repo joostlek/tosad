@@ -27,6 +27,6 @@ sourceCompatibility = 11
 repositories { mavenCentral() }
 
 dependencies {
-    runtimeOnly('org.postgresql:postgresql')
-    compile project(':webserver')
+    runtimeOnly('org.postgresql:postgresql:42.2.5')
+    compile project(':tosad')
 }
