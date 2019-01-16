@@ -1,4 +1,4 @@
-package nl.hu.tosad.webserver.services;
+package nl.hu.tosad.webserver.business_rules;
 
 import nl.hu.tosad.domain.entities.domain.BusinessRule;
 

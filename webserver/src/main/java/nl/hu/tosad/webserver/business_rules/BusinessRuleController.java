@@ -1,4 +1,4 @@
-package nl.hu.tosad.webserver.controllers;
+package nl.hu.tosad.webserver.business_rules;
 
 import nl.hu.tosad.domain.entities.BusinessRuleBuilder;
 import nl.hu.tosad.domain.entities.BusinessRuleBuilderFactory;
@@ -6,7 +6,6 @@ import nl.hu.tosad.domain.entities.BusinessRuleBuilderFactoryInterface;
 import nl.hu.tosad.domain.entities.BusinessRuleTypes;
 import nl.hu.tosad.domain.entities.domain.BusinessRule;
 import nl.hu.tosad.domain.entities.domain.dto.AttributeRangeRuleDTO;
-import nl.hu.tosad.webserver.services.BusinessRuleServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
