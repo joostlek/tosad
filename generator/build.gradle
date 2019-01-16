@@ -15,9 +15,26 @@ jar {
     version = '0.0.1-SNAPSHOT'
     manifest {
         attributes(
-                'Main-Class': 'nl.hu.generator.Main'
+                'Main-Class': 'nl.hu.tosad.generator.Main'
         )
     }
+}
+
+task fatJar(type: Jar) {
+    manifest.from jar.manifest
+    classifier = 'all'
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    } {
+        exclude "META-INF/*.SF"
+        exclude "META-INF/*.DSA"
+        exclude "META-INF/*.RSA"
+    }
+    with jar
+}
+
+artifacts {
+    archives fatJar
 }
 
 run {
