@@ -1,16 +1,20 @@
 package nl.hu.tosad.domain.ruletype;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
 public class Category {
+    @Id
+    @Column(nullable = false)
     private String code;
 
     private String name;
 
-    @ManyToOne
+    @OneToMany(mappedBy = "category")
     private List<BusinessRuleType> businessRuleType;
 
     public Category(String code, String name) {

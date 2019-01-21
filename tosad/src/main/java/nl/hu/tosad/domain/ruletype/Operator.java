@@ -2,32 +2,34 @@ package nl.hu.tosad.domain.ruletype;
 
 import nl.hu.tosad.domain.rule.BusinessRule;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class Operator {
 
-    private int id;
+    @Id
+    @SequenceGenerator(name = "operator_id_generator", sequenceName = "db_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "operator_id_generator")
+    private Long id;
     private String sign;
 
-    @ManyToMany
-    private List<BusinessRuleType> businesRuleTypes;
+    @ManyToMany(mappedBy = "availableOperators")
+    private List<BusinessRuleType> businessRuleTypes;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "operator")
     private List<BusinessRule> businessRules;
 
-    public Operator(int id, String sign) {
+    public Operator(Long id, String sign) {
         this.id = id;
         this.sign = sign;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -39,12 +41,12 @@ public class Operator {
         this.sign = sign;
     }
 
-    public List<BusinessRuleType> getBusinesRuleTypes() {
-        return businesRuleTypes;
+    public List<BusinessRuleType> getBusinessRuleTypes() {
+        return businessRuleTypes;
     }
 
-    public void setBusinesRuleTypes(List<BusinessRuleType> businesRuleTypes) {
-        this.businesRuleTypes = businesRuleTypes;
+    public void setBusinessRuleTypes(List<BusinessRuleType> businessRuleTypes) {
+        this.businessRuleTypes = businessRuleTypes;
     }
 
     public List<BusinessRule> getBusinessRules() {

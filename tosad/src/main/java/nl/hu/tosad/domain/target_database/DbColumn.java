@@ -1,6 +1,7 @@
 package nl.hu.tosad.domain.target_database;
 
 import nl.hu.tosad.domain.rule.BusinessRule;
+import nl.hu.tosad.domain.rule.Value;
 
 import javax.persistence.*;
 import java.util.List;
@@ -20,8 +21,12 @@ public class DbColumn {
     @JoinColumn(name = "fk_table")
     private DbTable table;
 
-    @OneToMany
+    @ManyToMany(mappedBy = "columns")
     private List<BusinessRule> businessRules;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_value")
+    private Value value;
 
     public DbColumn(String name, DbTable table) {
         this.name = name;

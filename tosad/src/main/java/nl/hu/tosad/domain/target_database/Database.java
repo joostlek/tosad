@@ -30,8 +30,12 @@ public class Database {
 
     private String password;
 
-    @OneToMany(mappedBy = "target_database")
-    private List<DbTable> dbTables;
+    @OneToMany(mappedBy = "database")
+    private List<DbTable> tables;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_db_dialect")
+    private Dialect dialect;
 
     public Database() {
     }

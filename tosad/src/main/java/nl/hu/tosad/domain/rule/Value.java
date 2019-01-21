@@ -3,14 +3,15 @@ package nl.hu.tosad.domain.rule;
 
 import nl.hu.tosad.domain.target_database.DbColumn;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class Value {
-    private int id;
+    @Id
+    @SequenceGenerator(name = "value_id_generator", sequenceName = "value_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "value_id_generator")
+    private Long id;
 
     private String value;
 
@@ -22,6 +23,7 @@ public class Value {
     @JoinColumn(name = "fk_business_rule")
     private BusinessRule businessRule;
 
+    @OneToMany(mappedBy = "value")
     private List<DbColumn> dbColumns;
 
 
@@ -67,11 +69,11 @@ public class Value {
         this.dbColumns.add(dbcolumn);
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,32 +1,35 @@
 package nl.hu.tosad.domain.ruletype;
 
-import org.hibernate.dialect.Dialect;
+import nl.hu.tosad.domain.target_database.Dialect;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Template {
-
-    private String id;
+    @Id
+    @SequenceGenerator(name = "template_id_generator", sequenceName = "temp_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "template_id_generator")
+    private Long id;
     private String text;
 
     @ManyToOne
+    @JoinColumn(name = "fk_template_dialect")
     private Dialect dialect;
 
     @ManyToOne
+    @JoinColumn(name = "fk_template_type")
     private BusinessRuleType businessRuleType;
 
-    public Template(String id, String text) {
+    public Template(Long id, String text) {
         this.id = id;
         this.text = text;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

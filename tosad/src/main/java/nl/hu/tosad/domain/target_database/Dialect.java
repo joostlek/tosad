@@ -9,7 +9,7 @@ public class Dialect {
     @Id
     @SequenceGenerator(name = "dialect_id_generator", sequenceName = "db_dialect_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dialect_id_generator")
-    private int id;
+    private Long id;
 
     private String name;
 
@@ -21,11 +21,11 @@ public class Dialect {
         this.databases = new ArrayList<>();
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

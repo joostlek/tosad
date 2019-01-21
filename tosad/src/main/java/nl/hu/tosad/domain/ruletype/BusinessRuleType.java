@@ -2,29 +2,35 @@ package nl.hu.tosad.domain.ruletype;
 
 import nl.hu.tosad.domain.rule.BusinessRule;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class BusinessRuleType {
+
+    @Id
+    @Column(nullable = false)
     private String code;
 
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "businessRuleType")
     private List<Template> template;
 
-    @OneToMany
-    private List<Category> category;
-
-    @ManyToMany
-    private List<Operator> operator;
-
     @ManyToOne
-    private List<BusinessRule> businessrule;
+    @JoinColumn(name = "fk_brt_category")
+    private Category category;
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "BRT_Operator",
+            joinColumns = {@JoinColumn(name = "operator_id")},
+            inverseJoinColumns = {@JoinColumn(name = "business_rule_type_id")}
+    )
+    private List<Operator> availableOperators;
+
+    @OneToMany(mappedBy = "businessRuleType")
+    private List<BusinessRule> businessRules;
 
     public BusinessRuleType(String code, String name) {
         this.code = code;
@@ -55,27 +61,27 @@ public class BusinessRuleType {
         this.template = template;
     }
 
-    public List<Category> getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(List<Category> category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
-    public List<Operator> getOperator() {
-        return operator;
+    public List<Operator> getAvailableOperators() {
+        return availableOperators;
     }
 
-    public void setOperator(List<Operator> operator) {
-        this.operator = operator;
+    public void setAvailableOperators(List<Operator> availableOperators) {
+        this.availableOperators = availableOperators;
     }
 
-    public List<BusinessRule> getBusinessrule() {
-        return businessrule;
+    public List<BusinessRule> getBusinessRules() {
+        return businessRules;
     }
 
-    public void setBusinessrule(List<BusinessRule> businessrule) {
-        this.businessrule = businessrule;
+    public void setBusinessRules(List<BusinessRule> businessRules) {
+        this.businessRules = businessRules;
     }
 }

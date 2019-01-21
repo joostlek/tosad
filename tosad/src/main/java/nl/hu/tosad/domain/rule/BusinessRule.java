@@ -15,7 +15,7 @@ public class BusinessRule {
     @Id
     @SequenceGenerator(name = "business_rule_id_generator", sequenceName = "br_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "business_rule_id_generator")
-    private int code;
+    private Long id;
 
     private String name;
 
@@ -23,16 +23,32 @@ public class BusinessRule {
 
     private String errorMessage;
 
+    @ManyToOne
+    @JoinColumn(name = "fk_brt_bt")
     private BusinessRuleType businessRuleType;
 
+    @ManyToOne
+    @JoinColumn(name = "fk_operator_br")
     private Operator operator;
 
     @OneToMany(mappedBy = "businessRule")
     private List<Value> values;
 
-    private List<DbColumn> dbColumns;
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "Column_Rule",
+            joinColumns = {@JoinColumn(name = "column_id")},
+            inverseJoinColumns = {@JoinColumn(name = "business_rule_id")}
+    )
+    private List<DbColumn> columns;
 
-    private List<DbTable> dbTables;
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "Table_Rule",
+            joinColumns = {@JoinColumn(name = "table_id")},
+            inverseJoinColumns = {@JoinColumn(name = "business_rule_1_id")}
+    )
+    private List<DbTable> tables;
 
     public BusinessRule(String name, String description, String errorMessage, BusinessRuleType businessRuleType, Operator operator) {
         this.name = name;
@@ -50,12 +66,12 @@ public class BusinessRule {
         this.name = name;
     }
 
-    public int getCode() {
-        return code;
+    public Long getId() {
+        return id;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -86,28 +102,28 @@ public class BusinessRule {
         values.add(value);
     }
 
-    public List<DbColumn> getDbColumns() {
-        return dbColumns;
+    public List<DbColumn> getColumns() {
+        return columns;
     }
 
-    public void setDbColumns(List<DbColumn> dbColumns) {
-        this.dbColumns = dbColumns;
+    public void setColumns(List<DbColumn> columns) {
+        this.columns = columns;
     }
 
     public void addDbColumn(DbColumn dbcolumn) {
-        dbColumns.add(dbcolumn);
+        columns.add(dbcolumn);
     }
 
-    public List<DbTable> getDbTables() {
-        return dbTables;
+    public List<DbTable> getTables() {
+        return tables;
     }
 
-    public void setDbTables(List<DbTable> dbTables) {
-        this.dbTables = dbTables;
+    public void setTables(List<DbTable> tables) {
+        this.tables = tables;
     }
 
     public void addDbTable(DbTable dbtable) {
-        dbTables.add(dbtable);
+        tables.add(dbtable);
     }
 
     public BusinessRuleType getBusinessRuleType() {
