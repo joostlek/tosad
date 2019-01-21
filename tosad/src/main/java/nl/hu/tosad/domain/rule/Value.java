@@ -17,7 +17,7 @@ public class Value {
 
     private String type;
 
-    private int position;
+    private String position;
 
     @ManyToOne
     @JoinColumn(name = "fk_business_rule")
@@ -27,7 +27,7 @@ public class Value {
     private List<DbColumn> dbColumns;
 
 
-    public Value(String value, String type, int position) {
+    public Value(String value, String type, String position) {
         this.value = value;
         this.type = type;
         this.position = position;
@@ -49,11 +49,11 @@ public class Value {
         this.type = type;
     }
 
-    public int getPosition() {
+    public String getPosition() {
         return position;
     }
 
-    public void setPosition(int position) {
+    public void setPosition(String position) {
         this.position = position;
     }
 

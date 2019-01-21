@@ -1,27 +1,36 @@
 package nl.hu.tosad.generator;
 
-import nl.hu.tosad.domain.entities.domain.AttributeRangeRule;
-import nl.hu.tosad.domain.entities.domain.Operator;
-import nl.hu.tosad.generator.dialects.Dialect;
-import nl.hu.tosad.generator.dialects.PostgresqlDialect;
-import nl.hu.tosad.generator.templates.Template;
-import nl.hu.tosad.generator.validators.Validator;
-import nl.hu.tosad.generator.validators.ValidatorFactory;
+import nl.hu.tosad.domain.ruletype.Template;
+import nl.hu.tosad.domain.target_database.DbColumn;
+import org.stringtemplate.v4.ST;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        Dialect dialect = new PostgresqlDialect();
-        AttributeRangeRule businessRule = new AttributeRangeRule();
-        businessRule.setName("naam");
-        businessRule.setOperator(Operator.IN_BETWEEN);
-        businessRule.setRangeEnd(3);
-        businessRule.setRangeStart(0);
+//        ST stringTemplate = new ST("<kek> <lol; null=\"asd\">");
+//        stringTemplate.add("lol", "asdasd");
+//        System.out.println(stringTemplate.getAttributes().values());
+//        System.out.println(stringTemplate.getAttributes());
+//        String template = "asdasd <value-value> asd <asd-asd>";
 
-        ValidatorFactory validatorFactory = new ValidatorFactory(businessRule);
-        Validator validator = validatorFactory.getValidator();
-        if (validator.validate()) {
-            Template template = dialect.getTemplate(businessRule);
-            System.out.println(template.getSQL());
+//        Pattern wholePattern = Pattern.compile("")
+
+        Map<String, Object> attributes = new HashMap<>();
+        attributes.put("attributes_lov", Arrays.asList("asd", "dsa"));
+        attributes.put("column_column", new DbColumn());
+
+        Template template = new Template("SELECT <attributes_lov; separator=\",\"> FROM <column_column>");
+
+        ST stringTemplate = new ST(template.getText());
+        stringTemplate.add("attributes_lov", "asd");
+        stringTemplate.add("attributes_lov", "asd");
+        stringTemplate.add("attributes_lov", "asd");
+        for (String key : template.getKeys()) {
+            stringTemplate.add(key, attributes.get(key));
         }
+        System.out.println(stringTemplate.render());
     }
 }

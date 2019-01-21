@@ -3,7 +3,9 @@ package nl.hu.tosad.domain.ruletype;
 import nl.hu.tosad.domain.target_database.Dialect;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -45,13 +47,30 @@ public class Template {
     }
 
     public Map<String, String> getAttributes() {
-        Pattern pattern = Pattern.compile("(<(.*?)-(.*?)>)");
+        Pattern pattern = Pattern.compile("(<((.*?)_(.*?))(;.*?)?>)");
         Matcher matcher = pattern.matcher(text);
         Map<String, String> templateAttributes = new HashMap<>();
         while (matcher.find()) {
-            templateAttributes.put(matcher.group(2), matcher.group(3));
+            System.out.println("first");
+            System.out.println(matcher.group(0));
+            System.out.println(matcher.group(1));
+            System.out.println(matcher.group(2));
+            System.out.println(matcher.group(3));
+            System.out.println(matcher.group(4));
+            System.out.println("last");
+            templateAttributes.put(matcher.group(3), matcher.group(4));
         }
         return templateAttributes;
+    }
+
+    public List<String> getKeys() {
+        Pattern pattern = Pattern.compile("(<((.*?)_(.*?))(;.*?)?>)");
+        Matcher matcher = pattern.matcher(text);
+        List<String> keys = new ArrayList<>();
+        while (matcher.find()) {
+            keys.add(matcher.group(2));
+        }
+        return keys;
     }
 
     public Dialect getDialect() {

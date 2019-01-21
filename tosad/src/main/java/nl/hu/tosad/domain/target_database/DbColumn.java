@@ -28,9 +28,7 @@ public class DbColumn {
     @JoinColumn(name = "fk_value")
     private Value value;
 
-    public DbColumn(String name, DbTable table) {
-        this.name = name;
-        this.table = table;
+    public DbColumn() {
     }
 
     public Long getId() {
