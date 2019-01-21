@@ -7,9 +7,8 @@ import java.util.List;
 
 @Entity
 public class Operator {
-
     @Id
-    @SequenceGenerator(name = "operator_id_generator", sequenceName = "db_seq", allocationSize = 1)
+    @SequenceGenerator(name = "operator_id_generator", sequenceName = "operator_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "operator_id_generator")
     private Long id;
     private String sign;

@@ -1,6 +1,5 @@
 package nl.hu.tosad.domain.rule;
 
-
 import nl.hu.tosad.domain.ruletype.BusinessRuleType;
 import nl.hu.tosad.domain.ruletype.Operator;
 import nl.hu.tosad.domain.target_database.DbColumn;
@@ -38,7 +37,7 @@ public class BusinessRule {
     @JoinTable(
             name = "Column_Rule",
             joinColumns = {@JoinColumn(name = "column_id")},
-            inverseJoinColumns = {@JoinColumn(name = "business_rule_id")}
+            inverseJoinColumns = {@JoinColumn(name = "business_rule_2_id")}
     )
     private List<DbColumn> columns;
 

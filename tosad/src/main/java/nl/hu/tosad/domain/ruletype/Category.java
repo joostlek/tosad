@@ -10,24 +10,24 @@ import java.util.List;
 public class Category {
     @Id
     @Column(nullable = false)
-    private String code;
+    private Long code;
 
     private String name;
 
     @OneToMany(mappedBy = "category")
     private List<BusinessRuleType> businessRuleType;
 
-    public Category(String code, String name) {
+    public Category(Long code, String name) {
         this.code = code;
         this.name = name;
     }
 
 
-    public String getCode() {
+    public Long getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(Long code) {
         this.code = code;
     }
 
