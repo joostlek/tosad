@@ -8,6 +8,7 @@ import java.util.List;
 
 @Entity
 public class Value {
+    private int id;
     private String value;
     private String type;
     private int position;
@@ -54,5 +55,13 @@ public class Value {
 
     public void addDbColumn(DbColumn dbcolumn) {
         this.dbColumns.add(dbcolumn);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
