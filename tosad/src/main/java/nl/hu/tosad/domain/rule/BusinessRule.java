@@ -1,6 +1,9 @@
 package nl.hu.tosad.domain.rule;
 
 
+
+import nl.hu.tosad.domain.ruletype.BusinessRuleType;
+import nl.hu.tosad.domain.ruletype.Operator;
 import nl.hu.tosad.domain.target_database.DbColumn;
 import nl.hu.tosad.domain.target_database.DbTable;
 
@@ -14,22 +17,20 @@ public class BusinessRule {
     private List<Value> values;
     private List<DbColumn> dbColumns;
     private List<DbTable> dbTables;
+    private BusinessRuleType businessRuleType;
+    private Operator operator;
 
 
-    public BusinessRule(int code, String name, String explanation, String errorMessage) {
+
+    public BusinessRule(int code, String name, String explanation, String errorMessage, List<DbTable> dbTables, BusinessRuleType businessRuleType) {
         this.code = code;
         this.name = name;
         this.explanation = explanation;
         this.errorMessage = errorMessage;
+        this.dbTables = dbTables;
     }
 
-    public int getCode() {
-        return code;
-    }
 
-    public void setCode(int code) {
-        this.code = code;
-    }
 
     public String getName() {
         return name;
@@ -37,6 +38,14 @@ public class BusinessRule {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getCode(){
+        return code;
+    }
+
+    public void setCode(int code){
+        this.code = code;
     }
 
     public String getExplanation() {
@@ -64,7 +73,7 @@ public class BusinessRule {
     }
 
     public void addValue(Value value) {
-        this.values.add(value);
+        values.add(value);
     }
 
     public List<DbColumn> getDbColumns() {
@@ -76,7 +85,7 @@ public class BusinessRule {
     }
 
     public void addDbColumn(DbColumn dbcolumn) {
-        this.dbColumns.add(dbcolumn);
+        dbColumns.add(dbcolumn);
     }
 
     public List<DbTable> getDbTables() {
@@ -88,7 +97,24 @@ public class BusinessRule {
     }
 
     public void addDbTable(DbTable dbtable) {
-        this.dbTables.add(dbtable);
+        dbTables.add(dbtable);
+    }
+
+
+    public BusinessRuleType getBusinessRuleType() {
+        return businessRuleType;
+    }
+
+    public void setBusinessRuleType(BusinessRuleType businessRuleType) {
+        this.businessRuleType = businessRuleType;
+    }
+
+    public Operator getOperator() {
+        return operator;
+    }
+
+    public void setOperator(Operator operator) {
+        this.operator = operator;
     }
 
 
