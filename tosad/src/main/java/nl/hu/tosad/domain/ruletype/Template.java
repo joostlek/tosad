@@ -3,6 +3,10 @@ package nl.hu.tosad.domain.ruletype;
 import nl.hu.tosad.domain.target_database.Dialect;
 
 import javax.persistence.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Entity
 public class Template {
@@ -20,8 +24,7 @@ public class Template {
     @JoinColumn(name = "fk_template_type")
     private BusinessRuleType businessRuleType;
 
-    public Template(Long id, String text) {
-        this.id = id;
+    public Template(String text) {
         this.text = text;
     }
 
@@ -39,6 +42,16 @@ public class Template {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Map<String, String> getAttributes() {
+        Pattern pattern = Pattern.compile("(<(.*?)-(.*?)>)");
+        Matcher matcher = pattern.matcher(text);
+        Map<String, String> templateAttributes = new HashMap<>();
+        while (matcher.find()) {
+            templateAttributes.put(matcher.group(2), matcher.group(3));
+        }
+        return templateAttributes;
     }
 
     public Dialect getDialect() {
