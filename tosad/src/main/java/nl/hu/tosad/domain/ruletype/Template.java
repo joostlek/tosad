@@ -51,13 +51,6 @@ public class Template {
         Matcher matcher = pattern.matcher(text);
         Map<String, String> templateAttributes = new HashMap<>();
         while (matcher.find()) {
-            System.out.println("first");
-            System.out.println(matcher.group(0));
-            System.out.println(matcher.group(1));
-            System.out.println(matcher.group(2));
-            System.out.println(matcher.group(3));
-            System.out.println(matcher.group(4));
-            System.out.println("last");
             templateAttributes.put(matcher.group(3), matcher.group(4));
         }
         return templateAttributes;
