@@ -12,7 +12,7 @@ import java.util.List;
 public class BusinessRule {
     private int code;
     private String name;
-    private String explanation;
+    private String description;
     private String errorMessage;
     private List<Value> values;
     private List<DbColumn> dbColumns;
@@ -21,11 +21,10 @@ public class BusinessRule {
     private Operator operator;
 
 
-
-    public BusinessRule(int code, String name, String explanation, String errorMessage, List<DbTable> dbTables, BusinessRuleType businessRuleType) {
+    public BusinessRule(int code, String name, String description, String errorMessage, List<DbTable> dbTables, BusinessRuleType businessRuleType) {
         this.code = code;
         this.name = name;
-        this.explanation = explanation;
+        this.description = description;
         this.errorMessage = errorMessage;
         this.dbTables = dbTables;
     }
@@ -48,12 +47,12 @@ public class BusinessRule {
         this.code = code;
     }
 
-    public String getExplanation() {
-        return explanation;
+    public String getDescription() {
+        return description;
     }
 
-    public void setExplanation(String explanation) {
-        this.explanation = explanation;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getErrorMessage() {
