@@ -1,4 +1,4 @@
-package nl.hu.tosad.webserver.databases;
+package nl.hu.tosad.webserver.bussiness_rules_types;
 
 import nl.hu.tosad.domain.ruletype.Category;
 import org.springframework.data.repository.CrudRepository;
