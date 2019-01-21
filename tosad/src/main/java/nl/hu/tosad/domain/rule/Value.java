@@ -4,14 +4,24 @@ package nl.hu.tosad.domain.rule;
 import nl.hu.tosad.domain.target_database.DbColumn;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.util.List;
 
 @Entity
 public class Value {
     private int id;
+
     private String value;
+
     private String type;
+
     private int position;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_business_rule")
+    private BusinessRule businessRule;
+
     private List<DbColumn> dbColumns;
 
 
@@ -63,5 +73,13 @@ public class Value {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public BusinessRule getBusinessRule() {
+        return businessRule;
+    }
+
+    public void setBusinessRule(BusinessRule businessRule) {
+        this.businessRule = businessRule;
     }
 }
