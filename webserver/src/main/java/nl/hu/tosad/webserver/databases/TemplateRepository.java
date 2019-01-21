@@ -1,4 +1,4 @@
-package nl.hu.tosad.webserver.business_ruletype;
+package nl.hu.tosad.webserver.databases;
 
 import nl.hu.tosad.domain.ruletype.Template;
 import org.springframework.data.repository.CrudRepository;
