@@ -1,6 +1,6 @@
 package nl.hu.tosad.domain.target_database;
 
-import nl.hu.tosad.domain.entities.domain.BusinessRule;
+import nl.hu.tosad.domain.rule.BusinessRule;
 
 import javax.persistence.*;
 import java.util.List;

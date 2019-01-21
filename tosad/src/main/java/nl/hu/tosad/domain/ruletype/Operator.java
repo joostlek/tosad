@@ -2,20 +2,21 @@ package nl.hu.tosad.domain.ruletype;
 
 import nl.hu.tosad.domain.rule.BusinessRule;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import java.util.List;
 
 @Entity
 public class Operator {
 
-    public int id;
-    public String sign;
+    private int id;
+    private String sign;
 
     @ManyToMany
-    public List<BusinessRuleType> businesRuleTypes;
+    private List<BusinessRuleType> businesRuleTypes;
 
     @ManyToMany
-    public List<BusinessRule> businessRules;
+    private List<BusinessRule> businessRules;
 
     public Operator(int id, String sign) {
         this.id = id;
@@ -26,28 +27,28 @@ public class Operator {
         return id;
     }
 
-    public String getSign() {
-        return sign;
-    }
-
-    public List<BusinessRuleType> getBusinesRuleTypes() {
-        return businesRuleTypes;
-    }
-
-    public List<BusinessRule> getBusinessRules() {
-        return businessRules;
-    }
-
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getSign() {
+        return sign;
     }
 
     public void setSign(String sign) {
         this.sign = sign;
     }
 
+    public List<BusinessRuleType> getBusinesRuleTypes() {
+        return businesRuleTypes;
+    }
+
     public void setBusinesRuleTypes(List<BusinessRuleType> businesRuleTypes) {
         this.businesRuleTypes = businesRuleTypes;
+    }
+
+    public List<BusinessRule> getBusinessRules() {
+        return businessRules;
     }
 
     public void setBusinessRules(List<BusinessRule> businessRules) {

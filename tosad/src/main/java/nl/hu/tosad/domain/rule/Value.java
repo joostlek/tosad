@@ -1,7 +1,6 @@
 package nl.hu.tosad.domain.rule;
 
 
-
 import nl.hu.tosad.domain.target_database.DbColumn;
 
 import javax.persistence.Entity;
@@ -13,7 +12,6 @@ public class Value {
     private String type;
     private int position;
     private List<DbColumn> dbColumns;
-
 
 
     public Value(String value, String type, int position) {

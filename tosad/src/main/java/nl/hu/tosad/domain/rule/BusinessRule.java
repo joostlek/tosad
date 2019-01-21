@@ -1,7 +1,6 @@
 package nl.hu.tosad.domain.rule;
 
 
-
 import nl.hu.tosad.domain.target_database.DbColumn;
 import nl.hu.tosad.domain.target_database.DbTable;
 
@@ -15,7 +14,6 @@ public class BusinessRule {
     private List<Value> values;
     private List<DbColumn> dbColumns;
     private List<DbTable> dbTables;
-
 
 
     public BusinessRule(int code, String name, String explanation, String errorMessage) {
@@ -92,8 +90,6 @@ public class BusinessRule {
     public void addDbTable(DbTable dbtable) {
         this.dbTables.add(dbtable);
     }
-
-
 
 
 }

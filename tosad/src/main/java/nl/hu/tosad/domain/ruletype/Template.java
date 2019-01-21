@@ -2,8 +2,8 @@ package nl.hu.tosad.domain.ruletype;
 
 import org.hibernate.dialect.Dialect;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Template {
@@ -26,28 +26,28 @@ public class Template {
         return id;
     }
 
-    public String getText() {
-        return text;
-    }
-
-    public Dialect getDialect() {
-        return dialect;
-    }
-
-    public BusinessRuleType getBusinessRuleType() {
-        return businessRuleType;
-    }
-
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getText() {
+        return text;
     }
 
     public void setText(String text) {
         this.text = text;
     }
 
+    public Dialect getDialect() {
+        return dialect;
+    }
+
     public void setDialect(Dialect dialect) {
         this.dialect = dialect;
+    }
+
+    public BusinessRuleType getBusinessRuleType() {
+        return businessRuleType;
     }
 
     public void setBusinessRuleType(BusinessRuleType businessRuleType) {
