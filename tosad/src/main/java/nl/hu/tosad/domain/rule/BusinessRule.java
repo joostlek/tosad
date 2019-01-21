@@ -1,35 +1,45 @@
 package nl.hu.tosad.domain.rule;
 
 
-
 import nl.hu.tosad.domain.ruletype.BusinessRuleType;
 import nl.hu.tosad.domain.ruletype.Operator;
 import nl.hu.tosad.domain.target_database.DbColumn;
 import nl.hu.tosad.domain.target_database.DbTable;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
 public class BusinessRule {
+
+    @Id
+    @SequenceGenerator(name = "business_rule_id_generator", sequenceName = "br_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "business_rule_id_generator")
     private int code;
+
     private String name;
+
     private String description;
+
     private String errorMessage;
-    private List<Value> values;
-    private List<DbColumn> dbColumns;
-    private List<DbTable> dbTables;
+
     private BusinessRuleType businessRuleType;
+
     private Operator operator;
 
+    private List<Value> values;
 
-    public BusinessRule(int code, String name, String description, String errorMessage, List<DbTable> dbTables, BusinessRuleType businessRuleType) {
-        this.code = code;
+    private List<DbColumn> dbColumns;
+
+    private List<DbTable> dbTables;
+
+    public BusinessRule(String name, String description, String errorMessage, BusinessRuleType businessRuleType, Operator operator) {
         this.name = name;
         this.description = description;
         this.errorMessage = errorMessage;
-        this.dbTables = dbTables;
+        this.businessRuleType = businessRuleType;
+        this.operator = operator;
     }
-
-
 
     public String getName() {
         return name;
@@ -39,11 +49,11 @@ public class BusinessRule {
         this.name = name;
     }
 
-    public int getCode(){
+    public int getCode() {
         return code;
     }
 
-    public void setCode(int code){
+    public void setCode(int code) {
         this.code = code;
     }
 
@@ -98,7 +108,6 @@ public class BusinessRule {
     public void addDbTable(DbTable dbtable) {
         dbTables.add(dbtable);
     }
-
 
     public BusinessRuleType getBusinessRuleType() {
         return businessRuleType;
