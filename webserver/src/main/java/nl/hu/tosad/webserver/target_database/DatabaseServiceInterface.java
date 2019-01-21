@@ -1,4 +1,4 @@
-package nl.hu.tosad.webserver.databases;
+package nl.hu.tosad.webserver.target_database;
 
 public interface DatabaseServiceInterface {
 }

@@ -1,9 +1,9 @@
 package nl.hu.tosad.webserver;
 
-//import nl.hu.tosad.webserver.business_rules.BusinessRuleServiceInterface;
-import nl.hu.tosad.webserver.databases.ColumnRepository;
-import nl.hu.tosad.webserver.databases.DatabaseRepository;
-import nl.hu.tosad.webserver.databases.TableRepository;
+//import nl.hu.tosad.webserver.rule.BusinessRuleServiceInterface;
+import nl.hu.tosad.webserver.target_database.ColumnRepository;
+import nl.hu.tosad.webserver.target_database.DatabaseRepository;
+import nl.hu.tosad.webserver.target_database.TableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
