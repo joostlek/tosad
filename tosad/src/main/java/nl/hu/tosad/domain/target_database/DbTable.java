@@ -1,4 +1,4 @@
-package nl.hu.tosad.domain.database;
+package nl.hu.tosad.domain.target_database;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,6 +22,30 @@ public class DbTable {
 
     public DbTable(String name, Database database) {
         this.name = name;
+        this.database = database;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Database getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(Database database) {
         this.database = database;
     }
 }

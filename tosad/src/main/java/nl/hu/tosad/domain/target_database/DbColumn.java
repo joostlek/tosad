@@ -1,4 +1,4 @@
-package nl.hu.tosad.domain.database;
+package nl.hu.tosad.domain.target_database;
 
 import nl.hu.tosad.domain.entities.domain.BusinessRule;
 
@@ -26,5 +26,37 @@ public class DbColumn {
     public DbColumn(String name, DbTable table) {
         this.name = name;
         this.table = table;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public DbTable getTable() {
+        return table;
+    }
+
+    public void setTable(DbTable table) {
+        this.table = table;
+    }
+
+    public List<BusinessRule> getBusinessRules() {
+        return businessRules;
+    }
+
+    public void setBusinessRules(List<BusinessRule> businessRules) {
+        this.businessRules = businessRules;
     }
 }

@@ -1,4 +1,4 @@
-package nl.hu.tosad.domain.database;
+package nl.hu.tosad.domain.target_database;
 
 import javax.persistence.*;
 import java.util.List;
@@ -30,7 +30,7 @@ public class Database {
 
     private String password;
 
-    @OneToMany(mappedBy = "database")
+    @OneToMany(mappedBy = "target_database")
     private List<DbTable> dbTables;
 
     public Database() {
