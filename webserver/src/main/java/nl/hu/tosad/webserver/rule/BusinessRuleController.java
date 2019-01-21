@@ -1,4 +1,4 @@
-//package nl.hu.tosad.webserver.business_rules;
+//package nl.hu.tosad.webserver.rule;
 //
 //import nl.hu.tosad.domain.entities.domain.BusinessRule;
 //import nl.hu.tosad.domain.entities.domain.dto.AttributeRangeRuleDTO;

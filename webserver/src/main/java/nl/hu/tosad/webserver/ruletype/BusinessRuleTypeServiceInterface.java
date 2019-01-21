@@ -1,4 +1,4 @@
-package nl.hu.tosad.webserver.bussiness_rules_types;
+package nl.hu.tosad.webserver.ruletype;
 
 import nl.hu.tosad.domain.ruletype.BusinessRuleType;
 

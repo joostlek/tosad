@@ -1,4 +1,4 @@
-package nl.hu.tosad.webserver.databases;
+package nl.hu.tosad.webserver.target_database;
 
 import nl.hu.tosad.domain.target_database.DbTable;
 import org.springframework.data.repository.CrudRepository;
