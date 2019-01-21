@@ -1,4 +1,4 @@
-package nl.hu.tosad.domain.entities.domain.database;
+package nl.hu.tosad.domain.database;
 
 import javax.persistence.*;
 import java.util.List;
