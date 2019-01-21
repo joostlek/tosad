@@ -1,6 +1,6 @@
 package nl.hu.tosad.domain.ruletype;
 
-import nl.hu.tosad.domain.entities.domain.BusinessRule;
+import nl.hu.tosad.domain.rule.BusinessRule;
 
 import javax.persistence.*;
 import java.util.List;
@@ -32,15 +32,48 @@ public class BusinessRuleType {
         return code;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
 
     public String getName() {
         return name;
     }
 
+    public List<Template> getTemplate() {
+        return template;
+    }
+
+    public List<Category> getCategory() {
+        return category;
+    }
+
+    public List<Operator> getOperator() {
+        return operator;
+    }
+
+    public List<BusinessRule> getBusinessrule() {
+        return businessrule;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setTemplate(List<Template> template) {
+        this.template = template;
+    }
+
+    public void setCategory(List<Category> category) {
+        this.category = category;
+    }
+
+    public void setOperator(List<Operator> operator) {
+        this.operator = operator;
+    }
+
+    public void setBusinessrule(List<BusinessRule> businessrule) {
+        this.businessrule = businessrule;
     }
 }
