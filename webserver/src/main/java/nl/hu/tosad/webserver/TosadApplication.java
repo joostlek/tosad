@@ -1,10 +1,6 @@
 package nl.hu.tosad.webserver;
 
-import nl.hu.tosad.domain.entities.domain.AttributeRangeRule;
-import nl.hu.tosad.domain.entities.domain.database.Database;
-import nl.hu.tosad.domain.entities.domain.database.DbColumn;
-import nl.hu.tosad.domain.entities.domain.database.DbTable;
-import nl.hu.tosad.webserver.business_rules.BusinessRuleServiceInterface;
+//import nl.hu.tosad.webserver.business_rules.BusinessRuleServiceInterface;
 import nl.hu.tosad.webserver.databases.ColumnRepository;
 import nl.hu.tosad.webserver.databases.DatabaseRepository;
 import nl.hu.tosad.webserver.databases.TableRepository;
@@ -15,11 +11,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication()
-@EntityScan("nl.hu.tosad.domain.entities")
+@EntityScan("nl.hu.tosad.domain")
 public class TosadApplication implements CommandLineRunner {
 
-    @Autowired
-    private BusinessRuleServiceInterface businessRuleService;
+//    @Autowired
+//    private BusinessRuleServiceInterface businessRuleService;
 
     @Autowired
     private DatabaseRepository databaseRepository;
@@ -37,13 +33,6 @@ public class TosadApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        AttributeRangeRule businessRule = new AttributeRangeRule();
-        Database database = databaseRepository.save(new Database());
-        DbTable dbTable = tableRepository.save(new DbTable("asd", database));
-        DbColumn dbColumn = columnRepository.save(new DbColumn("asd", dbTable));
-        businessRule.setColumn(dbColumn);
-        businessRule.setName("asd");
-        businessRuleService.saveBusinessRule(businessRule);
     }
 }
 

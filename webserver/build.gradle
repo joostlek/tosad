@@ -21,7 +21,8 @@ bootJar {
 }
 sourceCompatibility = 11
 
-repositories { 
+repositories {
+    mavenLocal()
     mavenCentral() 
 }
 
