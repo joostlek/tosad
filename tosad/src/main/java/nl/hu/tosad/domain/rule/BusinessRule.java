@@ -27,6 +27,7 @@ public class BusinessRule {
 
     private Operator operator;
 
+    @OneToMany(mappedBy = "businessRule")
     private List<Value> values;
 
     private List<DbColumn> dbColumns;
