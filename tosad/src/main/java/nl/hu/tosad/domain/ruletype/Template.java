@@ -26,7 +26,8 @@ public class Template {
     @JoinColumn(name = "fk_template_type")
     private BusinessRuleType businessRuleType;
 
-    public Template() {};
+    public Template() {
+    }
 
     public Template(String text) {
         this.text = text;

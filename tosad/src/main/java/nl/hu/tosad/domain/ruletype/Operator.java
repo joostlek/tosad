@@ -16,8 +16,11 @@ public class Operator {
     @ManyToMany(mappedBy = "availableOperators")
     private List<BusinessRuleType> businessRuleTypes;
 
-    @ManyToMany(mappedBy = "operator")
+    @OneToMany(mappedBy = "operator")
     private List<BusinessRule> businessRules;
+
+    public Operator() {
+    }
 
     public Operator(Long id, String sign) {
         this.id = id;
@@ -54,5 +57,10 @@ public class Operator {
 
     public void setBusinessRules(List<BusinessRule> businessRules) {
         this.businessRules = businessRules;
+    }
+
+    @Override
+    public String toString() {
+        return this.sign;
     }
 }
