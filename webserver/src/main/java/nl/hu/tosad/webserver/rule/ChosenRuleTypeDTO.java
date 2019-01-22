@@ -29,4 +29,13 @@ public class ChosenRuleTypeDTO {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    @Override
+    public String toString() {
+        return "ChosenRuleTypeDTO{" +
+                "code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                '}';
+    }
 }
