@@ -13,10 +13,24 @@
     <option th:text="${t.getDialect().getName()}"></option>
 </select>
 
-<h3>Kies een dialect</h3>
-<select th:each="t: ${templates}">
-    <option th:text="${t.getBusinessRuleType().getName()}"></option>
-</select>
+<h3>Kies een type</h3>
+<form method="post">
+    <select th:each="t: ${templates}" th:remove="all-but-first" name="template">
+        <option th:each="template : ${templates}"
+                th:value="${template.getBusinessRuleType().getName()}" th:text="${template.getBusinessRuleType().getName()}"></option>
+    </select>
+    <button type="submit" name="add">Volgende</button>
+</form>
+
+<!--<h3>Kies een dialect</h3>-->
+<!--<form method="post" multiple="true">-->
+    <!--<select th:each="t: ${templates}">-->
+        <!--<option th:text="${t.getBusinessRuleType().getName()}"></option>-->
+    <!--</select>-->
+    <!--<button type="submit" name="add">Volgende</button>-->
+<!--</form>-->
+
+
 
 <!--<form action="#" th:action="@{/addRule}" th:object="${businessRule}" method="post">-->
     <!--<p>Column: <input type="text" th:field="*{name}"/></p>-->
