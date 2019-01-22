@@ -84,4 +84,14 @@ public class Template {
     public void setBusinessRuleType(BusinessRuleType businessRuleType) {
         this.businessRuleType = businessRuleType;
     }
+
+    @Override
+    public String toString() {
+        return "Template{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                ", dialect=" + dialect +
+                ", businessRuleType=" + businessRuleType +
+                '}';
+    }
 }
