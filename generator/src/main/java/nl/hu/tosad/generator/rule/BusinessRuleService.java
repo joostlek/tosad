@@ -32,11 +32,24 @@ public class BusinessRuleService implements BusinessRuleServiceInterface {
     }
 
     @Override
+    public List<BusinessRule> getBusinessRulesByIdList(List<Long> businessRuleIds) {
+        List<BusinessRule> businessRules = new ArrayList<>();
+        for (Long id : businessRuleIds) {
+            try {
+                businessRules.add(businessRuleRepositoryInterface.getBusinessRuleById(id));
+            } catch (RuntimeException e) {
+                e.printStackTrace();
+            }
+        }
+        return businessRules;
+    }
+
+    @Override
     public List<String> convertBusinessRulesDry(List<Long> businessRuleIds) {
-        List<BusinessRule> businessRules = businessRuleRepositoryInterface.getBusinessRuleByList(businessRuleIds);
+        List<BusinessRule> businessRules = this.getBusinessRulesByIdList(businessRuleIds);
         List<String> sql = new ArrayList<>();
 
-        if (businessRules.size() == 0) {
+        if (businessRules.isEmpty()) {
             return sql;
         }
         Database database;

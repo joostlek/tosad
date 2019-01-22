@@ -30,7 +30,11 @@ public class BusinessRuleRepository implements BusinessRuleRepositoryInterface {
         baseDAO.openCurrentSession();
         BusinessRule businessRule = baseDAO.findById(id);
         baseDAO.closeCurrentSession();
-        return businessRule;
+        if (businessRule != null) {
+            return businessRule;
+        } else {
+            throw new RuntimeException("Businessrule not found");
+        }
     }
 
     public void delete(Long id) {
