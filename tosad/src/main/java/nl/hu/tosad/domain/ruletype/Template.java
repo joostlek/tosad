@@ -26,6 +26,8 @@ public class Template {
     @JoinColumn(name = "fk_template_type")
     private BusinessRuleType businessRuleType;
 
+    public Template() {};
+
     public Template(String text) {
         this.text = text;
     }
@@ -83,5 +85,15 @@ public class Template {
 
     public void setBusinessRuleType(BusinessRuleType businessRuleType) {
         this.businessRuleType = businessRuleType;
+    }
+
+    @Override
+    public String toString() {
+        return "Template{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                ", dialect=" + dialect +
+                ", businessRuleType=" + businessRuleType +
+                '}';
     }
 }

@@ -72,6 +72,7 @@ public class Main {
 //        System.out.println(businessRule.getTriggerName());
 
 
+
         Database database = new Database("Ondora", "jdbc:oracle:thin:@//ondora04.hu.nl:8521/EDUC18", "", 1, "doraexplorer", "Boots");
         DbTable dbTable = new DbTable("SEASON", database);
         DbColumn id = new DbColumn("ID", "int", dbTable);
