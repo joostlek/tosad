@@ -2,6 +2,7 @@ package nl.hu.tosad.webserver;
 
 //import nl.hu.tosad.webserver.rule.BusinessRuleServiceInterface;
 import nl.hu.tosad.domain.ruletype.Template;
+import nl.hu.tosad.webserver.rule.BusinessRuleServiceInterface;
 import nl.hu.tosad.webserver.ruletype.TemplateRepository;
 import nl.hu.tosad.webserver.target_database.ColumnRepository;
 import nl.hu.tosad.webserver.target_database.DatabaseRepository;
@@ -20,8 +21,8 @@ public class TosadApplication implements CommandLineRunner {
 
     private static final Logger log = LoggerFactory.getLogger(TosadApplication.class);
 
-//    @Autowired
-//    private BusinessRuleServiceInterface businessRuleService;
+    @Autowired
+    private BusinessRuleServiceInterface businessRuleService;
 
     @Autowired
     private DatabaseRepository databaseRepository;
@@ -45,6 +46,9 @@ public class TosadApplication implements CommandLineRunner {
         log.info("----------------------");
         for (Template t : templateRepository.findAll()) {
             log.info(t.toString());
+            log.info("Alle waardes in template:");
+            log.info("----------------------");
+            log.info(String.valueOf(t.getAttributes()));
         }
     }
 }

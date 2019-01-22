@@ -68,8 +68,7 @@ public class Template {
         return keys;
     }
 
-    public Dialect getDialect() {
-        return dialect;
+    public Dialect getDialect() { return dialect;
     }
 
     public void setDialect(Dialect dialect) {
