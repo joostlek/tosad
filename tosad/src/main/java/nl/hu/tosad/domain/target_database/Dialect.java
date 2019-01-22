@@ -21,6 +21,9 @@ public class Dialect {
         this.databases = new ArrayList<>();
     }
 
+    public Dialect() {
+    }
+
     public Long getId() {
         return id;
     }

@@ -14,6 +14,10 @@ public class BusinessRuleService implements BusinessRuleServiceInterface {
 
     private BusinessRuleRepository businessRuleRepository;
 
+    public BusinessRuleService(BusinessRuleRepository businessRuleRepository) {
+        this.businessRuleRepository = businessRuleRepository;
+    }
+
     @Override
     public List<String> convertBusinessRulesWet(List<Long> businessRuleIds) {
         if (businessRuleIds.size() == 0) {
@@ -47,6 +51,12 @@ public class BusinessRuleService implements BusinessRuleServiceInterface {
             Template template = businessRule.getBusinessRuleType().getTemplate(dialect);
             ST stringTemplate = new ST(template.getText());
             stringTemplate.add("name", businessRule.getTriggerName());
+            stringTemplate.add("table", businessRule.getTables().get(0));
+            if (businessRule.getColumns() != null) {
+                stringTemplate.add("column", businessRule.getColumns().get(0));
+            }
+            stringTemplate.add("operator", businessRule.getOperator());
+            stringTemplate.add("error", businessRule.getErrorMessage());
             for (Value value : businessRule.getValues()) {
                 stringTemplate.add(value.getPosition(), value.getValue());
             }

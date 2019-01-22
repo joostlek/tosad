@@ -30,6 +30,9 @@ public class Template {
         this.text = text;
     }
 
+    public Template() {
+    }
+
     public Long getId() {
         return id;
     }

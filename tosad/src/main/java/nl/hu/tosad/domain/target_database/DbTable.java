@@ -25,6 +25,9 @@ public class DbTable {
         this.database = database;
     }
 
+    public DbTable() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -47,5 +50,10 @@ public class DbTable {
 
     public void setDatabase(Database database) {
         this.database = database;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }

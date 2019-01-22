@@ -24,6 +24,9 @@ public class Operator {
         this.sign = sign;
     }
 
+    public Operator() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -54,5 +57,10 @@ public class Operator {
 
     public void setBusinessRules(List<BusinessRule> businessRules) {
         this.businessRules = businessRules;
+    }
+
+    @Override
+    public String toString() {
+        return this.sign;
     }
 }

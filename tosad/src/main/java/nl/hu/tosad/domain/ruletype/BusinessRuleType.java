@@ -38,6 +38,9 @@ public class BusinessRuleType {
         this.name = name;
     }
 
+    public BusinessRuleType() {
+    }
+
     public String getCode() {
         return code;
     }
