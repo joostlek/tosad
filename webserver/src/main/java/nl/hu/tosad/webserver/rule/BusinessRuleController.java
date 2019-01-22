@@ -4,7 +4,8 @@ import nl.hu.tosad.webserver.ruletype.TemplateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class BusinessRuleController {
@@ -25,6 +26,7 @@ public class BusinessRuleController {
     @GetMapping("/add")
     public String add(Model model) {
         model.addAttribute("templates", templateRepository.findAll());
+        model.addAttribute("chosenRule", new ChosenRuleTypeDTO());
         return "add";
     }
 

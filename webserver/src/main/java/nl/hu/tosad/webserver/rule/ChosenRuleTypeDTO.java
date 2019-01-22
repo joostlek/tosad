@@ -2,40 +2,20 @@ package nl.hu.tosad.webserver.rule;
 
 public class ChosenRuleTypeDTO {
 
-    private String code;
-    private String name;
-    private String category;
+    private Long businessRuleTypeCode;
 
-    public String getCode() {
-        return code;
+    public Long getBusinessRuleTypeCode() {
+        return businessRuleTypeCode;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
+    public void setBusinessRuleTypeCode(Long businessRuleTypeCode) {
+        this.businessRuleTypeCode = businessRuleTypeCode;
     }
 
     @Override
     public String toString() {
         return "ChosenRuleTypeDTO{" +
-                "code='" + code + '\'' +
-                ", name='" + name + '\'' +
-                ", category='" + category + '\'' +
+                "businessRuleTypeCode=" + businessRuleTypeCode +
                 '}';
     }
 }

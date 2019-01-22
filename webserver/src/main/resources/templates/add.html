@@ -9,10 +9,13 @@
 <h1>Define a Rule</h1>
 
 <h3>Kies een type</h3>
-<form action="#" th:action="@{/addType}" method="post">
-    <select th:each="t: ${templates}" th:remove="all-but-first" name="template">
+<form action="#" th:action="@{/addType}" th:object="${chosenRule}" method="post">
+    <select th:field="*{businessRuleTypeCode}"
+            th:remove="all-but-first"
+            name="template">
         <option th:each="template : ${templates}"
-                th:value="${template.getBusinessRuleType()}" th:text="${template.getBusinessRuleType().getName()}"></option>
+                th:value="${template.getBusinessRuleType().getCode()}"
+                th:text="${template.getBusinessRuleType().getName()}"></option>
     </select>
     <button type="submit">Volgende</button>
 </form>
