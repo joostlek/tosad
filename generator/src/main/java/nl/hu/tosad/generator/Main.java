@@ -12,6 +12,8 @@ import nl.hu.tosad.domain.target_database.DbTable;
 import nl.hu.tosad.domain.target_database.Dialect;
 import nl.hu.tosad.generator.rule.BusinessRuleRepository;
 import nl.hu.tosad.generator.rule.BusinessRuleService;
+import nl.hu.tosad.generator.target_database.TargetDatabaseService;
+import nl.hu.tosad.generator.target_database.TargetDatabaseServiceInterface;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -118,18 +120,12 @@ public class Main {
         businessRule.setOperator(operator);
         businessRule.setId(1L);
 
-        BusinessRuleRepository repository = new BusinessRuleRepository() {
-            @Override
-            public List<BusinessRule> getBusinessRuleByList(List<Long> ids) {
-                return Collections.singletonList(businessRule);
-            }
-
-            @Override
-            public BusinessRule getBusinessRuleById(Long id) {
-                return null;
-            }
-        };
+        BusinessRuleRepository repository = new BusinessRuleRepository();
         BusinessRuleService businessRuleService = new BusinessRuleService(repository);
-        System.out.println(businessRuleService.convertBusinessRulesDry(new ArrayList<>()));
+        List<String> query = businessRuleService.convertBusinessRulesDry(Collections.singletonList(1L));
+
+        TargetDatabaseServiceInterface databaseService = new TargetDatabaseService();
+        System.out.println(query);
+        databaseService.execute(query, database);
     }
 }

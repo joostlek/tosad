@@ -12,10 +12,10 @@ import java.util.List;
 
 public class BusinessRuleService implements BusinessRuleServiceInterface {
 
-    private BusinessRuleRepository businessRuleRepository;
+    private BusinessRuleRepositoryInterface businessRuleRepositoryInterface;
 
-    public BusinessRuleService(BusinessRuleRepository businessRuleRepository) {
-        this.businessRuleRepository = businessRuleRepository;
+    public BusinessRuleService(BusinessRuleRepositoryInterface businessRuleRepositoryInterface) {
+        this.businessRuleRepositoryInterface = businessRuleRepositoryInterface;
     }
 
     @Override
@@ -24,7 +24,7 @@ public class BusinessRuleService implements BusinessRuleServiceInterface {
             return new ArrayList<>();
         }
         List<String> sql = this.convertBusinessRulesDry(businessRuleIds);
-        BusinessRule businessRule = businessRuleRepository.getBusinessRuleById(businessRuleIds.get(0));
+        BusinessRule businessRule = businessRuleRepositoryInterface.getBusinessRuleById(businessRuleIds.get(0));
         Database database = businessRule.getDatabase();
 
         /* Add function to put the SQL in the server */
@@ -32,11 +32,24 @@ public class BusinessRuleService implements BusinessRuleServiceInterface {
     }
 
     @Override
+    public List<BusinessRule> getBusinessRulesByIdList(List<Long> businessRuleIds) {
+        List<BusinessRule> businessRules = new ArrayList<>();
+        for (Long id : businessRuleIds) {
+            try {
+                businessRules.add(businessRuleRepositoryInterface.getBusinessRuleById(id));
+            } catch (RuntimeException e) {
+                e.printStackTrace();
+            }
+        }
+        return businessRules;
+    }
+
+    @Override
     public List<String> convertBusinessRulesDry(List<Long> businessRuleIds) {
-        List<BusinessRule> businessRules = businessRuleRepository.getBusinessRuleByList(businessRuleIds);
+        List<BusinessRule> businessRules = this.getBusinessRulesByIdList(businessRuleIds);
         List<String> sql = new ArrayList<>();
 
-        if (businessRules.size() == 0) {
+        if (businessRules.isEmpty()) {
             return sql;
         }
         Database database;

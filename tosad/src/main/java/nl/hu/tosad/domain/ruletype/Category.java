@@ -1,19 +1,19 @@
 package nl.hu.tosad.domain.ruletype;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "CATEGORY")
 public class Category {
     @Id
-    @Column(nullable = false)
+    @Column(nullable = false, name = "ID")
     private Long id;
 
+    @Column(name = "CODE")
     private String code;
 
+    @Column(name = "NAME")
     private String name;
 
     @OneToMany(mappedBy = "category")

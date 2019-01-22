@@ -7,16 +7,17 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "db_column")
+@Table(name = "DB_COLUMN")
 public class DbColumn {
     @Id
     @SequenceGenerator(name = "column_id_generator", sequenceName = "dbc_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "column_id_generator")
     private Long id;
 
-    @Column
+    @Column(name = "NAME")
     private String name;
 
+    @Column(name = "TYPE")
     private String type;
 
     @ManyToOne
@@ -26,7 +27,7 @@ public class DbColumn {
     @ManyToMany(mappedBy = "columns")
     private List<BusinessRule> businessRules;
 
-    @OneToMany
+    @OneToMany(mappedBy = "column")
     private List<Value> values;
 
     public DbColumn() {

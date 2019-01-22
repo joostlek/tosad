@@ -12,22 +12,22 @@ public class Database {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "database_id_generator")
     private Long id;
 
-
+    @Column(name = "NAME")
     private String name;
 
-
+    @Column(name = "JDBC_URL")
     private String jdbcUrl;
 
-
+    @Column(name = "DATABASE_NAME")
     private String databaseName;
 
-
+    @Column(name = "PORT")
     private int port;
 
-
+    @Column(name = "USERNAME")
     private String username;
 
-
+    @Column(name = "PASSWORD")
     private String password;
 
     @OneToMany(mappedBy = "database")

@@ -5,11 +5,12 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
-        <property name="hibernate.connection.url">oracle:thin:@//ondora04.hu.nl:8521/EDUC18</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@//ondora04.hu.nl:8521/EDUC18</property>
         <property name="hibernate.connection.username">cursist</property>
         <property name="hibernate.connection.password">cursist5451</property>
         <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
         <property name="hibernate.hbm2ddl.auto">validate</property>
+        <property name="hibernate.default_schema">CURSIST</property>
         <property name="show_sql">true</property>
         <mapping class="nl.hu.tosad.domain.rule.BusinessRule"/>
         <mapping class="nl.hu.tosad.domain.rule.Value"/>

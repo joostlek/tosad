@@ -10,17 +10,22 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "BUSINESS_RULE")
 public class BusinessRule {
 
     @Id
     @SequenceGenerator(name = "business_rule_id_generator", sequenceName = "br_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "business_rule_id_generator")
+    @Column(name = "ID")
     private Long id;
 
+    @Column(name = "NAME")
     private String name;
 
+    @Column(name = "DESCRIPTION")
     private String description;
 
+    @Column(name = "ERROR_MESSAGE")
     private String errorMessage;
 
     @ManyToOne
