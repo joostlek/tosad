@@ -19,12 +19,12 @@ public class Category {
     @OneToMany(mappedBy = "category")
     private List<BusinessRuleType> businessRuleType;
 
+    public Category() {
+    }
+
     public Category(String code, String name) {
         this.code = code;
         this.name = name;
-    }
-
-    public Category() {
     }
 
     public Long getId() {

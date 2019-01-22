@@ -16,12 +16,12 @@ public class Dialect {
     @OneToMany(mappedBy = "dialect")
     private List<Database> databases;
 
+    public Dialect() {
+    }
+
     public Dialect(String name) {
         this.name = name;
         this.databases = new ArrayList<>();
-    }
-
-    public Dialect() {
     }
 
     public Long getId() {

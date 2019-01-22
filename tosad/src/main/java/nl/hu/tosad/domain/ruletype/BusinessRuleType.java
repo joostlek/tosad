@@ -33,12 +33,12 @@ public class BusinessRuleType {
     @OneToMany(mappedBy = "businessRuleType")
     private List<BusinessRule> businessRules;
 
+    public BusinessRuleType() {
+    }
+
     public BusinessRuleType(String code, String name) {
         this.code = code;
         this.name = name;
-    }
-
-    public BusinessRuleType() {
     }
 
     public String getCode() {

@@ -19,12 +19,12 @@ public class Operator {
     @OneToMany(mappedBy = "operator")
     private List<BusinessRule> businessRules;
 
+    public Operator() {
+    }
+
     public Operator(Long id, String sign) {
         this.id = id;
         this.sign = sign;
-    }
-
-    public Operator() {
     }
 
     public Long getId() {

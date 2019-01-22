@@ -26,11 +26,11 @@ public class Template {
     @JoinColumn(name = "fk_template_type")
     private BusinessRuleType businessRuleType;
 
-    public Template(String text) {
-        this.text = text;
+    public Template() {
     }
 
-    public Template() {
+    public Template(String text) {
+        this.text = text;
     }
 
     public Long getId() {

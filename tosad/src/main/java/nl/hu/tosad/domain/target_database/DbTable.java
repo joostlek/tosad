@@ -20,12 +20,12 @@ public class DbTable {
     @OneToMany(mappedBy = "table")
     private List<DbColumn> columns;
 
+    public DbTable() {
+    }
+
     public DbTable(String name, Database database) {
         this.name = name;
         this.database = database;
-    }
-
-    public DbTable() {
     }
 
     public Long getId() {
