@@ -2,6 +2,7 @@ package nl.hu.tosad.domain.rule;
 
 import nl.hu.tosad.domain.ruletype.BusinessRuleType;
 import nl.hu.tosad.domain.ruletype.Operator;
+import nl.hu.tosad.domain.target_database.Database;
 import nl.hu.tosad.domain.target_database.DbColumn;
 import nl.hu.tosad.domain.target_database.DbTable;
 
@@ -49,6 +50,9 @@ public class BusinessRule {
     )
     private List<DbTable> tables;
 
+    public BusinessRule() {
+    }
+
     public BusinessRule(String name, String description, String errorMessage, BusinessRuleType businessRuleType) {
         this.name = name;
         this.description = description;
@@ -65,14 +69,18 @@ public class BusinessRule {
     }
 
     public String getTriggerName() {
-        String res = "BRG_";
-        if (this.columns != null && this.columns.size() != 0) {
-            res += this.columns.get(0).getTable().getDatabase().getTriggerName();
-        } else if (this.tables != null && this.tables.size() != 0) {
-            res += this.tables.get(0).getDatabase().getTriggerName();
-        }
-        res += "_" + this.businessRuleType.getTriggerName() + "_" + id;
+        String res = "BRG_" + this.getDatabase().getTriggerName() + "_" + this.businessRuleType.getTriggerName() + "_" + id;
         return res.toUpperCase();
+    }
+
+    public Database getDatabase() {
+        Database database = null;
+        if (this.getColumns() != null && this.getColumns().size() != 0) {
+            database = this.getColumns().get(0).getTable().getDatabase();
+        } else if (this.getTables() != null && this.getTables().size() != 0) {
+            database = this.getTables().get(0).getDatabase();
+        }
+        return database;
     }
 
     public Long getId() {

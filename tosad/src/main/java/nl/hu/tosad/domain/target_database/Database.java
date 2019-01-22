@@ -100,4 +100,12 @@ public class Database {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Dialect getDialect() {
+        return dialect;
+    }
+
+    public void setDialect(Dialect dialect) {
+        this.dialect = dialect;
+    }
 }

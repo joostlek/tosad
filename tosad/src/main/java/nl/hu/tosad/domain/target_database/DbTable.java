@@ -20,6 +20,9 @@ public class DbTable {
     @OneToMany(mappedBy = "table")
     private List<DbColumn> columns;
 
+    public DbTable() {
+    }
+
     public DbTable(String name, Database database) {
         this.name = name;
         this.database = database;
@@ -47,5 +50,10 @@ public class DbTable {
 
     public void setDatabase(Database database) {
         this.database = database;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }

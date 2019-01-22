@@ -31,6 +31,7 @@ public class Value {
 
     public Value(String position, DbColumn dbColumn) {
         this.position = position;
+        this.type = "column";
         this.dbColumn = dbColumn;
     }
 

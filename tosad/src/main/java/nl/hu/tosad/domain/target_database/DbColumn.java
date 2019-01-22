@@ -85,4 +85,9 @@ public class DbColumn {
     public void setValues(List<Value> values) {
         this.values = values;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
