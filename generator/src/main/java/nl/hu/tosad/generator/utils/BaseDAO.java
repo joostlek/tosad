@@ -1,8 +1,9 @@
-package nl.hu.tosad.generator.dao;
+package nl.hu.tosad.generator.utils;
 
 import java.util.List;
 
 import nl.hu.tosad.domain.rule.BusinessRule;
+import nl.hu.tosad.generator.dao.BusinessRuleDAOInterface;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -11,13 +12,13 @@ import org.hibernate.cfg.Configuration;
 
 
 
-public class BusinessRuleDAO implements BusinessRuleDAOInterface<BusinessRule, Long> {
+public class BaseDAO implements BusinessRuleDAOInterface<BusinessRule, Long> {
 
     private Session currentSession;
 
     private Transaction currentTransaction;
 
-    public BusinessRuleDAO() {}
+    public BaseDAO() {}
 
     public Session openCurrentSession() {
         currentSession = getSessionFactory().openSession();

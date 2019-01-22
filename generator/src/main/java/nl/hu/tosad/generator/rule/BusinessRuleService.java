@@ -12,10 +12,10 @@ import java.util.List;
 
 public class BusinessRuleService implements BusinessRuleServiceInterface {
 
-    private BusinessRuleRepository businessRuleRepository;
+    private BusinessRuleRepositoryInterface businessRuleRepositoryInterface;
 
-    public BusinessRuleService(BusinessRuleRepository businessRuleRepository) {
-        this.businessRuleRepository = businessRuleRepository;
+    public BusinessRuleService(BusinessRuleRepositoryInterface businessRuleRepositoryInterface) {
+        this.businessRuleRepositoryInterface = businessRuleRepositoryInterface;
     }
 
     @Override
@@ -24,7 +24,7 @@ public class BusinessRuleService implements BusinessRuleServiceInterface {
             return new ArrayList<>();
         }
         List<String> sql = this.convertBusinessRulesDry(businessRuleIds);
-        BusinessRule businessRule = businessRuleRepository.getBusinessRuleById(businessRuleIds.get(0));
+        BusinessRule businessRule = businessRuleRepositoryInterface.getBusinessRuleById(businessRuleIds.get(0));
         Database database = businessRule.getDatabase();
 
         /* Add function to put the SQL in the server */
@@ -33,7 +33,7 @@ public class BusinessRuleService implements BusinessRuleServiceInterface {
 
     @Override
     public List<String> convertBusinessRulesDry(List<Long> businessRuleIds) {
-        List<BusinessRule> businessRules = businessRuleRepository.getBusinessRuleByList(businessRuleIds);
+        List<BusinessRule> businessRules = businessRuleRepositoryInterface.getBusinessRuleByList(businessRuleIds);
         List<String> sql = new ArrayList<>();
 
         if (businessRules.size() == 0) {
