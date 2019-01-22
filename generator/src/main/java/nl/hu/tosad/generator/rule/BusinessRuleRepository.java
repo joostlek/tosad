@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface BusinessRuleRepository {
     public List<BusinessRule> getBusinessRuleByList(List<Long> ids);
+
+    BusinessRule getBusinessRuleById(Long id);
 }

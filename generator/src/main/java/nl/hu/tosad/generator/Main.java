@@ -44,7 +44,7 @@ public class Main {
         BusinessRuleType businessRuleType = new BusinessRuleType("ARNG", "Attribute Range Rule");
         businessRuleType.setCategory(category);
         Dialect dialect = new Dialect("Oracle");
-        Template template1 = new Template("asdasd <column_column> asd <attribute_value>");
+        Template template1 = new Template("<name> asdasd <column_column> asd <attribute_value>");
         template1.setDialect(dialect);
         businessRuleType.setTemplates(Collections.singletonList(template1));
 
@@ -55,8 +55,12 @@ public class Main {
         businessRule.setValues(values);
         businessRule.setColumns(Collections.singletonList(column));
 
+        System.out.println(template1.getKeys());
+        System.out.println(template1.getAttributes());
+
         Template template2 = businessRuleType.getTemplate(dialect);
         ST stringTemplate1 = new ST(template2.getText());
+        stringTemplate1.add("name", businessRule.getTriggerName());
         for (Value value : businessRule.getValues()) {
             stringTemplate1.add(value.getPosition(), value);
         }

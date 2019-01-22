@@ -16,7 +16,7 @@ public class Operator {
     @ManyToMany(mappedBy = "availableOperators")
     private List<BusinessRuleType> businessRuleTypes;
 
-    @ManyToMany(mappedBy = "operator")
+    @OneToMany(mappedBy = "operator")
     private List<BusinessRule> businessRules;
 
     public Operator(Long id, String sign) {
