@@ -4,14 +4,22 @@
 
 <hibernate-configuration>
     <session-factory>
-
-    <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
-    <property name="hibernate.connection.url">oracle:thin:@//ondora04.hu.nl:8521/EDUC18</property>
-    <property name="hibernate.connection.username">cursist</property>
-    <property name="hibernate.connection.password">cursist5451</property>
-    <property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property>
-    <property name="hibernate.hbm2ddl.auto">validate</property>
-    <property name="show_sql">true</property>
-    <mapping class="nl.hu.tosad.domain.rule.BusinessRule"/>
-        </session-factory>
+        <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+        <property name="hibernate.connection.url">oracle:thin:@//ondora04.hu.nl:8521/EDUC18</property>
+        <property name="hibernate.connection.username">cursist</property>
+        <property name="hibernate.connection.password">cursist5451</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+        <property name="hibernate.hbm2ddl.auto">validate</property>
+        <property name="show_sql">true</property>
+        <mapping class="nl.hu.tosad.domain.rule.BusinessRule"/>
+        <mapping class="nl.hu.tosad.domain.rule.Value"/>
+        <mapping class="nl.hu.tosad.domain.ruletype.BusinessRuleType"/>
+        <mapping class="nl.hu.tosad.domain.ruletype.Template"/>
+        <mapping class="nl.hu.tosad.domain.ruletype.Category"/>
+        <mapping class="nl.hu.tosad.domain.ruletype.Operator"/>
+        <mapping class="nl.hu.tosad.domain.target_database.Database"/>
+        <mapping class="nl.hu.tosad.domain.target_database.DbColumn"/>
+        <mapping class="nl.hu.tosad.domain.target_database.DbTable"/>
+        <mapping class="nl.hu.tosad.domain.target_database.Dialect"/>
+    </session-factory>
 </hibernate-configuration>
