@@ -1,5 +1,8 @@
 package nl.hu.tosad.domain.target_database;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -15,6 +18,7 @@ public class DbTable {
     private String name;
 
     @ManyToOne
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinColumn(name = "fk_database")
     private Database database;
 

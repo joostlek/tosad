@@ -18,7 +18,7 @@ public class Template {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "template_id_generator")
     private Long id;
 
-    @Column(name = "TEXT")
+    @Column(name = "TEXT", length = 2047)
     private String text;
 
     @ManyToOne

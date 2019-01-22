@@ -10,7 +10,6 @@ import nl.hu.tosad.domain.target_database.Database;
 import nl.hu.tosad.domain.target_database.DbColumn;
 import nl.hu.tosad.domain.target_database.DbTable;
 import nl.hu.tosad.domain.target_database.Dialect;
-import nl.hu.tosad.generator.dao.BusinessRuleDAOInterface;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -21,7 +20,7 @@ import org.hibernate.cfg.Configuration;
 import java.util.List;
 
 
-public class BaseDAO implements BusinessRuleDAOInterface<BusinessRule, Long> {
+public class BaseDAO {
 
     private Session currentSession;
 
@@ -55,7 +54,7 @@ public class BaseDAO implements BusinessRuleDAOInterface<BusinessRule, Long> {
         return currentSession;
     }
 
-    public Session openCurrentSessionwithTransaction() {
+    public Session openCurrentSessionWithTransaction() {
         currentSession = getSessionFactory().openSession();
         currentTransaction = currentSession.beginTransaction();
         return currentSession;
@@ -65,7 +64,7 @@ public class BaseDAO implements BusinessRuleDAOInterface<BusinessRule, Long> {
         currentSession.close();
     }
 
-    public void closeCurrentSessionwithTransaction() {
+    public void closeCurrentSessionWithTransaction() {
         currentTransaction.commit();
         currentSession.close();
     }
@@ -86,11 +85,11 @@ public class BaseDAO implements BusinessRuleDAOInterface<BusinessRule, Long> {
         this.currentTransaction = currentTransaction;
     }
 
-    public void persist(BusinessRule entity) {
+    public void persist(Object entity) {
         getCurrentSession().save(entity);
     }
 
-    public void update(BusinessRule entity) {
+    public void update(Object entity) {
         getCurrentSession().update(entity);
     }
 

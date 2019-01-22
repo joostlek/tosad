@@ -2,6 +2,8 @@ package nl.hu.tosad.domain.target_database;
 
 import nl.hu.tosad.domain.rule.BusinessRule;
 import nl.hu.tosad.domain.rule.Value;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -21,6 +23,7 @@ public class DbColumn {
     private String type;
 
     @ManyToOne
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinColumn(name = "fk_table")
     private DbTable table;
 
