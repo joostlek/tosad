@@ -11,6 +11,7 @@ public class DbTable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "table_id_generator")
     private Long id;
 
+    @Column(name = "NAME")
     private String name;
 
     @ManyToOne

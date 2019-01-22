@@ -7,12 +7,14 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "BUSINESS_RULE_TYPE")
 public class BusinessRuleType {
 
     @Id
-    @Column(nullable = false)
+    @Column(nullable = false, name = "CODE")
     private String code;
 
+    @Column(name = "NAME")
     private String name;
 
     @OneToMany(mappedBy = "businessRuleType")

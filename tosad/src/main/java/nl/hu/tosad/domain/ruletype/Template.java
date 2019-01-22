@@ -11,11 +11,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Entity
+@Table(name = "TEMPLATE")
 public class Template {
     @Id
     @SequenceGenerator(name = "template_id_generator", sequenceName = "temp_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "template_id_generator")
     private Long id;
+
+    @Column(name = "TEXT")
     private String text;
 
     @ManyToOne
