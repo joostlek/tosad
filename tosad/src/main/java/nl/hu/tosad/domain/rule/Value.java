@@ -4,7 +4,6 @@ package nl.hu.tosad.domain.rule;
 import nl.hu.tosad.domain.target_database.DbColumn;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Value {
@@ -23,9 +22,17 @@ public class Value {
     @JoinColumn(name = "fk_business_rule")
     private BusinessRule businessRule;
 
-    @OneToMany(mappedBy = "value")
-    private List<DbColumn> dbColumns;
+    @ManyToOne
+    @JoinColumn(name = "fk_value_column")
+    private DbColumn dbColumn;
 
+    public Value() {
+    }
+
+    public Value(String position, DbColumn dbColumn) {
+        this.position = position;
+        this.dbColumn = dbColumn;
+    }
 
     public Value(String value, String type, String position) {
         this.value = value;
@@ -57,16 +64,12 @@ public class Value {
         this.position = position;
     }
 
-    public List<DbColumn> getDbColumns() {
-        return dbColumns;
+    public DbColumn getDbColumn() {
+        return dbColumn;
     }
 
-    public void setDbColumns(List<DbColumn> dbColumns) {
-        this.dbColumns = dbColumns;
-    }
-
-    public void addDbColumn(DbColumn dbcolumn) {
-        this.dbColumns.add(dbcolumn);
+    public void setDbColumn(DbColumn dbColumn) {
+        this.dbColumn = dbColumn;
     }
 
     public Long getId() {

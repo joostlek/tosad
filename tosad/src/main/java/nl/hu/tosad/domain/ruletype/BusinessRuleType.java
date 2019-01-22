@@ -1,6 +1,7 @@
 package nl.hu.tosad.domain.ruletype;
 
 import nl.hu.tosad.domain.rule.BusinessRule;
+import nl.hu.tosad.domain.target_database.Dialect;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,7 +16,7 @@ public class BusinessRuleType {
     private String name;
 
     @OneToMany(mappedBy = "businessRuleType")
-    private List<Template> template;
+    private List<Template> templates;
 
     @ManyToOne
     @JoinColumn(name = "fk_brt_category")
@@ -45,6 +46,10 @@ public class BusinessRuleType {
         this.code = code;
     }
 
+    public String getTriggerName() {
+        return category.getCode() + "_" + code;
+    }
+
     public String getName() {
         return name;
     }
@@ -53,12 +58,12 @@ public class BusinessRuleType {
         this.name = name;
     }
 
-    public List<Template> getTemplate() {
-        return template;
+    public List<Template> getTemplates() {
+        return templates;
     }
 
-    public void setTemplate(List<Template> template) {
-        this.template = template;
+    public void setTemplates(List<Template> templates) {
+        this.templates = templates;
     }
 
     public Category getCategory() {
@@ -75,6 +80,15 @@ public class BusinessRuleType {
 
     public void setAvailableOperators(List<Operator> availableOperators) {
         this.availableOperators = availableOperators;
+    }
+
+    public Template getTemplate(Dialect dialect) {
+        for (Template template : this.templates) {
+            if (template.getDialect() == dialect) {
+                return template;
+            }
+        }
+        return null;
     }
 
     public List<BusinessRule> getBusinessRules() {

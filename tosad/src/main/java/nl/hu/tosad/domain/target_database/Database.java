@@ -57,6 +57,10 @@ public class Database {
         this.name = name;
     }
 
+    public String getTriggerName() {
+        return this.name.substring(0, 4);
+    }
+
     public String getJdbcUrl() {
         return jdbcUrl;
     }

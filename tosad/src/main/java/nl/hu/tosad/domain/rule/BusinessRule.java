@@ -49,12 +49,11 @@ public class BusinessRule {
     )
     private List<DbTable> tables;
 
-    public BusinessRule(String name, String description, String errorMessage, BusinessRuleType businessRuleType, Operator operator) {
+    public BusinessRule(String name, String description, String errorMessage, BusinessRuleType businessRuleType) {
         this.name = name;
         this.description = description;
         this.errorMessage = errorMessage;
         this.businessRuleType = businessRuleType;
-        this.operator = operator;
     }
 
     public String getName() {
@@ -63,6 +62,17 @@ public class BusinessRule {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getTriggerName() {
+        String res = "BRG_";
+        if (this.columns != null && this.columns.size() != 0) {
+            res += this.columns.get(0).getTable().getDatabase().getTriggerName();
+        } else if (this.tables != null && this.tables.size() != 0) {
+            res += this.tables.get(0).getDatabase().getTriggerName();
+        }
+        res += "_" + this.businessRuleType.getTriggerName() + "_" + id;
+        return res.toUpperCase();
     }
 
     public Long getId() {

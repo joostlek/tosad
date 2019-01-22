@@ -1,12 +1,17 @@
 package nl.hu.tosad.generator;
 
+import nl.hu.tosad.domain.rule.BusinessRule;
+import nl.hu.tosad.domain.rule.Value;
+import nl.hu.tosad.domain.ruletype.BusinessRuleType;
+import nl.hu.tosad.domain.ruletype.Category;
 import nl.hu.tosad.domain.ruletype.Template;
+import nl.hu.tosad.domain.target_database.Database;
 import nl.hu.tosad.domain.target_database.DbColumn;
+import nl.hu.tosad.domain.target_database.DbTable;
+import nl.hu.tosad.domain.target_database.Dialect;
 import org.stringtemplate.v4.ST;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -20,17 +25,42 @@ public class Main {
 
         Map<String, Object> attributes = new HashMap<>();
         attributes.put("attributes_lov", Arrays.asList("asd", "dsa"));
-        attributes.put("column_column", new DbColumn());
+        attributes.put("column_column", "");
 
         Template template = new Template("SELECT <attributes_lov; separator=\",\"> FROM <column_column>");
 
         ST stringTemplate = new ST(template.getText());
-        stringTemplate.add("attributes_lov", "asd");
-        stringTemplate.add("attributes_lov", "asd");
-        stringTemplate.add("attributes_lov", "asd");
         for (String key : template.getKeys()) {
             stringTemplate.add(key, attributes.get(key));
         }
         System.out.println(stringTemplate.render());
+
+        Category category = new Category("CONS", "Static ");
+
+        Database database = new Database("asdasd", "", "", 1, "", "");
+        DbTable table = new DbTable("PRODUCT", database);
+        DbColumn column = new DbColumn("id", "int", table);
+
+        BusinessRuleType businessRuleType = new BusinessRuleType("ARNG", "Attribute Range Rule");
+        businessRuleType.setCategory(category);
+        Dialect dialect = new Dialect("Oracle");
+        Template template1 = new Template("asdasd <column_column> asd <attribute_value>");
+        template1.setDialect(dialect);
+        businessRuleType.setTemplates(Collections.singletonList(template1));
+
+        List<Value> values = Arrays.asList(new Value("age", "column", "column_column"),
+                new Value("123", "int", "attribute_value"));
+
+        BusinessRule businessRule = new BusinessRule("", "", "", businessRuleType);
+        businessRule.setValues(values);
+        businessRule.setColumns(Collections.singletonList(column));
+
+        Template template2 = businessRuleType.getTemplate(dialect);
+        ST stringTemplate1 = new ST(template2.getText());
+        for (Value value : businessRule.getValues()) {
+            stringTemplate1.add(value.getPosition(), value);
+        }
+        System.out.println(stringTemplate1.render());
+        System.out.println(businessRule.getTriggerName());
     }
 }

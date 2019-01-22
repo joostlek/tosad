@@ -17,6 +17,8 @@ public class DbColumn {
     @Column
     private String name;
 
+    private String type;
+
     @ManyToOne
     @JoinColumn(name = "fk_table")
     private DbTable table;
@@ -24,11 +26,16 @@ public class DbColumn {
     @ManyToMany(mappedBy = "columns")
     private List<BusinessRule> businessRules;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_value")
-    private Value value;
+    @OneToMany
+    private List<Value> values;
 
     public DbColumn() {
+    }
+
+    public DbColumn(String name, String type, DbTable table) {
+        this.name = name;
+        this.type = type;
+        this.table = table;
     }
 
     public Long getId() {
@@ -47,6 +54,14 @@ public class DbColumn {
         this.name = name;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public DbTable getTable() {
         return table;
     }
@@ -61,5 +76,13 @@ public class DbColumn {
 
     public void setBusinessRules(List<BusinessRule> businessRules) {
         this.businessRules = businessRules;
+    }
+
+    public List<Value> getValues() {
+        return values;
+    }
+
+    public void setValues(List<Value> values) {
+        this.values = values;
     }
 }
