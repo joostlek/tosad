@@ -25,7 +25,7 @@ public class Main {
 
         Map<String, Object> attributes = new HashMap<>();
         attributes.put("attributes_lov", Arrays.asList("asd", "dsa"));
-        attributes.put("column_column", "");
+        attributes.put("column_column", "testtabel");
 
         Template template = new Template("SELECT <attributes_lov; separator=\",\"> FROM <column_column>");
 
