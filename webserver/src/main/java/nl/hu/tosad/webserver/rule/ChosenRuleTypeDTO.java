@@ -2,13 +2,13 @@ package nl.hu.tosad.webserver.rule;
 
 public class ChosenRuleTypeDTO {
 
-    private Long businessRuleTypeCode;
+    private String businessRuleTypeCode;
 
-    public Long getBusinessRuleTypeCode() {
+    public String getBusinessRuleTypeCode() {
         return businessRuleTypeCode;
     }
 
-    public void setBusinessRuleTypeCode(Long businessRuleTypeCode) {
+    public void setBusinessRuleTypeCode(String businessRuleTypeCode) {
         this.businessRuleTypeCode = businessRuleTypeCode;
     }
 

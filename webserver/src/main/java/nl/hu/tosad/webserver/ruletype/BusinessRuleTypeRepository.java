@@ -10,4 +10,6 @@ import java.util.List;
 public interface BusinessRuleTypeRepository extends CrudRepository<BusinessRuleType, Long> {
 
     List<BusinessRuleType> findAll();
+
+    BusinessRuleType findBusinessRuleTypeByCode(String code);
 }
