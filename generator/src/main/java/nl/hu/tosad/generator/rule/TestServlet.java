@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet(urlPatterns = {"/test"})
-public class testServlet extends HttpServlet {
+public class TestServlet extends HttpServlet {
         public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
             res.setStatus(HttpServletResponse.SC_NO_CONTENT);
             int value1 = Integer.parseInt(req.getParameter("v1"));
