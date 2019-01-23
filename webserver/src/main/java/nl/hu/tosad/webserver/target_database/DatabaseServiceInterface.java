@@ -5,7 +5,7 @@ import nl.hu.tosad.domain.target_database.DbColumn;
 import nl.hu.tosad.domain.target_database.DbTable;
 
 public interface DatabaseServiceInterface {
-    boolean getDatabaseDefinition(Database database);
+    Database getDatabaseDefinition(Database database);
 
     DbColumn getColumnById(Long id);
 

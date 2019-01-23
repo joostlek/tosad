@@ -5,7 +5,7 @@ package nl.hu.tosad.webserver;
 import nl.hu.tosad.domain.ruletype.Template;
 import nl.hu.tosad.domain.target_database.Database;
 import nl.hu.tosad.webserver.ruletype.TemplateRepository;
-import nl.hu.tosad.webserver.target_database.DatabaseServiceInterface;
+import nl.hu.tosad.webserver.target_database.DatabaseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class TosadApplication implements CommandLineRunner {
     private static final Logger log = LoggerFactory.getLogger(TosadApplication.class);
 
     @Autowired
-    private DatabaseServiceInterface databaseService;
+    private DatabaseService databaseService;
 
     @Autowired
     private TemplateRepository templateRepository;
@@ -35,10 +35,10 @@ public class TosadApplication implements CommandLineRunner {
         log.info("Alle templates in db:");
         log.info("----------------------");
         for (Template t : templateRepository.findAll()) {
-            log.info(t.toString());
+            System.out.println(t.getAttributes());
         }
-        Database database = databaseService.getDatabaseById(1L);
-        System.out.println(databaseService.getDatabaseDefinition(database));
+        Database database = databaseService.getDatabaseById(2L);
+        System.out.println(databaseService.validateDatabase(database));
     }
 }
 

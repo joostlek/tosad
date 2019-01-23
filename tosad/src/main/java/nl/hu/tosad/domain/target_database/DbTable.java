@@ -4,6 +4,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,6 +24,7 @@ public class DbTable {
     private Database database;
 
     @OneToMany(mappedBy = "table")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<DbColumn> columns;
 
     public DbTable() {
@@ -31,6 +33,7 @@ public class DbTable {
     public DbTable(String name, Database database) {
         this.name = name;
         this.database = database;
+        this.columns = new ArrayList<>();
     }
 
     public Long getId() {
@@ -55,6 +58,36 @@ public class DbTable {
 
     public void setDatabase(Database database) {
         this.database = database;
+    }
+
+    public List<DbColumn> getColumns() {
+        return columns;
+    }
+
+    public void setColumns(List<DbColumn> columns) {
+        this.columns = columns;
+    }
+
+    public void addColumn(DbColumn column) {
+        this.columns.add(column);
+    }
+
+    public DbColumn getColumn(String columnName) {
+        for (DbColumn column : this.columns) {
+            if (column.getName().equals(columnName)) {
+                return column;
+            }
+        }
+        return null;
+    }
+
+    public boolean hasColumn(String columnName) {
+        for (DbColumn column : this.columns) {
+            if (column.getName().equals(columnName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

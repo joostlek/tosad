@@ -1,5 +1,8 @@
 package nl.hu.tosad.domain.target_database;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -31,6 +34,7 @@ public class Database {
     private String password;
 
     @OneToMany(mappedBy = "database")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<DbTable> tables;
 
     @ManyToOne
@@ -99,6 +103,26 @@ public class Database {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<DbTable> getTables() {
+        return tables;
+    }
+
+    public void setTables(List<DbTable> tables) {
+        this.tables = tables;
+    }
+
+    public boolean hasTable(String tableName) {
+        for (DbTable table : this.tables) {
+            if (table.getName().equals(tableName))
+                return true;
+        }
+        return false;
+    }
+
+    public void addTable(DbTable table) {
+        this.tables.add(table);
     }
 
     public Dialect getDialect() {

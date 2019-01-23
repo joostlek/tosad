@@ -36,6 +36,11 @@ public class DbColumn {
     public DbColumn() {
     }
 
+    public DbColumn(String name, String type) {
+        this.name = name;
+        this.type = type;
+    }
+
     public DbColumn(String name, String type, DbTable table) {
         this.name = name;
         this.type = type;
