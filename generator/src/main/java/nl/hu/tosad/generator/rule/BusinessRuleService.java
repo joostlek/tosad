@@ -5,6 +5,9 @@ import nl.hu.tosad.domain.rule.Value;
 import nl.hu.tosad.domain.ruletype.Template;
 import nl.hu.tosad.domain.target_database.Database;
 import nl.hu.tosad.domain.target_database.Dialect;
+import nl.hu.tosad.generator.target_database.TargetDatabaseRepository;
+import nl.hu.tosad.generator.target_database.TargetDatabaseService;
+import nl.hu.tosad.generator.target_database.TargetDatabaseServiceInterface;
 import org.stringtemplate.v4.ST;
 
 import java.util.ArrayList;
@@ -12,10 +15,13 @@ import java.util.List;
 
 public class BusinessRuleService implements BusinessRuleServiceInterface {
 
-    private BusinessRuleRepository businessRuleRepository;
+    private BusinessRuleRepositoryInterface businessRuleRepositoryInterface;
 
-    public BusinessRuleService(BusinessRuleRepository businessRuleRepository) {
-        this.businessRuleRepository = businessRuleRepository;
+    private TargetDatabaseServiceInterface targetDatabaseService;
+
+    public BusinessRuleService() {
+        this.businessRuleRepositoryInterface = new BusinessRuleRepository();
+        this.targetDatabaseService = new TargetDatabaseService();
     }
 
     @Override
@@ -24,19 +30,33 @@ public class BusinessRuleService implements BusinessRuleServiceInterface {
             return new ArrayList<>();
         }
         List<String> sql = this.convertBusinessRulesDry(businessRuleIds);
-        BusinessRule businessRule = businessRuleRepository.getBusinessRuleById(businessRuleIds.get(0));
-        Database database = businessRule.getDatabase();
+        BusinessRule businessRule = businessRuleRepositoryInterface.getBusinessRuleById(businessRuleIds.get(0));
 
-        /* Add function to put the SQL in the server */
-        return null;
+        TargetDatabaseRepository targetDatabaseRepository = new TargetDatabaseRepository();
+        Database database = targetDatabaseRepository.findDatabaseByBusinessRule(businessRule);
+        targetDatabaseService.execute(sql, database);
+        return sql;
+    }
+
+    @Override
+    public List<BusinessRule> getBusinessRulesByIdList(List<Long> businessRuleIds) {
+        List<BusinessRule> businessRules = new ArrayList<>();
+        for (Long id : businessRuleIds) {
+            try {
+                businessRules.add(businessRuleRepositoryInterface.getBusinessRuleById(id));
+            } catch (RuntimeException e) {
+                e.printStackTrace();
+            }
+        }
+        return businessRules;
     }
 
     @Override
     public List<String> convertBusinessRulesDry(List<Long> businessRuleIds) {
-        List<BusinessRule> businessRules = businessRuleRepository.getBusinessRuleByList(businessRuleIds);
+        List<BusinessRule> businessRules = this.getBusinessRulesByIdList(businessRuleIds);
         List<String> sql = new ArrayList<>();
 
-        if (businessRules.size() == 0) {
+        if (businessRules.isEmpty()) {
             return sql;
         }
         Database database;

@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "DIALECT")
 public class Dialect {
     @Id
     @SequenceGenerator(name = "dialect_id_generator", sequenceName = "db_dialect_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dialect_id_generator")
     private Long id;
 
+    @Column(name = "NAME")
     private String name;
 
     @OneToMany(mappedBy = "dialect")

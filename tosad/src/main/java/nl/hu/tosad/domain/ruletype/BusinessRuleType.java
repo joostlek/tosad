@@ -2,20 +2,25 @@ package nl.hu.tosad.domain.ruletype;
 
 import nl.hu.tosad.domain.rule.BusinessRule;
 import nl.hu.tosad.domain.target_database.Dialect;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "BUSINESS_RULE_TYPE")
 public class BusinessRuleType {
 
     @Id
-    @Column(nullable = false)
+    @Column(nullable = false, name = "CODE")
     private String code;
 
+    @Column(name = "NAME")
     private String name;
 
     @OneToMany(mappedBy = "businessRuleType")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Template> templates;
 
     @ManyToOne

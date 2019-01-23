@@ -5,22 +5,29 @@ import nl.hu.tosad.domain.ruletype.Operator;
 import nl.hu.tosad.domain.target_database.Database;
 import nl.hu.tosad.domain.target_database.DbColumn;
 import nl.hu.tosad.domain.target_database.DbTable;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "BUSINESS_RULE")
 public class BusinessRule {
 
     @Id
     @SequenceGenerator(name = "business_rule_id_generator", sequenceName = "br_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "business_rule_id_generator")
+    @Column(name = "ID")
     private Long id;
 
+    @Column(name = "NAME")
     private String name;
 
+    @Column(name = "DESCRIPTION")
     private String description;
 
+    @Column(name = "ERROR_MESSAGE")
     private String errorMessage;
 
     @ManyToOne
@@ -32,9 +39,11 @@ public class BusinessRule {
     private Operator operator;
 
     @OneToMany(mappedBy = "businessRule")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Value> values;
 
     @ManyToMany(cascade = {CascadeType.ALL})
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
             name = "Column_Rule",
             joinColumns = {@JoinColumn(name = "column_id")},
@@ -42,7 +51,8 @@ public class BusinessRule {
     )
     private List<DbColumn> columns;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
             name = "Table_Rule",
             joinColumns = {@JoinColumn(name = "table_id")},
@@ -159,5 +169,18 @@ public class BusinessRule {
         this.operator = operator;
     }
 
-
+    @Override
+    public String toString() {
+        return "BusinessRule{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", errorMessage='" + errorMessage + '\'' +
+                ", businessRuleType=" + businessRuleType +
+                ", operator=" + operator +
+                ", values=" + values +
+                ", columns=" + columns +
+                ", tables=" + tables +
+                '}';
+    }
 }

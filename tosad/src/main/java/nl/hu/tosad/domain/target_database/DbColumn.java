@@ -2,31 +2,35 @@ package nl.hu.tosad.domain.target_database;
 
 import nl.hu.tosad.domain.rule.BusinessRule;
 import nl.hu.tosad.domain.rule.Value;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "db_column")
+@Table(name = "DB_COLUMN")
 public class DbColumn {
     @Id
     @SequenceGenerator(name = "column_id_generator", sequenceName = "dbc_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "column_id_generator")
     private Long id;
 
-    @Column
+    @Column(name = "NAME")
     private String name;
 
+    @Column(name = "TYPE")
     private String type;
 
     @ManyToOne
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinColumn(name = "fk_table")
     private DbTable table;
 
     @ManyToMany(mappedBy = "columns")
     private List<BusinessRule> businessRules;
 
-    @OneToMany
+    @OneToMany(mappedBy = "column")
     private List<Value> values;
 
     public DbColumn() {

@@ -1,5 +1,8 @@
 package nl.hu.tosad.domain.target_database;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,9 +14,11 @@ public class DbTable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "table_id_generator")
     private Long id;
 
+    @Column(name = "NAME")
     private String name;
 
     @ManyToOne
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinColumn(name = "fk_database")
     private Database database;
 

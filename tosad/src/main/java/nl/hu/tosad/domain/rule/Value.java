@@ -6,16 +6,20 @@ import nl.hu.tosad.domain.target_database.DbColumn;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "VALUE")
 public class Value {
     @Id
     @SequenceGenerator(name = "value_id_generator", sequenceName = "value_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "value_id_generator")
     private Long id;
 
+    @Column(name = "VALUE")
     private String value;
 
+    @Column(name = "TYPE")
     private String type;
 
+    @Column(name = "POSITION")
     private String position;
 
     @ManyToOne
@@ -24,15 +28,15 @@ public class Value {
 
     @ManyToOne
     @JoinColumn(name = "fk_value_column")
-    private DbColumn dbColumn;
+    private DbColumn column;
 
     public Value() {
     }
 
-    public Value(String position, DbColumn dbColumn) {
+    public Value(String position, DbColumn column) {
         this.position = position;
         this.type = "column";
-        this.dbColumn = dbColumn;
+        this.column = column;
     }
 
     public Value(String value, String type, String position) {
@@ -65,12 +69,12 @@ public class Value {
         this.position = position;
     }
 
-    public DbColumn getDbColumn() {
-        return dbColumn;
+    public DbColumn getColumn() {
+        return column;
     }
 
-    public void setDbColumn(DbColumn dbColumn) {
-        this.dbColumn = dbColumn;
+    public void setColumn(DbColumn dbColumn) {
+        this.column = dbColumn;
     }
 
     public Long getId() {
