@@ -15,8 +15,6 @@ public class BusinessRuleController {
     @Autowired
     private TemplateRepository templateRepository;
 
-//    private BusinessRuleBuilderFactoryInterface builderFactoryInterface = new BusinessRuleBuilderFactory();
-
     @GetMapping("/")
     public String ruleList(Model model) {
         model.addAttribute("businessRules", businessRuleService.getAllBusinessRules());
@@ -26,7 +24,6 @@ public class BusinessRuleController {
     @GetMapping("/add")
     public String add(Model model) {
         model.addAttribute("templates", templateRepository.findAll());
-        model.addAttribute("chosenRule", new ChosenRuleTypeDTO());
         return "add";
     }
 
@@ -35,7 +32,6 @@ public class BusinessRuleController {
         model.addAttribute("type", new ChosenRuleTypeDTO());
         return "fillRule";
     }
-
 
 
 }
