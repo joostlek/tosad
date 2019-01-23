@@ -97,7 +97,7 @@ public class Value {
     public String toString() {
         if (type.equalsIgnoreCase("VARCHAR2")) {
             return "\"" + this.value + "\"";
-        } else if (type.equalsIgnoreCase("int")) {
+        } else if (type.equalsIgnoreCase("NUMBER")) {
             return this.value;
         }
         return this.value;
