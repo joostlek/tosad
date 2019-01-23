@@ -73,9 +73,9 @@ public class BusinessRuleService implements BusinessRuleServiceInterface {
             stringTemplate.add("name", businessRule.getTriggerName());
             stringTemplate.add("table", businessRule.getTables().get(0));
             if (businessRule.getColumns() != null) {
-                stringTemplate.add("column", businessRule.getColumns().get(0));
+                stringTemplate.add("column_column", businessRule.getColumns().get(0));
             }
-            stringTemplate.add("operator", businessRule.getOperator());
+            stringTemplate.add("operator_operator", businessRule.getOperator());
             stringTemplate.add("error", businessRule.getErrorMessage());
             for (Value value : businessRule.getValues()) {
                 stringTemplate.add(value.getPosition(), value.getValue());
