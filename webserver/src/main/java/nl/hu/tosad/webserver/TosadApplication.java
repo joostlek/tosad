@@ -1,18 +1,18 @@
 package nl.hu.tosad.webserver;
 
 //import nl.hu.tosad.webserver.rule.BusinessRuleServiceInterface;
+
 import nl.hu.tosad.domain.ruletype.Template;
+import nl.hu.tosad.domain.target_database.Database;
 import nl.hu.tosad.webserver.ruletype.TemplateRepository;
-import nl.hu.tosad.webserver.target_database.ColumnRepository;
-import nl.hu.tosad.webserver.target_database.DatabaseRepository;
-import nl.hu.tosad.webserver.target_database.TableRepository;
+import nl.hu.tosad.webserver.target_database.DatabaseServiceInterface;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @SpringBootApplication()
 @EntityScan("nl.hu.tosad.domain")
@@ -20,17 +20,8 @@ public class TosadApplication implements CommandLineRunner {
 
     private static final Logger log = LoggerFactory.getLogger(TosadApplication.class);
 
-//    @Autowired
-//    private BusinessRuleServiceInterface businessRuleService;
-
     @Autowired
-    private DatabaseRepository databaseRepository;
-
-    @Autowired
-    private ColumnRepository columnRepository;
-
-    @Autowired
-    private TableRepository tableRepository;
+    private DatabaseServiceInterface databaseService;
 
     @Autowired
     private TemplateRepository templateRepository;
@@ -46,6 +37,8 @@ public class TosadApplication implements CommandLineRunner {
         for (Template t : templateRepository.findAll()) {
             log.info(t.toString());
         }
+        Database database = databaseService.getDatabaseById(1L);
+        System.out.println(databaseService.getDatabaseDefinition(database));
     }
 }
 
