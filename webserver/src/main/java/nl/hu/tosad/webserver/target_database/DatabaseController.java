@@ -1,5 +1,6 @@
 package nl.hu.tosad.webserver.target_database;
 
+import nl.hu.tosad.webserver.rule.BusinessRuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +12,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class DatabaseController {
     @Autowired
     DatabaseService databaseService;
-
+    @Autowired
+    BusinessRuleService businessRuleService;
     @GetMapping("/")
     public String databaseList(Model model) {
         model.addAttribute("databases", databaseService.getAllDatabases());
@@ -24,6 +26,7 @@ public class DatabaseController {
 
         model.addAttribute("chosenDatabase", dbn);
         redirectAttributes.addFlashAttribute("chosenDB", dbn);
+        model.addAttribute("businessRules", businessRuleService.getAllBusinessRulesByDb(dbn));
         return"ruleList";
     }
 

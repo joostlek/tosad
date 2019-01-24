@@ -5,6 +5,7 @@ import nl.hu.tosad.domain.ruletype.Template;
 import nl.hu.tosad.domain.target_database.Dialect;
 import nl.hu.tosad.webserver.ruletype.BusinessRuleTypeRepository;
 import nl.hu.tosad.webserver.ruletype.TemplateRepository;
+import nl.hu.tosad.webserver.target_database.ChosenDatabaseDTO;
 import nl.hu.tosad.webserver.target_database.DatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,9 +31,8 @@ public class BusinessRuleController {
 
 
     @GetMapping("/allRules")
-    public String ruleList(Model model) {
+    public String ruleList(@ModelAttribute ChosenDatabaseDTO dbn, Model model) {
 
-        model.addAttribute("businessRules", businessRuleService.getAllBusinessRules());
         return "ruleList";
     }
 

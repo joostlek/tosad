@@ -1,20 +1,20 @@
 package nl.hu.tosad.webserver.target_database;
 
 public class ChosenDatabaseDTO {
-    private String databaseName;
+    private Long databaseId;
 
-    public String getDatabaseName() {
-        return databaseName;
+    public Long getDatabaseId() {
+        return databaseId;
     }
 
-    public void setDatabaseName(String databaseName) {
-        this.databaseName = databaseName;
+    public void setDatabaseName(Long databaseId) {
+        this.databaseId = databaseId;
     }
 
     @Override
     public String toString() {
         return "ChosenDatabase{" +
-                "databaseName=" + databaseName +
+                "databaseId=" + databaseId +
                 '}';
     }
 }
