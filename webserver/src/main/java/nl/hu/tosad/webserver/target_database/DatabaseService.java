@@ -42,6 +42,10 @@ public class DatabaseService implements DatabaseServiceInterface {
         return true;
     }
 
+    public List<DbTable> getAllTables() {
+        return tableRepository.findAll();
+    }
+
     @Override
     public DbColumn getColumnById(Long id) {
         return columnRepository.findById(id).orElseThrow(RuntimeException::new);

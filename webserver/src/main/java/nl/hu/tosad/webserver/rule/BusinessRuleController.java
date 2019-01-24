@@ -1,5 +1,6 @@
 package nl.hu.tosad.webserver.rule;
 
+import nl.hu.tosad.domain.ruletype.BusinessRuleType;
 import nl.hu.tosad.domain.ruletype.Template;
 import nl.hu.tosad.domain.target_database.Dialect;
 import nl.hu.tosad.webserver.ruletype.BusinessRuleTypeRepository;
@@ -50,8 +51,12 @@ public class BusinessRuleController {
     @PostMapping("/addType")
     public String addType(@ModelAttribute ChosenRuleTypeDTO brtc, Model model) {
         Dialect dialect = databaseService.getDialectbyID((long) 1);
+        BusinessRuleType type = businessRuleTypeRepository.findBusinessRuleTypeByCode(brtc.getBusinessRuleTypeCode());
         Template template = businessRuleTypeRepository.findBusinessRuleTypeByCode(brtc.getBusinessRuleTypeCode()).getTemplate(dialect);
-        model.addAttribute("chosenType", template.getAttributes());
+        model.addAttribute("templateByType", template.getAttributes());
+        model.addAttribute("type", type);
+        model.addAttribute("template", template.toString());
+        model.addAttribute("tables", databaseService.getAllTables());
         return "fillRule";
     }
 
