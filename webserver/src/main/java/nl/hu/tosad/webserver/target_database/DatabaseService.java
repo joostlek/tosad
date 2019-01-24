@@ -4,6 +4,7 @@ package nl.hu.tosad.webserver.target_database;
 import nl.hu.tosad.domain.target_database.Database;
 import nl.hu.tosad.domain.target_database.DbColumn;
 import nl.hu.tosad.domain.target_database.DbTable;
+import nl.hu.tosad.domain.target_database.Dialect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +19,14 @@ public class DatabaseService implements DatabaseServiceInterface {
 
     private final TableRepository tableRepository;
 
+    private final DialectRepository dialectRepository;
+
     @Autowired
-    public DatabaseService(DatabaseRepository databaseRepository, ColumnRepository columnRepository, TableRepository tableRepository) {
+    public DatabaseService(DatabaseRepository databaseRepository, ColumnRepository columnRepository, TableRepository tableRepository, DialectRepository dialectRepository) {
         this.databaseRepository = databaseRepository;
         this.columnRepository = columnRepository;
         this.tableRepository = tableRepository;
+        this.dialectRepository = dialectRepository;
     }
 
     public Database validateDatabase(Database database) {
@@ -126,6 +130,10 @@ public class DatabaseService implements DatabaseServiceInterface {
     @Override
     public Database getDatabaseById(Long id) {
         return databaseRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
+
+    public Dialect getDialectbyID(Long id) {
+        return dialectRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
     private DbColumn saveColumn(DbColumn column) {
