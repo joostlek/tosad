@@ -1,12 +1,13 @@
-package nl.hu.tosad.webserver.rule;
+package nl.hu.tosad.webserver.rule.presentation;
 
 import nl.hu.tosad.domain.ruletype.BusinessRuleType;
 import nl.hu.tosad.domain.ruletype.Template;
 import nl.hu.tosad.domain.target_database.Dialect;
-import nl.hu.tosad.webserver.ruletype.BusinessRuleTypeRepository;
-import nl.hu.tosad.webserver.ruletype.TemplateRepository;
-import nl.hu.tosad.webserver.target_database.ChosenDatabaseDTO;
-import nl.hu.tosad.webserver.target_database.DatabaseService;
+import nl.hu.tosad.webserver.rule.service.RuleServiceInterface;
+import nl.hu.tosad.webserver.ruletype.data.BusinessRuleTypeRepository;
+import nl.hu.tosad.webserver.ruletype.data.TemplateRepository;
+import nl.hu.tosad.webserver.target_database.presentation.ChosenDatabaseDTO;
+import nl.hu.tosad.webserver.target_database.service.TargetDatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,12 +16,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class BusinessRuleController {
+public class RuleController {
     @Autowired
-    BusinessRuleServiceInterface businessRuleService;
+    RuleServiceInterface businessRuleService;
 
     @Autowired
-    DatabaseService databaseService;
+    TargetDatabaseService targetDatabaseService;
 
     @Autowired
     private TemplateRepository templateRepository;
@@ -51,13 +52,13 @@ public class BusinessRuleController {
 
     @PostMapping("/addType")
     public String addType(@ModelAttribute ChosenRuleTypeDTO brtc, Model model) {
-        Dialect dialect = databaseService.getDialectbyID((long) 1);
+        Dialect dialect = targetDatabaseService.getDialectById((long) 1);
         BusinessRuleType type = businessRuleTypeRepository.findBusinessRuleTypeByCode(brtc.getBusinessRuleTypeCode());
         Template template = businessRuleTypeRepository.findBusinessRuleTypeByCode(brtc.getBusinessRuleTypeCode()).getTemplate(dialect);
         model.addAttribute("templateByType", template.getAttributes());
         model.addAttribute("type", type);
         model.addAttribute("template", template.toString());
-        model.addAttribute("tables", databaseService.getAllTables());
+        model.addAttribute("tables", targetDatabaseService.getAllTables());
         return "fillRule";
     }
 

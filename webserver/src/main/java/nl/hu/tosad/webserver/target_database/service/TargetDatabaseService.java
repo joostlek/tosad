@@ -1,4 +1,4 @@
-package nl.hu.tosad.webserver.target_database;
+package nl.hu.tosad.webserver.target_database.service;
 
 
 import com.google.gson.Gson;
@@ -6,6 +6,10 @@ import nl.hu.tosad.domain.target_database.Database;
 import nl.hu.tosad.domain.target_database.DbColumn;
 import nl.hu.tosad.domain.target_database.DbTable;
 import nl.hu.tosad.domain.target_database.Dialect;
+import nl.hu.tosad.webserver.target_database.data.ColumnRepository;
+import nl.hu.tosad.webserver.target_database.data.DatabaseRepository;
+import nl.hu.tosad.webserver.target_database.data.DialectRepository;
+import nl.hu.tosad.webserver.target_database.data.TableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +25,7 @@ import java.util.List;
 import java.util.Scanner;
 
 @Service
-public class DatabaseService implements DatabaseServiceInterface {
+public class TargetDatabaseService implements TargetDatabaseServiceInterface {
     private final DatabaseRepository databaseRepository;
 
     private final ColumnRepository columnRepository;
@@ -31,13 +35,14 @@ public class DatabaseService implements DatabaseServiceInterface {
     private final DialectRepository dialectRepository;
 
     @Autowired
-    public DatabaseService(DatabaseRepository databaseRepository, ColumnRepository columnRepository, TableRepository tableRepository, DialectRepository dialectRepository) {
+    public TargetDatabaseService(DatabaseRepository databaseRepository, ColumnRepository columnRepository, TableRepository tableRepository, DialectRepository dialectRepository) {
         this.databaseRepository = databaseRepository;
         this.columnRepository = columnRepository;
         this.tableRepository = tableRepository;
         this.dialectRepository = dialectRepository;
     }
 
+    @Override
     public Database validateDatabase(Database database) {
         DatabaseConnectionFactory databaseConnectionFactory = new DatabaseConnectionFactory(database);
         try {
@@ -62,7 +67,7 @@ public class DatabaseService implements DatabaseServiceInterface {
         }
     }
 
-    public DbTable validateTable(DbTable table) {
+    private DbTable validateTable(DbTable table) {
         DatabaseConnectionFactory databaseConnectionFactory = new DatabaseConnectionFactory(table.getDatabase());
         try {
             Connection connection = databaseConnectionFactory.createConnection();
@@ -78,7 +83,6 @@ public class DatabaseService implements DatabaseServiceInterface {
                     }
                 } else {
                     DbColumn column = new DbColumn(metaData.getColumnName(i), metaData.getColumnTypeName(i), table);
-//                    table.addColumn(column);
                     columnRepository.save(column);
                 }
                 i++;
@@ -90,42 +94,7 @@ public class DatabaseService implements DatabaseServiceInterface {
         }
     }
 
-    public Database getDatabaseDefinition(Database database) {
-        database.setTables(new ArrayList<>());
-        DatabaseConnectionFactory databaseConnectionFactory = new DatabaseConnectionFactory(database);
-        Connection connection;
-        try {
-            connection = databaseConnectionFactory.createConnection();
-            DatabaseMetaData databaseMetaData = connection.getMetaData();
-            ResultSet resultSet = databaseMetaData.getTables(null, connection.getSchema(), "%", null);
-            while (resultSet.next()) {
-                database.addTable(getTableDefinition(database, resultSet.getString(3)));
-            }
-            return databaseRepository.save(database);
-        } catch (SQLException e) {
-            return null;
-        }
-    }
-
-    private DbTable getTableDefinition(Database database, String tableName) throws SQLException {
-        DatabaseConnectionFactory databaseConnectionFactory = new DatabaseConnectionFactory(database);
-        Connection connection = databaseConnectionFactory.createConnection();
-        ResultSet resultSet = connection.prepareStatement("select * from " + tableName).executeQuery();
-        DbTable table = tableRepository.save(new DbTable(tableName, database));
-        int i = 1;
-        ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
-        while (resultSetMetaData.getColumnCount() >= i) {
-            table.addColumn(getColumnDefinition(table, resultSetMetaData.getColumnName(i), resultSetMetaData.getColumnTypeName(i)));
-            i++;
-        }
-        resultSet.close();
-        return table;
-    }
-
-    private DbColumn getColumnDefinition(DbTable table, String columnName, String columnType) {
-        return columnRepository.save(new DbColumn(columnName, columnType, table));
-    }
-
+    @Override
     public List<DbTable> getAllTables() {
         return tableRepository.findAll();
     }
@@ -145,10 +114,12 @@ public class DatabaseService implements DatabaseServiceInterface {
         return databaseRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
-    public Dialect getDialectbyID(Long id) {
+    @Override
+    public Dialect getDialectById(Long id) {
         return dialectRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
+    @Override
     public List<Database> getAllDatabases(){
         return databaseRepository.findAll();
     }
@@ -179,18 +150,5 @@ public class DatabaseService implements DatabaseServiceInterface {
         } catch (IOException e) {
             throw new RuntimeException("");
         }
-    }
-
-
-    private DbColumn saveColumn(DbColumn column) {
-        return this.columnRepository.save(column);
-    }
-
-    private DbTable saveTable(DbTable table) {
-        return this.tableRepository.save(table);
-    }
-
-    public Database saveDatabase(Database database) {
-        return this.databaseRepository.save(database);
     }
 }

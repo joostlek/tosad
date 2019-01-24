@@ -1,4 +1,4 @@
-package nl.hu.tosad.webserver.ruletype;
+package nl.hu.tosad.webserver.ruletype.data;
 
 import nl.hu.tosad.domain.ruletype.BusinessRuleType;
 import nl.hu.tosad.domain.ruletype.Template;

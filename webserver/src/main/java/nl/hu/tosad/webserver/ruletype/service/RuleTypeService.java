@@ -1,18 +1,19 @@
-package nl.hu.tosad.webserver.ruletype;
+package nl.hu.tosad.webserver.ruletype.service;
 
 import nl.hu.tosad.domain.ruletype.BusinessRuleType;
+import nl.hu.tosad.webserver.ruletype.data.BusinessRuleTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class BusinessRuleTypeService implements BusinessRuleTypeServiceInterface{
+public class RuleTypeService implements RuleTypeServiceInterface {
 
     private final BusinessRuleTypeRepository businessRuleTypeRepository;
 
     @Autowired
-    public BusinessRuleTypeService(BusinessRuleTypeRepository businessRuleTypeRepository) {
+    public RuleTypeService(BusinessRuleTypeRepository businessRuleTypeRepository) {
         this.businessRuleTypeRepository = businessRuleTypeRepository;
     }
 

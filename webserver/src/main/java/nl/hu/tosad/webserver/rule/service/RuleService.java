@@ -1,6 +1,7 @@
-package nl.hu.tosad.webserver.rule;
+package nl.hu.tosad.webserver.rule.service;
 
 import nl.hu.tosad.domain.rule.BusinessRule;
+import nl.hu.tosad.webserver.rule.data.BusinessRuleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class BusinessRuleService implements BusinessRuleServiceInterface {
+public class RuleService implements RuleServiceInterface {
 
     private final BusinessRuleRepository businessRuleRepository;
 
     @Autowired
-    public BusinessRuleService(BusinessRuleRepository businessRuleRepository) {
+    public RuleService(BusinessRuleRepository businessRuleRepository) {
         this.businessRuleRepository = businessRuleRepository;
     }
 

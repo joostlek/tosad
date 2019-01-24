@@ -1,4 +1,4 @@
-package nl.hu.tosad.webserver.target_database;
+package nl.hu.tosad.webserver.target_database.data;
 
 import nl.hu.tosad.domain.target_database.Dialect;
 import org.springframework.data.repository.CrudRepository;

@@ -1,4 +1,4 @@
-package nl.hu.tosad.webserver.rule;
+package nl.hu.tosad.webserver.rule.presentation;
 
 public class ChosenRuleTypeDTO {
 

@@ -1,4 +1,4 @@
-package nl.hu.tosad.webserver.rule;
+package nl.hu.tosad.webserver.rule.data;
 
         import nl.hu.tosad.domain.rule.BusinessRule;
         import org.springframework.data.repository.CrudRepository;

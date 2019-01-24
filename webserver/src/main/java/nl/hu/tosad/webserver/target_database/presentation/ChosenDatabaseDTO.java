@@ -1,4 +1,4 @@
-package nl.hu.tosad.webserver.target_database;
+package nl.hu.tosad.webserver.target_database.presentation;
 
 public class ChosenDatabaseDTO {
     private Long databaseId;

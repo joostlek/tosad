@@ -1,10 +1,10 @@
-package nl.hu.tosad.webserver.rule;
+package nl.hu.tosad.webserver.rule.service;
 
         import nl.hu.tosad.domain.rule.BusinessRule;
 
         import java.util.List;
 
-public interface BusinessRuleServiceInterface {
+public interface RuleServiceInterface {
     BusinessRule getBusinessRuleById(Long id);
 
     BusinessRule saveBusinessRule(BusinessRule businessRule);
