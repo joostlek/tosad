@@ -4,15 +4,28 @@
     <meta charset="UTF-8">
     <title>Database Lijst</title>
 </head>
-<body th:action="@{/databases}">
-<h1>Overview of available Databases:</h1>
-<form  th:action="@{/addDb}">
-    <table>
-        <tr th:each="db: ${databases}">
-            <td th:text="${db.getName()}"/>
-        </tr>
-    </table>
-    <input type="submit" value="Add a database">
+<body>
+<!--<h1>Overview of available Databases:</h1>-->
+<!--<form  th:action="@{/addDb}">-->
+    <!--<table>-->
+        <!--<tr th:each="db: ${databases}">-->
+            <!--<td th:text="${db.getName()}"/>-->
+        <!--</tr>-->
+    <!--</table>-->
+    <!--<input type="submit" value="Add a database">-->
+<!--</form>-->
+<h1>Define a Rule</h1>
+
+<h3>Kies een database</h3>
+<form action="#" th:action="@{/addDb}" th:object="${chosenDatabase}" method="post">
+    <select th:field="*{databaseName}"
+            th:remove="all-but-first"
+            name="template">
+        <option th:each="db : ${databases}"
+                th:value="${db.getName()}"
+                th:text="${db.getName()}"></option>
+    </select>
+    <button type="submit">Volgende</button>
 </form>
 </body>
 </html>
