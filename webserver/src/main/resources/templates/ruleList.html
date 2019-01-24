@@ -24,7 +24,7 @@
             <td th:text="${br.getName()}"/>
             <td th:text="${br.getErrorMessage()}">
             <td th:text="${br.getDescription()}">
-            <td ><button class="button">Manage</button></td>
+            <td ><a class="button" th:href="@{/manage_Businessrule}">Manage</a></td>
             <td> <button class="button">Remove</button></td>
         </tr>
     </table>
