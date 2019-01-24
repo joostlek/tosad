@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Database Lijst</title>
+</head>
+<body th:action="@{/databases}">
+<h1>Overview of available Databases:</h1>
+<form  th:action="@{/addDb}">
+    <table>
+        <tr th:each="db: ${databases}">
+            <td th:text="${db.getName()}"/>
+        </tr>
+    </table>
+    <input type="submit" value="Add a database">
+</form>
+</body>
+</html>

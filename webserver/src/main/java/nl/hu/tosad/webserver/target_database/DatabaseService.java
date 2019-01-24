@@ -65,6 +65,11 @@ public class DatabaseService implements DatabaseServiceInterface {
         return dialectRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
+    public List<Database> getAllDatabases(){
+        return databaseRepository.findAll();
+    }
+
+
     private DbColumn saveColumn(DbColumn column) {
         return this.columnRepository.save(column);
     }
@@ -76,4 +81,7 @@ public class DatabaseService implements DatabaseServiceInterface {
     public Database saveDatabase(Database database) {
         return this.databaseRepository.save(database);
     }
+
+
+
 }

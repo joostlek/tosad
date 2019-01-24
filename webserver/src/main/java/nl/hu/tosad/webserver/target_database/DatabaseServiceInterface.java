@@ -4,6 +4,8 @@ import nl.hu.tosad.domain.target_database.Database;
 import nl.hu.tosad.domain.target_database.DbColumn;
 import nl.hu.tosad.domain.target_database.DbTable;
 
+import java.util.List;
+
 public interface DatabaseServiceInterface {
     boolean getDatabaseDefinition(Database database);
 
@@ -12,4 +14,5 @@ public interface DatabaseServiceInterface {
     DbTable getTableById(Long id);
 
     Database getDatabaseById(Long id);
+    List<Database> getAllDatabases();
 }
