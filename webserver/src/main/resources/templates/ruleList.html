@@ -1,19 +1,32 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Business rule list</title>
+    <link rel="stylesheet" type="text/css" href="../css/normalize.css" th:href="@{/css/ruleList_style.css}" >
+
+    <!--/*/ <th:block th:include="headertemplate :: head"></th:block> /*/-->
 </head>
 <body>
-<h1>Overview of all business rules:</h1>
-<form  th:action="@{/add}">
-    <table>
+<!--/*/<th:block th:include="headertemplate :: header"></th:block> /*/-->
+<h1 align="middle">All business rules</h1>
+    <table align="middle">
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Error message</td>
+            <td>Information</td>
+            <td>Change</td>
+            <td>Delete</td>
+        </tr>
         <tr th:each="br: ${businessRules}">
             <td th:text="${br.getId()}"/>
             <td th:text="${br.getName()}"/>
+            <td th:text="${br.getErrorMessage()}">
+            <td th:text="${br.getDescription()}">
+            <td ><button class="button">Manage</button></td>
+            <td> <button class="button">Remove</button></td>
         </tr>
     </table>
-    <input type="submit" value="Add a business rule">
-</form>
 </body>
 </html>

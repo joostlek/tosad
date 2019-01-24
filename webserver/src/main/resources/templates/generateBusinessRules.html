@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Business rule list</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/ruleList_style.css}" >
+
+    <!--/*/ <th:block th:include="headertemplate :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*/<th:block th:include="headertemplate :: header"></th:block> /*/-->
+<h1 align="middle">Generate business rules</h1>
+<table align="middle">
+    <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Error message</td>
+        <td>Generate</td>
+    </tr>
+    <tr th:each="br: ${businessRules}">
+        <td th:text="${br.getId()}"/>
+        <td th:text="${br.getName()}"/>
+        <td th:text="${br.getErrorMessage()}">
+        <td> <button class="button">Generate</button></td>
+    </tr>
+</table>
+
+</body>
+</html>
