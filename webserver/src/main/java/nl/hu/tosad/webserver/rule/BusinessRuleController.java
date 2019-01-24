@@ -29,8 +29,9 @@ public class BusinessRuleController {
 
 
 
-    @GetMapping("/")
+    @GetMapping("/allRules")
     public String ruleList(Model model) {
+
         model.addAttribute("businessRules", businessRuleService.getAllBusinessRules());
         return "ruleList";
     }

@@ -12,7 +12,7 @@ public class DatabaseController {
     @Autowired
     DatabaseService databaseService;
 
-    @GetMapping("/databases")
+    @GetMapping("/")
     public String databaseList(Model model) {
         model.addAttribute("databases", databaseService.getAllDatabases());
         model.addAttribute("chosenDatabase", new ChosenDatabaseDTO());
