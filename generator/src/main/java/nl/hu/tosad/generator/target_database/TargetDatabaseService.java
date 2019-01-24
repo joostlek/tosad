@@ -17,7 +17,7 @@ public class TargetDatabaseService implements TargetDatabaseServiceInterface {
         try {
             DatabaseConnectionFactory connectionFactory = new DatabaseConnectionFactory(database);
             Connection connection = connectionFactory.createConnection();
-            logger.log(Level.INFO, "Created connection");
+            logger.log(Level.INFO, "Created communication");
             for (String query : sql) {
                 Statement statement = connection.createStatement();
                 statement.execute(query);

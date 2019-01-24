@@ -1,4 +1,4 @@
-package nl.hu.tosad.generator.rule;
+package nl.hu.tosad.generator.rule.service;
 
 import nl.hu.tosad.domain.rule.BusinessRule;
 

@@ -1,4 +1,5 @@
-package nl.hu.tosad.generator.rule;
+package nl.hu.tosad.generator.rule.data;
+
 import nl.hu.tosad.domain.rule.BusinessRule;
 import nl.hu.tosad.generator.utils.BaseDAO;
 import org.hibernate.Session;

@@ -1,10 +1,12 @@
-package nl.hu.tosad.generator.rule;
+package nl.hu.tosad.generator.rule.service;
 
 import nl.hu.tosad.domain.rule.BusinessRule;
 import nl.hu.tosad.domain.rule.Value;
 import nl.hu.tosad.domain.ruletype.Template;
 import nl.hu.tosad.domain.target_database.Database;
 import nl.hu.tosad.domain.target_database.Dialect;
+import nl.hu.tosad.generator.rule.data.BusinessRuleRepository;
+import nl.hu.tosad.generator.rule.data.BusinessRuleRepositoryInterface;
 import nl.hu.tosad.generator.target_database.TargetDatabaseRepository;
 import nl.hu.tosad.generator.target_database.TargetDatabaseService;
 import nl.hu.tosad.generator.target_database.TargetDatabaseServiceInterface;
