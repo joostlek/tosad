@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 @Service
 public class DatabaseService implements DatabaseServiceInterface {
@@ -60,6 +61,11 @@ public class DatabaseService implements DatabaseServiceInterface {
         return dialectRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
+    public List<Database> getAllDatabases(){
+        return databaseRepository.findAll();
+    }
+
+
     private DbColumn saveColumn(DbColumn column) {
         return this.columnRepository.save(column);
     }
@@ -71,4 +77,7 @@ public class DatabaseService implements DatabaseServiceInterface {
     public Database saveDatabase(Database database) {
         return this.databaseRepository.save(database);
     }
+
+
+
 }
