@@ -9,5 +9,7 @@ public interface BusinessRuleServiceInterface {
 
     BusinessRule saveBusinessRule(BusinessRule businessRule);
 
+    List<BusinessRule> getAllBusinessRulesByDb(Long dbName);
+
     List<BusinessRule> getAllBusinessRules();
 }

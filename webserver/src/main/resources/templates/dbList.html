@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Database Lijst</title>
+</head>
+<body>
+<!--<h1>Overview of available Databases:</h1>-->
+<!--<form  th:action="@{/addDb}">-->
+    <!--<table>-->
+        <!--<tr th:each="db: ${databases}">-->
+            <!--<td th:text="${db.getName()}"/>-->
+        <!--</tr>-->
+    <!--</table>-->
+    <!--<input type="submit" value="Add a database">-->
+<!--</form>-->
+<h1>Define a Rule</h1>
+
+<h3>Kies een database</h3>
+<form action="#" th:action="@{/addDb}" method="get">
+    <select th:remove="all-but-first"
+            name="db">
+        <option th:each="db : ${databases}"
+                th:value="${db.getId()}"
+                th:text="${db.getName()}"></option>
+    </select>
+    <button type="submit">Volgende</button>
+</form>
+</body>
+</html>

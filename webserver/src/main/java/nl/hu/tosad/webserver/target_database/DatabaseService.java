@@ -8,6 +8,9 @@ import nl.hu.tosad.domain.target_database.Dialect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -117,6 +120,10 @@ public class DatabaseService implements DatabaseServiceInterface {
         return columnRepository.save(new DbColumn(columnName, columnType, table));
     }
 
+    public List<DbTable> getAllTables() {
+        return tableRepository.findAll();
+    }
+
     @Override
     public DbColumn getColumnById(Long id) {
         return columnRepository.findById(id).orElseThrow(RuntimeException::new);
@@ -135,6 +142,11 @@ public class DatabaseService implements DatabaseServiceInterface {
     public Dialect getDialectbyID(Long id) {
         return dialectRepository.findById(id).orElseThrow(RuntimeException::new);
     }
+
+    public List<Database> getAllDatabases(){
+        return databaseRepository.findAll();
+    }
+
 
     private DbColumn saveColumn(DbColumn column) {
         return this.columnRepository.save(column);
