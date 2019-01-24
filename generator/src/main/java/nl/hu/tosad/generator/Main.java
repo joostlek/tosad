@@ -6,8 +6,8 @@ import nl.hu.tosad.generator.rule.communication.ConnectionControllerInterface;
 import java.io.IOException;
 
 public class Main {
-    public static final int DRY_PORT = 8084;
-    public static final int DRY_WET = 8085;
+    public static final int PORT_DRY = 8084;
+    public static final int PORT_WET = 8085;
 
 
     public static void main(String[] args) throws IOException {
