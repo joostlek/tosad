@@ -1,17 +1,20 @@
 
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Getting Started: Serving Web Content</title>
+<head th:fragment="head">
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="../css/header.css" th:href="@{/css/header.css}" >
     <link rel="stylesheet" type="text/css" href="../css/normalize.css" th:href="@{/css/normalize.css}" >
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 <body>
+<div th:fragment="header">
 <div class="topnav">
     <li class="navli"><a class="nava" href="add.html" th:href="@{/add}">Define a Business Rule</a></li>
-    <li class="navli"><a class="nava" href="ruleList.html" th:href="@{/ruleList}">All Business Rules</a></li>
-    <li class="navli"><a class="nava" href="add.html" th:href="@{/add}">Generate Business Rules</a></li>
+    <li class="navli"><a class="nava" href="ruleList.html" th:href="@{/}">All Business Rules</a></li>
+    <li class="navli"><a class="nava" href="add.html" th:href="@{/generateBusinessRules}">Generate Business Rules</a></li>
+</div>
 </div>
 </body>
 </html>

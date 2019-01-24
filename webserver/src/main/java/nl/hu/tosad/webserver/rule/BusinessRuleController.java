@@ -41,6 +41,12 @@ public class BusinessRuleController {
         return "add";
     }
 
+    @GetMapping("/generateBusinessRules")
+    public String generateBusinessRules(Model model) {
+        model.addAttribute("businessRules", businessRuleService.getAllBusinessRules());
+        return "generateBusinessRules";
+    }
+
     @PostMapping("/addType")
     public String addType(@ModelAttribute ChosenRuleTypeDTO brtc, Model model) {
         Dialect dialect = databaseService.getDialectbyID((long) 1);
