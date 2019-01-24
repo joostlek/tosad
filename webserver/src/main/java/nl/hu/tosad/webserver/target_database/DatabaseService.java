@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 @Service
 public class DatabaseService implements DatabaseServiceInterface {
@@ -39,6 +40,10 @@ public class DatabaseService implements DatabaseServiceInterface {
             return false;
         }
         return true;
+    }
+
+    public List<DbTable> getAllTables() {
+        return tableRepository.findAll();
     }
 
     @Override

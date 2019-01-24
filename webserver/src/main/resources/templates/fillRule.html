@@ -8,7 +8,53 @@
 <body>
 <h1>Define a Rule</h1>
 
-<p th:text="${chosenType}"></p>
+<p th:text="${tables}"></p>
+
+<form action="#" th:object="${templateByType}">
+    <div>
+        <label>name:</label>
+        <input type="text">
+    </div>
+
+    <div>
+        <label>table:</label>
+        <input type="table">
+    </div>
+
+    <div th:each="template : ${templateByType}">
+        <div th:switch="${template.getValue()}">
+
+            <div th:case="'int'">
+                <label th:text="${template.getKey()}"></label>
+                <input type="number">
+            </div>
+
+            <div th:case="'operator'">
+                <label th:text="${template.getKey()}"></label>
+                <select th:field="${type}"
+                        th:remove="all-but-first"
+                        name="operator">
+                    <option th:each="operator : ${type.getAvailableOperators()}"
+                            th:value="${operator}"
+                            th:text="${operator}"
+                    ></option>
+                </select>
+            </div>
+
+            <div th:case="'statement'">
+                <label th:text="${template.getKey()}"></label>
+                <input type="statement">
+            </div>
+        </div>
+    </div>
+
+    <label>error:</label>
+    <input type="text">
+
+    </div>
+    <button type="submit">Volgende</button>
+</form>
+
 
 </body>
 </html>
