@@ -7,9 +7,9 @@ import nl.hu.tosad.domain.target_database.Database;
 import nl.hu.tosad.domain.target_database.Dialect;
 import nl.hu.tosad.generator.rule.data.RuleRepository;
 import nl.hu.tosad.generator.rule.data.RuleRepositoryInterface;
-import nl.hu.tosad.generator.target_database.TargetDatabaseRepository;
-import nl.hu.tosad.generator.target_database.TargetDatabaseService;
-import nl.hu.tosad.generator.target_database.TargetDatabaseServiceInterface;
+import nl.hu.tosad.generator.target_database.data.TargetDatabaseRepository;
+import nl.hu.tosad.generator.target_database.service.TargetDatabaseService;
+import nl.hu.tosad.generator.target_database.service.TargetDatabaseServiceInterface;
 import org.stringtemplate.v4.ST;
 
 import java.util.ArrayList;

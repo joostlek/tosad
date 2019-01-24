@@ -1,0 +1,13 @@
+create or replace trigger ARNG
+  before update or insert or delete
+on <table>, <table>
+for each row
+declare
+begin
+  if ()){
+  return true;
+  }
+  else return false;
+
+  exception when no_data_found then return false;
+end;

@@ -1,0 +1,15 @@
+CREATE OR REPLACE TRIGGER trg_aoth
+  before INSERT OR UPDATE of postcode
+  on MEDEWERKER
+  FOR EACH ROW
+  declare
+      e_exception exception;
+  begin
+    if (SUBSTR(:NEW.postcode, 1, 1) not between '1' and '9') THEN
+      raise e_exception;
+    END IF;
+
+    exception
+    when e_exception then
+    raise_application_error(-20000, 'First characters must be a number');
+  end;

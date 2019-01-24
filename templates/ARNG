@@ -1,0 +1,14 @@
+create or replace trigger trg_arng
+before INSERT OR UPDATE ON MEDEWERKER
+    FOR EACH ROW
+declare
+    e_exception exception;
+begin
+  if (:NEW.ID not between 1 AND 10) THEN
+    raise e_exception;
+  END IF;
+
+  exception
+  when e_exception then
+  raise_application_error(-20000, 'Value must be between 1 and 10');
+end;

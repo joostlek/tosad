@@ -1,6 +1,7 @@
-package nl.hu.tosad.generator.target_database;
+package nl.hu.tosad.generator.target_database.service;
 
 import nl.hu.tosad.domain.target_database.Database;
+import nl.hu.tosad.generator.target_database.data.DatabaseConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;

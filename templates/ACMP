@@ -1,0 +1,14 @@
+CREATE OR REPLACE TRIGGER tgr_acmp
+before insert or update of kinderen
+  on MEDEWERKER
+  for each row
+  declare
+      e_exception exception;
+    begin
+  if(:NEW.kinderen < 0) then
+    raise e_exception;
+  end if;
+    exception
+    when e_exception then
+    raise_application_error(-20000, 'Value must be 0 or above');
+end;

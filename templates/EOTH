@@ -1,0 +1,17 @@
+CREATE OR REPLACE TRIGGER trg_eoth
+  before INSERT OR UPDATE
+  on medewerker
+  FOR EACH ROW
+  declare
+      v_waarde number;
+      e_exception exception;
+  begin
+    select count(*) into v_waarde from medewerker;
+    if (v_waarde > 5) THEN
+      raise e_exception;
+    END IF;
+
+    exception
+    when e_exception then
+    raise_application_error(-20000, 'Not possible bits');
+  end;

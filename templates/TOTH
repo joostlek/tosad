@@ -1,0 +1,15 @@
+CREATE OR REPLACE TRIGGER trg_toth
+  before INSERT OR UPDATE of FUNCTIE, SALARIS
+  on MEDEWERKER
+  FOR EACH ROW
+  declare
+      e_exception exception;
+  begin
+    if (:NEW.FUNCTIE = 'POETS' AND :NEW.SALARIS > 2000) THEN
+      raise e_exception;
+    END IF;
+
+    exception
+    when e_exception then
+    raise_application_error(-20000, 'Wat is nu het verschil joh kech');
+  end;

@@ -1,0 +1,17 @@
+CREATE OR REPLACE TRIGGER trg_icmp
+  before INSERT OR UPDATE of STARTSALARIS
+  on contract
+  FOR EACH ROW
+  declare
+      v_waarde number;
+      e_exception exception;
+  begin
+    select SALARIS into v_waarde from medewerker where id = 1;
+    if (:NEW.STARTSALARIS < v_waarde) THEN
+      raise e_exception;
+    END IF;
+
+    exception
+    when e_exception then
+    raise_application_error(-20000, 'Not possible bits');
+  end;
