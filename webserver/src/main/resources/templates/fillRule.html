@@ -25,7 +25,7 @@
                     <input type="text">
                 </div>
 
-                <div class="formType" th:each="template : ${templateByType}">
+                <div th:each="template : ${templateByType}">
                     <div th:switch="${template.getValue()}">
 
                         <div th:case="'column'">
@@ -61,7 +61,7 @@
                 <input type="text">
 
 
-                <button class="button" type="submit">Volgende</button>
+                <button class="button" type="submit">Save</button>
             </div>
     </div>
 </form>

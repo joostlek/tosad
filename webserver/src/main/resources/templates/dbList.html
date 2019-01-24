@@ -17,12 +17,11 @@
 <h1>Define a Rule</h1>
 
 <h3>Kies een database</h3>
-<form action="#" th:action="@{/addDb}" th:object="${chosenDatabase}" method="post">
-    <select th:field="*{databaseName}"
-            th:remove="all-but-first"
-            name="template">
+<form action="#" th:action="@{/addDb}" method="get">
+    <select th:remove="all-but-first"
+            name="db">
         <option th:each="db : ${databases}"
-                th:value="${db.getName()}"
+                th:value="${db.getId()}"
                 th:text="${db.getName()}"></option>
     </select>
     <button type="submit">Volgende</button>
