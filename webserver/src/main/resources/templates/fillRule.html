@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <script th:src="@{/js/define_rule.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/define_rule.css}">
     <!--/*/ <th:block th:include="headertemplate :: head"></th:block> /*/-->
 </head>
 <body>
@@ -13,17 +14,15 @@
 
 <form action="#" th:object="${templateByType}">
     <div>
-
-        <form action="#" th:object="${templateByType}">
             <div class="why">
                 <div >
-                    <label>name:</label>
+                    <label>name:</label><br>
                     <input type="text">
                 </div>
 
-                <div class="formType">
-                    <label>table:</label>
-                    <input type="table">
+                <div>
+                    <label>table:</label><br>
+                    <input type="text">
                 </div>
 
                 <div class="formType" th:each="template : ${templateByType}">
@@ -64,8 +63,7 @@
 
                 <button class="button" type="submit">Volgende</button>
             </div>
+    </div>
 </form>
-
-
 </body>
 </html>
