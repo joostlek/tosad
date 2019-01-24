@@ -10,11 +10,11 @@ import java.util.logging.Logger;
 
 public class SocketProcessor extends Thread {
     private Socket socket;
-    private BusinessRuleCommand callback;
+    private RuleCommand callback;
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
-    public SocketProcessor(Socket socket, BusinessRuleCommand callback) {
+    public SocketProcessor(Socket socket, RuleCommand callback) {
         this.socket = socket;
         this.callback = callback;
     }

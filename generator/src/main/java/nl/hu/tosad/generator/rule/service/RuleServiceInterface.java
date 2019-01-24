@@ -4,7 +4,7 @@ import nl.hu.tosad.domain.rule.BusinessRule;
 
 import java.util.List;
 
-public interface BusinessRuleServiceInterface {
+public interface RuleServiceInterface {
     List<String> convertBusinessRulesDry(List<Long> businessRuleIds);
 
     List<String> convertBusinessRulesWet(List<Long> businessRuleIds);

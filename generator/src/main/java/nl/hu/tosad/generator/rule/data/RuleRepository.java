@@ -4,11 +4,11 @@ import nl.hu.tosad.domain.rule.BusinessRule;
 import nl.hu.tosad.generator.utils.BaseDAO;
 import org.hibernate.Session;
 
-public class BusinessRuleRepository implements BusinessRuleRepositoryInterface {
+public class RuleRepository implements RuleRepositoryInterface {
 
     private BaseDAO baseDAO;
 
-    public BusinessRuleRepository() {
+    public RuleRepository() {
         baseDAO = new BaseDAO();
     }
 

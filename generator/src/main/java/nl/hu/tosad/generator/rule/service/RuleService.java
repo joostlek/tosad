@@ -5,8 +5,8 @@ import nl.hu.tosad.domain.rule.Value;
 import nl.hu.tosad.domain.ruletype.Template;
 import nl.hu.tosad.domain.target_database.Database;
 import nl.hu.tosad.domain.target_database.Dialect;
-import nl.hu.tosad.generator.rule.data.BusinessRuleRepository;
-import nl.hu.tosad.generator.rule.data.BusinessRuleRepositoryInterface;
+import nl.hu.tosad.generator.rule.data.RuleRepository;
+import nl.hu.tosad.generator.rule.data.RuleRepositoryInterface;
 import nl.hu.tosad.generator.target_database.TargetDatabaseRepository;
 import nl.hu.tosad.generator.target_database.TargetDatabaseService;
 import nl.hu.tosad.generator.target_database.TargetDatabaseServiceInterface;
@@ -15,14 +15,14 @@ import org.stringtemplate.v4.ST;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BusinessRuleService implements BusinessRuleServiceInterface {
+public class RuleService implements RuleServiceInterface {
 
-    private BusinessRuleRepositoryInterface businessRuleRepositoryInterface;
+    private RuleRepositoryInterface ruleRepositoryInterface;
 
     private TargetDatabaseServiceInterface targetDatabaseService;
 
-    public BusinessRuleService() {
-        this.businessRuleRepositoryInterface = new BusinessRuleRepository();
+    public RuleService() {
+        this.ruleRepositoryInterface = new RuleRepository();
         this.targetDatabaseService = new TargetDatabaseService();
     }
 
@@ -32,7 +32,7 @@ public class BusinessRuleService implements BusinessRuleServiceInterface {
             return new ArrayList<>();
         }
         List<String> sql = this.convertBusinessRulesDry(businessRuleIds);
-        BusinessRule businessRule = businessRuleRepositoryInterface.getBusinessRuleById(businessRuleIds.get(0));
+        BusinessRule businessRule = ruleRepositoryInterface.getBusinessRuleById(businessRuleIds.get(0));
 
         TargetDatabaseRepository targetDatabaseRepository = new TargetDatabaseRepository();
         Database database = targetDatabaseRepository.findDatabaseByBusinessRule(businessRule);
@@ -45,7 +45,7 @@ public class BusinessRuleService implements BusinessRuleServiceInterface {
         List<BusinessRule> businessRules = new ArrayList<>();
         for (Long id : businessRuleIds) {
             try {
-                businessRules.add(businessRuleRepositoryInterface.getBusinessRuleById(id));
+                businessRules.add(ruleRepositoryInterface.getBusinessRuleById(id));
             } catch (RuntimeException e) {
                 e.printStackTrace();
             }

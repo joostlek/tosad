@@ -1,16 +1,16 @@
 package nl.hu.tosad.generator.rule.communication;
 
-import nl.hu.tosad.generator.rule.service.BusinessRuleAdapterInterface;
+import nl.hu.tosad.generator.rule.service.RuleAdapterInterface;
 
 import java.io.IOException;
 import java.util.logging.Logger;
 
-public class BusinessRuleCommand implements CommandInterface {
+public class RuleCommand implements CommandInterface {
     private boolean wet;
-    private BusinessRuleAdapterInterface adapter;
+    private RuleAdapterInterface adapter;
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
-    public BusinessRuleCommand(boolean wet, BusinessRuleAdapterInterface adapter) {
+    public RuleCommand(boolean wet, RuleAdapterInterface adapter) {
         this.wet = wet;
         this.adapter = adapter;
     }
