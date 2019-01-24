@@ -1,6 +1,7 @@
 package nl.hu.tosad.webserver.target_database;
 
 
+import com.google.gson.Gson;
 import nl.hu.tosad.domain.target_database.Database;
 import nl.hu.tosad.domain.target_database.DbColumn;
 import nl.hu.tosad.domain.target_database.DbTable;
@@ -8,11 +9,16 @@ import nl.hu.tosad.domain.target_database.Dialect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.List;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 
 @Service
 public class DatabaseService implements DatabaseServiceInterface {
@@ -145,6 +151,34 @@ public class DatabaseService implements DatabaseServiceInterface {
 
     public List<Database> getAllDatabases(){
         return databaseRepository.findAll();
+    }
+
+    @Override
+    public List<String> generateQueries(List<Long> businessRuleIds, boolean wet) {
+        try {
+            Socket s = new Socket(System.getenv("GEN_URL"), wet ? Integer.parseInt(System.getenv("GEN_PORT_WET")) : Integer.parseInt(System.getenv("GEN_PORT_DRY")));
+            OutputStream os = s.getOutputStream();
+            PrintWriter pw = new PrintWriter(os);
+            Gson gson = new Gson();
+            pw.println(gson.toJson(businessRuleIds) + "\r\n");
+            pw.flush();
+            pw.println("\r\n");
+            pw.flush();
+            InputStream inputStream = s.getInputStream();
+            Scanner scanner = new Scanner(inputStream);
+            String sql = "[]";
+            while (scanner.hasNextLine()) {
+                sql = scanner.nextLine();
+            }
+            scanner.close();
+            inputStream.close();
+            pw.close();
+            s.close();
+            String[] sqlQueries = gson.fromJson(sql, String[].class);
+            return Arrays.asList(sqlQueries);
+        } catch (IOException e) {
+            throw new RuntimeException("");
+        }
     }
 
 

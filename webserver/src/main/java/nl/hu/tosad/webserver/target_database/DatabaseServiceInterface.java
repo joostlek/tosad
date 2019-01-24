@@ -14,5 +14,8 @@ public interface DatabaseServiceInterface {
     DbTable getTableById(Long id);
 
     Database getDatabaseById(Long id);
+
     List<Database> getAllDatabases();
+
+    List<String> generateQueries(List<Long> businessRuleIds, boolean wet);
 }
