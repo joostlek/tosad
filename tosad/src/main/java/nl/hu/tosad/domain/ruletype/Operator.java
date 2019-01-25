@@ -1,7 +1,5 @@
 package nl.hu.tosad.domain.ruletype;
 
-import nl.hu.tosad.domain.rule.BusinessRule;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -18,9 +16,6 @@ public class Operator {
 
     @ManyToMany(mappedBy = "availableOperators")
     private List<BusinessRuleType> businessRuleTypes;
-
-    @OneToMany(mappedBy = "operator")
-    private List<BusinessRule> businessRules;
 
     public Operator() {
     }
@@ -52,14 +47,6 @@ public class Operator {
 
     public void setBusinessRuleTypes(List<BusinessRuleType> businessRuleTypes) {
         this.businessRuleTypes = businessRuleTypes;
-    }
-
-    public List<BusinessRule> getBusinessRules() {
-        return businessRules;
-    }
-
-    public void setBusinessRules(List<BusinessRule> businessRules) {
-        this.businessRules = businessRules;
     }
 
     @Override

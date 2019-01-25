@@ -1,6 +1,5 @@
 package nl.hu.tosad.domain.ruletype;
 
-import nl.hu.tosad.domain.rule.BusinessRule;
 import nl.hu.tosad.domain.target_database.Dialect;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -34,9 +33,6 @@ public class BusinessRuleType {
             inverseJoinColumns = {@JoinColumn(name = "business_rule_type_id")}
     )
     private List<Operator> availableOperators;
-
-    @OneToMany(mappedBy = "businessRuleType")
-    private List<BusinessRule> businessRules;
 
     public BusinessRuleType() {
     }
@@ -97,13 +93,5 @@ public class BusinessRuleType {
             }
         }
         return null;
-    }
-
-    public List<BusinessRule> getBusinessRules() {
-        return businessRules;
-    }
-
-    public void setBusinessRules(List<BusinessRule> businessRules) {
-        this.businessRules = businessRules;
     }
 }
