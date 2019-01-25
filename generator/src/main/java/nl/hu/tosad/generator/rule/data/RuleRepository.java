@@ -13,13 +13,14 @@ public class RuleRepository implements RuleRepositoryInterface {
     }
 
     public BusinessRule getBusinessRuleById(Long id) {
-        Session session = baseDAO.openCurrentSession();
-        BusinessRule businessRule = session.find(BusinessRule.class, id);
-        baseDAO.closeCurrentSession();
-        if (businessRule != null) {
-            return businessRule;
-        } else {
-            throw new RuntimeException("Businessrule not found");
+        try (Session session = baseDAO.openCurrentSession()) {
+            BusinessRule businessRule = session.find(BusinessRule.class, id);
+            baseDAO.closeCurrentSession();
+            if (businessRule != null) {
+                return businessRule;
+            } else {
+                throw new RuntimeException("Businessrule not found");
+            }
         }
     }
 }

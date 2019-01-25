@@ -15,9 +15,10 @@ public class TargetDatabaseRepository implements TargetDatabaseRepositoryInterfa
 
     @Override
     public Database findDatabaseByBusinessRule(BusinessRule businessRule) {
-        Session session = baseDAO.openCurrentSessionWithTransaction();
-        Database database = businessRule.getDatabase();
-        baseDAO.closeCurrentSessionWithTransaction();
-        return database;
+        try (Session session = baseDAO.openCurrentSessionWithTransaction()) {
+            Database database = businessRule.getDatabase();
+            baseDAO.closeCurrentSessionWithTransaction();
+            return database;
+        }
     }
 }

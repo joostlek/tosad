@@ -19,10 +19,8 @@ public class ConnectionReceiver extends Thread {
     public void run() {
         logger.info("Started socket on port " + port);
         while (true) {
-            try {
-                ServerSocket serverSocket = new ServerSocket(port);
+            try (ServerSocket serverSocket = new ServerSocket(port)) {
                 new SocketProcessor(serverSocket.accept(), command).start();
-                serverSocket.close();
             } catch (IOException ex) {
                 logger.severe(ex.getMessage());
             }

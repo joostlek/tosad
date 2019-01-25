@@ -15,21 +15,19 @@ public class TargetDatabaseService implements TargetDatabaseServiceInterface {
 
     @Override
     public boolean execute(List<String> sql, Database database) {
-        try {
-            DatabaseConnectionFactory connectionFactory = new DatabaseConnectionFactory(database);
-            Connection connection = connectionFactory.createConnection();
+        DatabaseConnectionFactory connectionFactory = new DatabaseConnectionFactory(database);
+        try (Connection connection = connectionFactory.createConnection()) {
             logger.log(Level.INFO, "Created communication");
             for (String query : sql) {
-                Statement statement = connection.createStatement();
-                statement.execute(query);
-                statement.close();
-                logger.log(Level.INFO, "Executed ", sql);
+                try (Statement statement = connection.createStatement()) {
+                    statement.execute(query);
+                }
+                logger.log(Level.INFO, "Executed %s", sql);
             }
             connection.close();
             logger.log(Level.INFO, "Done!");
         } catch (SQLException e) {
             logger.log(Level.SEVERE, e.getMessage());
-            e.printStackTrace();
             return false;
         }
         return true;
