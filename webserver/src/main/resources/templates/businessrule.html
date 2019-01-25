@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css"  th:href="@{/css/style.css}" >
+    <!--/*/ <th:block th:include="headertemplate :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*/<th:block th:include="headertemplate :: header"></th:block> /*/-->
+<h1 align="middle">Manage a business rule</h1>
+<form  action="#" th:object="${templateByType}">
+    <div class="why">
+        <div >
+            <label>name:</label>
+            <input th:value="${businessRule.getName()}" type="text">
+        </div>
+
+        <div >
+            <label>table:</label>
+            <input th:value="${businessRule.getTables()}" type="table">
+        </div>
+
+        <div th:each="template : ${templateByType}">
+            <div th:switch="${template.getValue()}">
+
+                <div th:case="'int'">
+                    <label th:text="${template.getKey()}"></label>
+                    th:each="key: ${map.keySet()}"
+                    <input th:text="${key}"></input>
+
+
+                </div>
+
+                <div th:case="'operator'">
+                    <label th:text="${template.getKey()}"></label>
+                    <select th:field="${type}"
+                            th:remove="all-but-first"
+                            name="operator">
+                        <option th:each="operator : ${type.getAvailableOperators()}"
+                                th:value="${businessRule.getOperator()}"
+                                th:text="${operator}"
+                        ></option>
+                    </select>
+                </div>
+
+                <div th:case="'statement'">
+                    <label th:text="${template.getKey()}"></label>
+                    <input th:value="${businessRule.getValues()}" type="statement">
+                </div>
+            </div>
+        </div>
+
+        <label >error:</label>
+        <input th:value="${businessRule.getErrorMessage()} "type="text">
+        <button class="button">Remove</button>
+    </div>
+</form>
+</body>
+</html>

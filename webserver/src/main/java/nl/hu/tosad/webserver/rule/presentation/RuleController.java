@@ -1,5 +1,7 @@
 package nl.hu.tosad.webserver.rule.presentation;
 
+import nl.hu.tosad.domain.rule.BusinessRule;
+import nl.hu.tosad.domain.rule.Value;
 import nl.hu.tosad.domain.ruletype.BusinessRuleType;
 import nl.hu.tosad.domain.ruletype.Template;
 import nl.hu.tosad.domain.target_database.Dialect;
@@ -13,7 +15,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class RuleController {
@@ -44,10 +50,21 @@ public class RuleController {
         return "add";
     }
 
-    @GetMapping("/generateBusinessRules")
-    public String generateBusinessRules(Model model) {
-        model.addAttribute("businessRules", businessRuleService.getAllBusinessRules());
-        return "generateBusinessRules";
+    @GetMapping("/businessrule/{id}")
+    public String businessrule(Model model,@PathVariable Long id) {
+        model.addAttribute("businessRule", businessRuleService.getBusinessRuleById(id));
+        BusinessRule businessRule = businessRuleService.getBusinessRuleById(id);
+        Map<String, Object> map = new HashMap<>();
+        for (Value value: businessRule.getValues()){
+            map.put(value.getPosition(),value.getValue());
+        }
+        Template template = businessRule.getBusinessRuleType().getTemplate(businessRule.getDatabase().getDialect());
+        model.addAttribute("map",map);
+        model.addAttribute("type", businessRule.getBusinessRuleType());
+        model.addAttribute("templateByType", template.getAttributes());
+        model.addAttribute("template", template);
+        model.addAttribute("tables", targetDatabaseService.getAllTables());
+        return "businessrule";
     }
 
     @PostMapping("/addType")
