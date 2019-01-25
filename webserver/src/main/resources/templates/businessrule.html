@@ -26,9 +26,9 @@
 
                 <div th:case="'int'">
                     <label th:text="${template.getKey()}"></label>
-                    th:each="key: ${map.keySet()}"
+                    <div th:each="key: ${map.keySet()}"
                     <input th:text="${key}"></input>
-
+                    </div>
 
                 </div>
 
