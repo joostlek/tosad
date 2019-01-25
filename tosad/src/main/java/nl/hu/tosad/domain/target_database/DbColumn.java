@@ -1,12 +1,9 @@
 package nl.hu.tosad.domain.target_database;
 
-import nl.hu.tosad.domain.rule.BusinessRule;
-import nl.hu.tosad.domain.rule.Value;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "DB_COLUMN")
@@ -26,12 +23,6 @@ public class DbColumn {
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinColumn(name = "fk_table")
     private DbTable table;
-
-    @ManyToMany(mappedBy = "columns")
-    private List<BusinessRule> businessRules;
-
-    @OneToMany(mappedBy = "column")
-    private List<Value> values;
 
     public DbColumn() {
     }
@@ -77,22 +68,6 @@ public class DbColumn {
 
     public void setTable(DbTable table) {
         this.table = table;
-    }
-
-    public List<BusinessRule> getBusinessRules() {
-        return businessRules;
-    }
-
-    public void setBusinessRules(List<BusinessRule> businessRules) {
-        this.businessRules = businessRules;
-    }
-
-    public List<Value> getValues() {
-        return values;
-    }
-
-    public void setValues(List<Value> values) {
-        this.values = values;
     }
 
     @Override
