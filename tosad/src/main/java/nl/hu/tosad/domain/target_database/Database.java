@@ -24,9 +24,6 @@ public class Database {
     @Column(name = "DATABASE_NAME")
     private String databaseName;
 
-    @Column(name = "PORT")
-    private int port;
-
     @Column(name = "USERNAME")
     private String username;
 
@@ -44,11 +41,10 @@ public class Database {
     public Database() {
     }
 
-    public Database(String name, String jdbcUrl, String databaseName, int port, String username, String password) {
+    public Database(String name, String jdbcUrl, String databaseName, String username, String password) {
         this.name = name;
         this.jdbcUrl = jdbcUrl;
         this.databaseName = databaseName;
-        this.port = port;
         this.username = username;
         this.password = password;
     }
@@ -87,14 +83,6 @@ public class Database {
 
     public void setDatabaseName(String databaseName) {
         this.databaseName = databaseName;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
     }
 
     public String getUsername() {
