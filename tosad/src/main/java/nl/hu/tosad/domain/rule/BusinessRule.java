@@ -39,7 +39,7 @@ public class BusinessRule {
     @JoinColumn(name = "fk_operator_br")
     private Operator operator;
 
-    @OneToMany(mappedBy = "businessRule", cascade = {CascadeType.PERSIST})
+    @OneToMany(mappedBy = "businessRule", cascade = {CascadeType.ALL})
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Value> values;
 
