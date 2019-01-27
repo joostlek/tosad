@@ -12,4 +12,6 @@ public interface BusinessRuleRepository extends CrudRepository<BusinessRule, Lon
     Optional<BusinessRule> findById(Long id);
 
     List<BusinessRule> findAll();
+
+
 }

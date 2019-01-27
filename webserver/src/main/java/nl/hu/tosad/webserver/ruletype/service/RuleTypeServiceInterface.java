@@ -10,4 +10,5 @@ public interface RuleTypeServiceInterface {
     BusinessRuleType saveBusinessRulesTypes(BusinessRuleType businessRuleType);
 
     List<BusinessRuleType> getAllBusinessRules();
+
 }

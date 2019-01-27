@@ -12,4 +12,5 @@ public interface RuleServiceInterface {
     List<BusinessRule> getAllBusinessRulesByDb(Long dbName);
 
     List<BusinessRule> getAllBusinessRules();
+
 }

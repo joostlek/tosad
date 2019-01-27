@@ -1,10 +1,12 @@
 package nl.hu.tosad.webserver.rule.presentation;
 
+import javassist.NotFoundException;
 import nl.hu.tosad.domain.rule.BusinessRule;
 import nl.hu.tosad.domain.rule.Value;
 import nl.hu.tosad.domain.ruletype.BusinessRuleType;
 import nl.hu.tosad.domain.ruletype.Template;
 import nl.hu.tosad.domain.target_database.Dialect;
+import nl.hu.tosad.webserver.rule.data.BusinessRuleRepository;
 import nl.hu.tosad.webserver.rule.service.RuleServiceInterface;
 import nl.hu.tosad.webserver.ruletype.data.BusinessRuleTypeRepository;
 import nl.hu.tosad.webserver.ruletype.data.TemplateRepository;
@@ -13,10 +15,7 @@ import nl.hu.tosad.webserver.target_database.service.TargetDatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,6 +33,9 @@ public class RuleController {
 
     @Autowired
     private BusinessRuleTypeRepository businessRuleTypeRepository;
+
+    @Autowired
+    private BusinessRuleRepository businessRuleRepository;
 
 
 
@@ -65,6 +67,21 @@ public class RuleController {
         model.addAttribute("template", template);
         model.addAttribute("tables", targetDatabaseService.getAllTables());
         return "businessrule";
+    }
+
+//    @DeleteMapping("/deleteBusinessrule/{id}")
+//    public void deleteRule(@PathVariable Long id) throws Exception {
+//         BusinessRule br = businessRuleService.deleteBusinessRule(id);
+//        if (br ==null)
+//            throw new Exception();
+//    }
+
+
+    @GetMapping("/delete/{id}")
+    public String deleteBR(@PathVariable("id") long id, Model model) {
+        BusinessRule br = businessRuleService.getBusinessRuleById(id);
+        businessRuleRepository.delete(br);
+        return "/";
     }
 
     @PostMapping("/addType")

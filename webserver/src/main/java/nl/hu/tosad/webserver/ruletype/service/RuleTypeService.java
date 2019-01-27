@@ -32,4 +32,5 @@ public class RuleTypeService implements RuleTypeServiceInterface {
     public List<BusinessRuleType> getAllBusinessRules() {
         return (List<BusinessRuleType>) businessRuleTypeRepository.findAll();
     }
+
 }

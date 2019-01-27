@@ -28,7 +28,8 @@ public class RuleService implements RuleServiceInterface {
         return businessRuleRepository.save(businessRule);
     }
 
-    public List<BusinessRule> getAllBusinessRulesByDb(Long dbId){
+
+    public List<BusinessRule> getAllBusinessRulesByDb(Long dbId) {
         List<BusinessRule> businessRules = businessRuleRepository.findAll();
         List<BusinessRule> businessRulesFinal = new ArrayList();
         for(BusinessRule br : businessRules) {
