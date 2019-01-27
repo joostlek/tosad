@@ -5,9 +5,9 @@ import nl.hu.tosad.domain.ruletype.BusinessRuleType;
 import java.util.List;
 
 public interface RuleTypeServiceInterface {
-    BusinessRuleType getBusinessRulesTypesbyId(long ID);
+    BusinessRuleType getBusinessRuleTypeByCode(String code);
 
-    BusinessRuleType saveBusinessRulesTypes(BusinessRuleType businessRuleType);
+    BusinessRuleType saveBusinessRulesType(BusinessRuleType businessRuleType);
 
     List<BusinessRuleType> getAllBusinessRules();
 

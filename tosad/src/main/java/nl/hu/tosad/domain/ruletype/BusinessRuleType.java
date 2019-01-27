@@ -88,7 +88,7 @@ public class BusinessRuleType {
 
     public Template getTemplate(Dialect dialect) {
         for (Template template : this.templates) {
-            if (template.getDialect() == dialect) {
+            if (template.getDialect().equals(dialect)) {
                 return template;
             }
         }

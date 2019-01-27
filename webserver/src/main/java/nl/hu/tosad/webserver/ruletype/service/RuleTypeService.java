@@ -19,18 +19,18 @@ public class RuleTypeService implements RuleTypeServiceInterface {
 
 
     @Override
-    public BusinessRuleType getBusinessRulesTypesbyId(long ID) {
-        return businessRuleTypeRepository.findById(ID).orElse(null);
+    public BusinessRuleType getBusinessRuleTypeByCode(String code) {
+        return businessRuleTypeRepository.findById(code).orElse(null);
     }
 
     @Override
-    public BusinessRuleType saveBusinessRulesTypes(BusinessRuleType businessRuleType) {
+    public BusinessRuleType saveBusinessRulesType(BusinessRuleType businessRuleType) {
         return businessRuleTypeRepository.save(businessRuleType);
     }
 
     @Override
     public List<BusinessRuleType> getAllBusinessRules() {
-        return (List<BusinessRuleType>) businessRuleTypeRepository.findAll();
+        return businessRuleTypeRepository.findAll();
     }
 
 }

@@ -15,6 +15,7 @@ public class TargetDatabaseController {
     TargetDatabaseService targetDatabaseService;
     @Autowired
     RuleService businessRuleService;
+
     @GetMapping("/")
     public String databaseList(Model model) {
         model.addAttribute("databases", targetDatabaseService.getAllDatabases());
@@ -28,7 +29,7 @@ public class TargetDatabaseController {
         model.addAttribute("chosenDatabase", dbn);
         redirectAttributes.addFlashAttribute("chosenDB", dbn);
         model.addAttribute("businessRules", businessRuleService.getAllBusinessRulesByDb(dbn));
-        return"ruleList";
+        return "ruleList";
     }
 
 
