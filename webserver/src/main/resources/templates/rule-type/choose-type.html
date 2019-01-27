@@ -12,8 +12,8 @@
 <h1 align="middle">Define a Rule</h1>
 
 <h3 th:align="middle">Choose a type</h3>
-<form th:align="middle" action="#" th:action="@{/addType}" th:object="${chosenRule}" method="post">
-    <select th:field="*{businessRuleTypeCode}"
+<form th:align="middle" action="#" th:action="@{/rules/type}" th:object="${newRuleType}" method="post">
+    <select th:field="*{typeCode}"
             th:remove="all-but-first"
             name="template">
         <option th:each="template : ${templates}"
@@ -22,6 +22,6 @@
     </select>
     <button th:align="middle" class="button" type="submit">Next</button>
 </form>
-
+</div>
 </body>
 </html>

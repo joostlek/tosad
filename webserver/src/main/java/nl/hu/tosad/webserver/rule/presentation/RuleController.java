@@ -1,7 +1,5 @@
 package nl.hu.tosad.webserver.rule.presentation;
 
-import nl.hu.tosad.domain.rule.BusinessRule;
-import nl.hu.tosad.domain.rule.Value;
 import nl.hu.tosad.domain.ruletype.BusinessRuleType;
 import nl.hu.tosad.domain.ruletype.Template;
 import nl.hu.tosad.domain.target_database.Dialect;
@@ -9,63 +7,72 @@ import nl.hu.tosad.webserver.rule.data.BusinessRuleRepository;
 import nl.hu.tosad.webserver.rule.service.RuleServiceInterface;
 import nl.hu.tosad.webserver.ruletype.data.BusinessRuleTypeRepository;
 import nl.hu.tosad.webserver.ruletype.data.TemplateRepository;
-import nl.hu.tosad.webserver.target_database.presentation.ChosenDatabaseDTO;
+import nl.hu.tosad.webserver.ruletype.presentation.RuleTypeDTO;
+import nl.hu.tosad.webserver.ruletype.presentation.RuleTypeHolder;
+import nl.hu.tosad.webserver.target_database.presentation.DatabaseHolder;
 import nl.hu.tosad.webserver.target_database.service.TargetDatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@SessionAttributes({"database", "ruleType"})
 public class RuleController {
-    @Autowired
-    private RuleServiceInterface businessRuleService;
+    private final RuleServiceInterface ruleService;
+
+    private final TargetDatabaseService targetDatabaseService;
+
+    private final TemplateRepository templateRepository;
+
+    private final BusinessRuleTypeRepository businessRuleTypeRepository;
+
+    private final BusinessRuleRepository businessRuleRepository;
 
     @Autowired
-    private TargetDatabaseService targetDatabaseService;
-
-    @Autowired
-    private TemplateRepository templateRepository;
-
-    @Autowired
-    private BusinessRuleTypeRepository businessRuleTypeRepository;
-
-    @Autowired
-    private BusinessRuleRepository businessRuleRepository;
-
-    @GetMapping("/allRules")
-    public String ruleList(@ModelAttribute ChosenDatabaseDTO dbn, Model model) {
-
-        return "ruleList";
+    public RuleController(RuleServiceInterface ruleService, TargetDatabaseService targetDatabaseService, TemplateRepository templateRepository, BusinessRuleTypeRepository businessRuleTypeRepository, BusinessRuleRepository businessRuleRepository) {
+        this.ruleService = ruleService;
+        this.targetDatabaseService = targetDatabaseService;
+        this.templateRepository = templateRepository;
+        this.businessRuleTypeRepository = businessRuleTypeRepository;
+        this.businessRuleRepository = businessRuleRepository;
     }
 
-    @GetMapping("/add")
-    public String add(Model model) {
-        model.addAttribute("templates", templateRepository.findAll());
-        model.addAttribute("chosenRule", new ChosenRuleTypeDTO());
-        return "add";
+    @GetMapping("/rules")
+    public String ruleList(
+            @ModelAttribute("database") DatabaseHolder databaseHolder,
+            Model model) {
+        Long databaseId = databaseHolder.getDatabase().getId();
+        model.addAttribute("rules", ruleService.getAllBusinessRulesByDatabaseId(databaseId));
+        return "rule/rule-list";
+    }
+
+    @GetMapping("/rules/add")
+    public String add(Model model,
+                      @ModelAttribute("database") DatabaseHolder databaseHolder,
+                      @ModelAttribute("ruleType") RuleTypeHolder ruleTypeHolder) {
+        Long databaseId = databaseHolder.getDatabase().getId();
+        Template template = ruleTypeHolder.getBusinessRuleType().getTemplate(databaseHolder.getDatabase().getDialect());
+        model.addAttribute("tables", targetDatabaseService.getTablesByDatabaseId(databaseId));
+        model.addAttribute("type", ruleTypeHolder.getBusinessRuleType());
+        model.addAttribute("typeAttributes", template.getAttributes());
+        return "create-rule";
     }
 
     @GetMapping("/businessrule/{id}")
     public String businessrule(Model model, @PathVariable Long id) {
-        model.addAttribute("businessRule", businessRuleService.getBusinessRuleById(id));
-        BusinessRule businessRule = businessRuleService.getBusinessRuleById(id);
-        Map<String, Object> map = new HashMap<>();
-        for (Value value : businessRule.getValues()) {
-            map.put(value.getPosition(), value.getValue());
-        }
-        Template template = businessRule.getBusinessRuleType().getTemplate(businessRule.getDatabase().getDialect());
-        model.addAttribute("map", map);
-        model.addAttribute("type", businessRule.getBusinessRuleType());
-        model.addAttribute("templateByType", template.getAttributes());
-        model.addAttribute("template", template);
-        model.addAttribute("tables", targetDatabaseService.getAllTables());
+//        model.addAttribute("businessRule", businessRuleService.getBusinessRuleById(id));
+//        BusinessRule businessRule = businessRuleService.getBusinessRuleById(id);
+//        Map<String, Object> map = new HashMap<>();
+//        for (Value value : businessRule.getValues()) {
+//            map.put(value.getPosition(), value.getValue());
+//        }
+//        Template template = businessRule.getBusinessRuleType().getTemplate(businessRule.getDatabase().getDialect());
+//        model.addAttribute("map", map);
+//        model.addAttribute("type", businessRule.getBusinessRuleType());
+//        model.addAttribute("templateByType", template.getAttributes());
+//        model.addAttribute("template", template);
+//        model.addAttribute("tables", targetDatabaseService.getAllTables());
         return "businessrule";
     }
 
@@ -79,16 +86,16 @@ public class RuleController {
 
     @GetMapping("/delete/{id}")
     public String deleteBR(@PathVariable("id") long id, Model model) {
-        BusinessRule br = businessRuleService.getBusinessRuleById(id);
-        businessRuleRepository.delete(br);
+//        BusinessRule br = businessRuleService.getBusinessRuleById(id);
+//        businessRuleRepository.delete(br);
         return "RuleList";
     }
 
     @PostMapping("/addType")
-    public String addType(@ModelAttribute ChosenRuleTypeDTO brtc, Model model) {
+    public String addType(@ModelAttribute RuleTypeDTO brtc, Model model) {
         Dialect dialect = targetDatabaseService.getDialectById((long) 1);
-        BusinessRuleType type = businessRuleTypeRepository.findBusinessRuleTypeByCode(brtc.getBusinessRuleTypeCode());
-        Template template = businessRuleTypeRepository.findBusinessRuleTypeByCode(brtc.getBusinessRuleTypeCode()).getTemplate(dialect);
+        BusinessRuleType type = businessRuleTypeRepository.findBusinessRuleTypeByCode(brtc.getTypeCode());
+        Template template = businessRuleTypeRepository.findBusinessRuleTypeByCode(brtc.getTypeCode()).getTemplate(dialect);
         model.addAttribute("templateByType", template.getAttributes());
         model.addAttribute("type", type);
         model.addAttribute("template", template.toString());

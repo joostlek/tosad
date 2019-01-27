@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
@@ -11,9 +10,10 @@
 <body>
 <div th:fragment="header">
 <div class="topnav">
-    <li class="navli"><a class="nava" href="add.html" th:href="@{/add}">Define a Business Rule</a></li>
-    <li class="navli"><a class="nava" href="ruleList.html" th:href="@{/allRules}">All Business Rules</a></li>
-    <li class="navli"><a class="nava" href="add.html" th:href="@{/generateBusinessRules}">Generate Business Rules</a></li>
+    <li class="navli"><a class="nava" href="create-rule.html" th:href="@{/add}">Define a Business Rule</a></li>
+    <li class="navli"><a class="nava" href="rule/rule-list.html" th:href="@{/allRules}">All Business Rules</a></li>
+    <li class="navli"><a class="nava" href="create-rule.html" th:href="@{/generateBusinessRules}">Generate Business
+        Rules</a></li>
     <li class="navli"><a class="nava" href="target-database/db-list.html" th:href="@{/}">Databases</a></li>
 </div>
 </div>
