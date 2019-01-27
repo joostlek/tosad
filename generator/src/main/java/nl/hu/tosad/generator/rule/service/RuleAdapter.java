@@ -20,9 +20,9 @@ public class RuleAdapter implements RuleAdapterInterface {
         List<Long> businessRuleIds = Arrays.asList(longArray);
 
         if (wet) {
-            return gson.toJson(ruleServiceInterface.convertBusinessRulesDry(businessRuleIds));
-        } else {
             return gson.toJson(ruleServiceInterface.convertBusinessRulesWet(businessRuleIds));
+        } else {
+            return gson.toJson(ruleServiceInterface.convertBusinessRulesDry(businessRuleIds));
         }
     }
 }
