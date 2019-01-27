@@ -23,24 +23,24 @@ public class TargetDatabaseController {
         return new DatabaseHolder();
     }
 
-    @GetMapping("/db")
+    @GetMapping("/database")
     public String databaseList(
             @RequestParam(value = "error", required = false) String errorMessage,
             Model model) {
         model.addAttribute("databases", targetDatabaseService.getAllDatabases());
         model.addAttribute("chosenDatabase", new ChosenDatabaseDTO());
         model.addAttribute("error", errorMessage);
-        return "db-list";
+        return "target-database/db-list";
     }
 
-    @PostMapping("/db")
+    @PostMapping("/database")
     public RedirectView chooseDb(
             @ModelAttribute ChosenDatabaseDTO chosenDatabase,
             @ModelAttribute("database") DatabaseHolder database,
             RedirectAttributes attributes) {
         Long databaseId = chosenDatabase.getDatabaseId();
         if (!targetDatabaseService.databaseExists(databaseId)) {
-            return new RedirectView("/db?error=Database+not+found");
+            return new RedirectView("/database?error=Database+not+found");
         }
         database.setDatabase(targetDatabaseService.getDatabaseById(databaseId));
         attributes.addFlashAttribute("database", database);
