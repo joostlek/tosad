@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add new database</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="../css/normalize.css" th:href="@{/css/style.css}">
+    <!--/*/ <th:block th:include="headertemplate :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*/ <th:block th:include="headertemplate :: head"></th:block> /*/-->
+    <div>
+        <h1>Add new database</h1>
+        <form action="#" th:action="@{/database/create}" method="post" th:object="${newDatabase}">
+            <label>Choose dialect</label>
+            <select th:remove="all-but-first"
+                    th:field="*{dialectId}"
+                    name="di">
+                <option th:each="di : ${dialects}"
+                        th:value="${di.getId()}"
+                        th:text="${di.getName()}"></option>
+            </select><br>
+            <label>URL</label><input type="text" th:field="*{jdbcUrl}"><br>
+            <label>Username</label><input type="text" th:field="*{username}"><br>
+            <label>Password</label><input type="password" th:field="*{password}"><br>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+</body>
+</html>

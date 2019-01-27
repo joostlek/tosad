@@ -19,6 +19,8 @@ public interface TargetDatabaseServiceInterface {
 
     Dialect getDialectById(Long id);
 
+    List<Dialect> getAllDialects();
+
     List<Database> getAllDatabases();
 
     List<String> generateQueries(List<Long> businessRuleIds, boolean wet);
@@ -28,4 +30,6 @@ public interface TargetDatabaseServiceInterface {
     boolean databaseExists(Long id);
 
     List<DbTable> getTablesByDatabaseId(Long id);
+
+    Database saveDatabase(Database database);
 }

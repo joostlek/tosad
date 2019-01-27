@@ -1,5 +1,6 @@
 package nl.hu.tosad.webserver.target_database.presentation;
 
+import nl.hu.tosad.domain.target_database.Database;
 import nl.hu.tosad.webserver.target_database.service.TargetDatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,25 @@ public class TargetDatabaseController {
         return "target-database/db-list";
     }
 
+    @GetMapping("/database/create")
+    public String dialectList(
+            @RequestParam(value = "error", required = false) String errorMessage,
+            Model model){
+        model.addAttribute("newDatabase", new NewDatabaseDTO());
+        model.addAttribute("dialects", targetDatabaseService.getAllDialects());
+        model.addAttribute("error", errorMessage);
+        return "target-database/create-db";
+    }
+
+    @PostMapping("/database/create")
+    public RedirectView newDb(
+            @ModelAttribute NewDatabaseDTO newDatabase,
+            RedirectAttributes attributes) {
+        Database db = new Database("", newDatabase.getJdbcUrl(), "", newDatabase.getUsername(), newDatabase.getPassword());
+        targetDatabaseService.saveDatabase(db);
+        return new RedirectView("/database");
+    }
+
     @PostMapping("/database")
     public RedirectView chooseDb(
             @ModelAttribute ChosenDatabaseDTO chosenDatabase,
@@ -46,6 +66,5 @@ public class TargetDatabaseController {
         attributes.addFlashAttribute("database", database);
         return new RedirectView("/rules");
     }
-
 
 }

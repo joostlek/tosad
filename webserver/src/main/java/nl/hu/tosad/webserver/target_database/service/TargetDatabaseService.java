@@ -76,6 +76,11 @@ public class TargetDatabaseService implements TargetDatabaseServiceInterface {
         return tableRepository.findAllByDatabaseId(id);
     }
 
+    @Override
+    public Database saveDatabase(Database database) {
+        return databaseRepository.save(database);
+    }
+
     private DbTable validateTable(DbTable table) {
         DatabaseConnectionFactory databaseConnectionFactory = new DatabaseConnectionFactory(table.getDatabase());
         try {
@@ -127,6 +132,9 @@ public class TargetDatabaseService implements TargetDatabaseServiceInterface {
     public Dialect getDialectById(Long id) {
         return dialectRepository.findById(id).orElseThrow(RuntimeException::new);
     }
+
+    @Override
+    public List<Dialect> getAllDialects(){return dialectRepository.findAll();}
 
     @Override
     public List<Database> getAllDatabases(){
