@@ -71,6 +71,11 @@ public class TargetDatabaseService implements TargetDatabaseServiceInterface {
         return databaseRepository.existsById(id);
     }
 
+    @Override
+    public List<DbTable> getTablesByDatabaseId(Long id) {
+        return tableRepository.findAllByDatabaseId(id);
+    }
+
     private DbTable validateTable(DbTable table) {
         DatabaseConnectionFactory databaseConnectionFactory = new DatabaseConnectionFactory(table.getDatabase());
         try {

@@ -12,4 +12,6 @@ public interface TableRepository extends CrudRepository<DbTable, Long> {
     DbTable findByNameAndDatabase(String string, Database database);
 
     List<DbTable> findAll();
+
+    List<DbTable> findAllByDatabaseId(Long id);
 }

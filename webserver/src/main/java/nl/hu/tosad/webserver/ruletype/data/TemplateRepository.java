@@ -14,4 +14,6 @@ public interface TemplateRepository extends CrudRepository<Template, Long> {
     List<Template> findAll();
 
     List<Template> findByBusinessRuleType(BusinessRuleType br);
+
+    List<Template> findAllByDialect(Dialect dialect);
 }

@@ -36,7 +36,7 @@
                                 <name>Rule</name>
                                 <SoftwareUnitDefinitions>
                                     <SoftwareUnitDefinition>
-                                        <name>nl.hu.tosad.webserver.rule.presentation.ChosenRuleTypeDTO</name>
+                                        <name>nl.hu.tosad.webserver.ruletype.presentation.RuleTypeDTO</name>
                                         <type>CLASS</type>
                                     </SoftwareUnitDefinition>
                                     <SoftwareUnitDefinition>
@@ -45,7 +45,7 @@
                                     </SoftwareUnitDefinition>
                                 </SoftwareUnitDefinitions>
                                 <PhysicalPaths>
-                                    <path>nl.hu.tosad.webserver.rule.presentation.ChosenRuleTypeDTO</path>
+                                    <path>nl.hu.tosad.webserver.ruletype.presentation.RuleTypeDTO</path>
                                     <path>nl.hu.tosad.webserver.rule.presentation.RuleController</path>
                                 </PhysicalPaths>
                             </ModuleStrategy>

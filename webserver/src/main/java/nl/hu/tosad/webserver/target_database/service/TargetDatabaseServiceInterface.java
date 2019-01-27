@@ -26,4 +26,6 @@ public interface TargetDatabaseServiceInterface {
     Database validateDatabase(Database database);
 
     boolean databaseExists(Long id);
+
+    List<DbTable> getTablesByDatabaseId(Long id);
 }

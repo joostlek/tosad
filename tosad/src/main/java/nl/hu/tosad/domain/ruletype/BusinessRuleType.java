@@ -27,6 +27,7 @@ public class BusinessRuleType {
     private Category category;
 
     @ManyToMany(cascade = {CascadeType.ALL})
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
             name = "BRT_Operator",
             joinColumns = {@JoinColumn(name = "operator_id")},
