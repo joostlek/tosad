@@ -1,6 +1,7 @@
 package nl.hu.tosad.webserver.target_database.presentation;
 
 import nl.hu.tosad.domain.target_database.Database;
+import nl.hu.tosad.domain.target_database.Dialect;
 import nl.hu.tosad.webserver.target_database.service.TargetDatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,9 +47,11 @@ public class TargetDatabaseController {
 
     @PostMapping("/database/create")
     public RedirectView newDb(
-            @ModelAttribute NewDatabaseDTO newDatabase,
-            RedirectAttributes attributes) {
-        Database db = new Database("", newDatabase.getJdbcUrl(), "", newDatabase.getUsername(), newDatabase.getPassword());
+            @ModelAttribute NewDatabaseDTO newDatabase) {
+        Long dialectId = newDatabase.getDialectId();
+        Dialect dialect = targetDatabaseService.getDialectById(dialectId);
+        Database db = new Database(newDatabase.getName(), newDatabase.getJdbcUrl(), newDatabase.getUsername(), newDatabase.getPassword());
+        db.setDialect(dialect);
         targetDatabaseService.saveDatabase(db);
         return new RedirectView("/database");
     }

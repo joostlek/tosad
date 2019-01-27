@@ -20,6 +20,7 @@
                         th:value="${di.getId()}"
                         th:text="${di.getName()}"></option>
             </select><br>
+            <label>Name</label><input type="text" th:field="*{name}"><br>
             <label>URL</label><input type="text" th:field="*{jdbcUrl}"><br>
             <label>Username</label><input type="text" th:field="*{username}"><br>
             <label>Password</label><input type="password" th:field="*{password}"><br>
