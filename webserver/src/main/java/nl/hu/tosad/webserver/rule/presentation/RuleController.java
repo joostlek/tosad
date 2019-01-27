@@ -81,7 +81,7 @@ public class RuleController {
     public String deleteBR(@PathVariable("id") long id, Model model) {
         BusinessRule br = businessRuleService.getBusinessRuleById(id);
         businessRuleRepository.delete(br);
-        return "/";
+        return "RuleList";
     }
 
     @PostMapping("/addType")
