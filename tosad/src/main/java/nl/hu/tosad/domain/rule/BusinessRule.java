@@ -9,6 +9,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -38,11 +39,11 @@ public class BusinessRule {
     @JoinColumn(name = "fk_operator_br")
     private Operator operator;
 
-    @OneToMany(mappedBy = "businessRule")
+    @OneToMany(mappedBy = "businessRule", cascade = {CascadeType.PERSIST})
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Value> values;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.MERGE})
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
             name = "Column_Rule",
@@ -51,7 +52,7 @@ public class BusinessRule {
     )
     private List<DbColumn> columns;
 
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
             name = "Table_Rule",
@@ -68,6 +69,9 @@ public class BusinessRule {
         this.description = description;
         this.errorMessage = errorMessage;
         this.businessRuleType = businessRuleType;
+        this.columns = new ArrayList<>();
+        this.tables = new ArrayList<>();
+        this.values = new ArrayList<>();
     }
 
     public String getName() {

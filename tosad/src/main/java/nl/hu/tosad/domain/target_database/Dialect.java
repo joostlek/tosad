@@ -49,4 +49,16 @@ public class Dialect {
     public void setDatabases(List<Database> databases) {
         this.databases = databases;
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object instanceof Dialect) {
+            Dialect dialect = (Dialect) object;
+            return dialect.id.equals(this.id);
+        }
+        return false;
+    }
 }
