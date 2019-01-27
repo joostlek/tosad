@@ -44,7 +44,6 @@ public class TargetDatabaseController {
         }
         database.setDatabase(targetDatabaseService.getDatabaseById(databaseId));
         attributes.addFlashAttribute("database", database);
-        System.out.println(database.getDatabase());
         return new RedirectView("/rules");
     }
 
