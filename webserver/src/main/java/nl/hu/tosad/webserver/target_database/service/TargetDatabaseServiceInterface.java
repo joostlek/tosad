@@ -24,4 +24,6 @@ public interface TargetDatabaseServiceInterface {
     List<String> generateQueries(List<Long> businessRuleIds, boolean wet);
 
     Database validateDatabase(Database database);
+
+    boolean databaseExists(Long id);
 }

@@ -19,7 +19,6 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -65,6 +64,11 @@ public class TargetDatabaseService implements TargetDatabaseServiceInterface {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public boolean databaseExists(Long id) {
+        return databaseRepository.existsById(id);
     }
 
     private DbTable validateTable(DbTable table) {

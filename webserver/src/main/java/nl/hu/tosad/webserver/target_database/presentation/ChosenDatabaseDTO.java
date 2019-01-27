@@ -7,7 +7,7 @@ public class ChosenDatabaseDTO {
         return databaseId;
     }
 
-    public void setDatabaseName(Long databaseId) {
+    public void setDatabaseId(Long databaseId) {
         this.databaseId = databaseId;
     }
 

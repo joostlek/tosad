@@ -1,6 +1,5 @@
 package nl.hu.tosad.webserver.rule.presentation;
 
-import javassist.NotFoundException;
 import nl.hu.tosad.domain.rule.BusinessRule;
 import nl.hu.tosad.domain.rule.Value;
 import nl.hu.tosad.domain.ruletype.BusinessRuleType;
@@ -15,7 +14,10 @@ import nl.hu.tosad.webserver.target_database.service.TargetDatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,10 +25,10 @@ import java.util.Map;
 @Controller
 public class RuleController {
     @Autowired
-    RuleServiceInterface businessRuleService;
+    private RuleServiceInterface businessRuleService;
 
     @Autowired
-    TargetDatabaseService targetDatabaseService;
+    private TargetDatabaseService targetDatabaseService;
 
     @Autowired
     private TemplateRepository templateRepository;
@@ -36,8 +38,6 @@ public class RuleController {
 
     @Autowired
     private BusinessRuleRepository businessRuleRepository;
-
-
 
     @GetMapping("/allRules")
     public String ruleList(@ModelAttribute ChosenDatabaseDTO dbn, Model model) {
@@ -53,15 +53,15 @@ public class RuleController {
     }
 
     @GetMapping("/businessrule/{id}")
-    public String businessrule(Model model,@PathVariable Long id) {
+    public String businessrule(Model model, @PathVariable Long id) {
         model.addAttribute("businessRule", businessRuleService.getBusinessRuleById(id));
         BusinessRule businessRule = businessRuleService.getBusinessRuleById(id);
         Map<String, Object> map = new HashMap<>();
-        for (Value value: businessRule.getValues()){
-            map.put(value.getPosition(),value.getValue());
+        for (Value value : businessRule.getValues()) {
+            map.put(value.getPosition(), value.getValue());
         }
         Template template = businessRule.getBusinessRuleType().getTemplate(businessRule.getDatabase().getDialect());
-        model.addAttribute("map",map);
+        model.addAttribute("map", map);
         model.addAttribute("type", businessRule.getBusinessRuleType());
         model.addAttribute("templateByType", template.getAttributes());
         model.addAttribute("template", template);
