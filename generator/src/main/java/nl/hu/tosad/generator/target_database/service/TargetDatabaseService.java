@@ -22,7 +22,7 @@ public class TargetDatabaseService implements TargetDatabaseServiceInterface {
                 try (Statement statement = connection.createStatement()) {
                     statement.execute(query);
                 }
-                logger.log(Level.INFO, "Executed %s", sql);
+                logger.log(Level.INFO, String.format("Executed %s", sql));
             }
             connection.close();
             logger.log(Level.INFO, "Done!");
