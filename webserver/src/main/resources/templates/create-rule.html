@@ -12,53 +12,75 @@
 <!--/*/<th:block th:include="headertemplate :: header"></th:block> /*/-->
 <h1 th:align="middle" th:text="${type.getName()}"></h1>
 
-<form action="#">
+<form action="#" th:object="${rule}" th:action="@{/rules/add}" method="post">
     <div>
         <div class="why">
             <div>
-                <label>name:</label><br>
-                <input type="text">
+                <label for="name">Name:</label><br>
+                <input type="text"
+                       id="name"
+                       th:field="*{properties['name']}">
+            </div>
+
+            <div>
+                <label>Type:</label><br>
+                <select th:field="*{properties['type']}"
+                        th:remove="all-but-first"
+                        name="template" disabled>
+                    <option th:value="${ruleType.getBusinessRuleType().getCode()}"
+                            th:text="${ruleType.getBusinessRuleType().getName()}"></option>
+                </select>
             </div>
 
             <div>
                 <label>table:</label><br>
-                <input type="text">
+                <select th:field="*{properties['table']}"
+                        th:remove="all-but-first"
+                        name="template" disabled>
+                    <option th:value="${ruleType.getTable().getId()}"
+                            th:text="${ruleType.getTable().getName()}"></option>
+                </select>
             </div>
 
             <div th:each="attribute : ${typeAttributes}">
                 <div th:switch="${attribute.getValue()}">
 
                     <div th:case="'column'">
-                        <label th:text="${attribute.getKey()}"></label>
-                        <input type="text">
+                        <label>Column:</label><br>
+                        <select th:field="*{properties['__${attribute.key}__']}"
+                                th:remove="all-but-first"
+                                name="template">
+                            <option th:each="column : ${columns}"
+                                    th:value="${column.getId()}"
+                                    th:text="${column.getName()}"></option>
+                        </select>
                     </div>
 
                     <div th:case="'int'">
                         <label th:text="${attribute.getKey()}"></label>
-                        <input type="number">
+                        <input th:field="*{properties['__${attribute.key}__']}" type="number" required>
                     </div>
 
                     <div th:case="'operator'">
                         <label th:text="${attribute.getKey()}"></label>
-                        <select th:field="${type}"
-                                th:remove="all-but-first"
-                                name="operator">
+                        <select th:field="*{properties['__${attribute.key}__']}"
+                                name="operator"
+                                required>
                             <option th:each="operator : ${type.getAvailableOperators()}"
-                                    th:value="${operator}"
-                                    th:text="${operator}"
-                            ></option>
+                                    th:value="${operator.getId()}"
+                                    th:text="${operator}"></option>
                         </select>
                     </div>
 
                     <div th:case="'statement'">
                         <label th:text="${attribute.getKey()}"></label>
-                        <input type="text">
+                        <input th:field="*{properties['__${attribute.key}__']}" type="text">
                     </div>
                 </div>
             </div>
 
-            <label>error:</label>
-            <input type="text">
+            <label for="error">error:</label>
+            <input id="error" type="text" th:field="*{properties['error']}" required>
 
 
             <button class="button" type="submit">Save</button>

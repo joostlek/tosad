@@ -1,9 +1,11 @@
 package nl.hu.tosad.webserver.ruletype.service;
 
 import nl.hu.tosad.domain.ruletype.BusinessRuleType;
+import nl.hu.tosad.domain.ruletype.Operator;
 import nl.hu.tosad.domain.ruletype.Template;
 import nl.hu.tosad.domain.target_database.Dialect;
 import nl.hu.tosad.webserver.ruletype.data.BusinessRuleTypeRepository;
+import nl.hu.tosad.webserver.ruletype.data.OperatorRepository;
 import nl.hu.tosad.webserver.ruletype.data.TemplateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,9 @@ public class RuleTypeService implements RuleTypeServiceInterface {
 
     @Autowired
     private TemplateRepository templateRepository;
+
+    @Autowired
+    private OperatorRepository operatorRepository;
 
     private final BusinessRuleTypeRepository businessRuleTypeRepository;
 
@@ -42,6 +47,11 @@ public class RuleTypeService implements RuleTypeServiceInterface {
     @Override
     public List<Template> getTemplatesByDialect(Dialect dialect) {
         return templateRepository.findAllByDialect(dialect);
+    }
+
+    @Override
+    public Operator getOperator(Long id) {
+        return operatorRepository.findById(id).orElse(null);
     }
 
 }

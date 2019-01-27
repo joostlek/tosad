@@ -77,6 +77,11 @@ public class TargetDatabaseService implements TargetDatabaseServiceInterface {
     }
 
     @Override
+    public List<DbColumn> getColumnsByTableId(Long id) {
+        return columnRepository.findAllByTableId(id);
+    }
+
+    @Override
     public Database saveDatabase(Database database) {
         return databaseRepository.save(database);
     }
