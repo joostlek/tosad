@@ -10,7 +10,7 @@
     <h2 th:text="${error}"></h2>
 </div>
 
-<form action="#" th:action="@{/db}" method="post" th:object="${chosenDatabase}">
+<form action="#" th:action="@{/database}" method="post" th:object="${chosenDatabase}">
     <label>Database
         <select th:remove="all-but-first"
                 th:field="*{databaseId}"
