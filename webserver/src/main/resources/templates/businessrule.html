@@ -26,9 +26,8 @@
 
                 <div th:case="'int'">
                     <label th:text="${template.getKey()}"></label>
-                    <div th:each="key: ${map.keySet()}"
-                    <input th:text="${key}"></input>
-                    </div>
+                    <input th:value="${mappie.get(template.getKey())}">
+
 
                 </div>
 
@@ -53,7 +52,7 @@
 
         <label >error:</label>
         <input th:value="${businessRule.getErrorMessage()} "type="text">
-        <button class="button">Remove</button>
+        <button class="button">Change</button>
     </div>
 </form>
 </body>
