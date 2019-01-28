@@ -57,7 +57,8 @@ public class RuleController {
         Long tableId = ruleTypeHolder.getTable().getId();
 
         model.addAttribute("rule", new RuleDTO());
-        model.addAttribute("columns", targetDatabaseService.getColumnsByTableId(tableId));
+        model.addAttribute(
+                "columns", targetDatabaseService.getColumnsByTableId(tableId));
         model.addAttribute("type", ruleTypeHolder.getBusinessRuleType());
         model.addAttribute("typeAttributes", template.getAttributes());
         return "rule/create-rule";

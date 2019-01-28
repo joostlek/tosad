@@ -13,12 +13,12 @@
     <div class="why">
         <div >
             <label>name:</label>
-            <input th:value="${businessRule.getName()}" type="text">
+            <input th:type="text" th:value="${businessRule.getName()}" type="text">
         </div>
 
         <div >
             <label>table:</label>
-            <input th:value="${businessRule.getTables()}" type="table">
+            <input th:type="text" th:value="${businessRule.getTables()}" type="table">
         </div>
 
         <div th:each="template : ${templateByType}">
@@ -26,7 +26,7 @@
 
                 <div th:case="'int'">
                     <label th:text="${template.getKey()}"></label>
-                    <input th:value="${map.get(template.getKey())}">
+                    <input th:type="number" th:value="${map.get(template.getKey())}">
 
 
                 </div>
