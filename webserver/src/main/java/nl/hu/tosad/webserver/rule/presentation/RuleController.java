@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -102,21 +103,27 @@ public class RuleController {
         return new RedirectView("/rules");
     }
 
-    @GetMapping("/businessrule/{id}")
-    public String businessrule(Model model, @PathVariable Long id) {
-//        model.addAttribute("businessRule", businessRuleService.getBusinessRuleById(id));
-//        BusinessRule businessRule = businessRuleService.getBusinessRuleById(id);
-//        Map<String, Object> map = new HashMap<>();d
-//        for (Value value : businessRule.getValues()) {
-//            map.put(value.getPosition(), value.getValue());
-//        }
-//        Template template = businessRule.getBusinessRuleType().getTemplate(businessRule.getDatabase().getDialect());
-//        model.addAttribute("map", map);
-//        model.addAttribute("type", businessRule.getBusinessRuleType());
-//        model.addAttribute("templateByType", template.getAttributes());
-//        model.addAttribute("template", template);
-//        model.addAttribute("tables", targetDatabaseService.getAllTables());
-        return "businessrule";
+    @GetMapping("/rules/generate")
+    public String generate(Model model){
+        model.addAttribute("businessRules", ruleService.getAllBusinessRulesByDatabaseId(1L));
+        return "generate-rule";
+    }
+
+    @GetMapping("/rule/{id}")
+    public String rule(Model model, @PathVariable Long id) {
+        model.addAttribute("businessRule", ruleService.getBusinessRuleById(id));
+        BusinessRule businessRule = ruleService.getBusinessRuleById(id);
+        Map<String, Object> map = new HashMap<>();
+        for (Value value : businessRule.getValues()) {
+            map.put(value.getPosition(), value.getValue());
+        }
+        Template template = businessRule.getBusinessRuleType().getTemplate(businessRule.getDatabase().getDialect());
+        model.addAttribute("map", map);
+        model.addAttribute("type", businessRule.getBusinessRuleType());
+        model.addAttribute("templateByType", template.getAttributes());
+        model.addAttribute("template", template);
+        model.addAttribute("tables", targetDatabaseService.getAllTables());
+        return "rule";
     }
 
 //    @DeleteMapping("/deleteBusinessrule/{id}")
