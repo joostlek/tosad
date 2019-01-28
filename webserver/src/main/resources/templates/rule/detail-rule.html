@@ -27,8 +27,8 @@
                 <select th:field="*{properties['type']}"
                         th:remove="all-but-first"
                         name="template" disabled>
-                    <option th:value="${ruleType.getCode()}"
-                            th:text="${ruleType.getName()}"></option>
+                    <option th:value="${bRuleType.getCode()}"
+                            th:text="${bRuleType.getName()}"></option>
                 </select>
             </div>
 
@@ -65,7 +65,7 @@
                         <select th:field="*{properties['__${attribute.key}__']}"
                                 name="operator"
                                 required>
-                            <option th:each="operator : ${ruleType.getAvailableOperators()}"
+                            <option th:each="operator : ${bRuleType.getAvailableOperators()}"
                                     th:value="${operator.getId()}"
                                     th:text="${operator}"></option>
                         </select>

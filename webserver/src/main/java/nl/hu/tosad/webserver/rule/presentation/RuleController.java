@@ -99,7 +99,7 @@ public class RuleController {
         });
 
         model.addAttribute("businessRule", rule);
-        model.addAttribute("ruleType", businessRule.getBusinessRuleType());
+        model.addAttribute("bRuleType", businessRule.getBusinessRuleType());
         model.addAttribute("columns", businessRule.getTables().get(0).getColumns());
         model.addAttribute("rule", toRuleDTO(rule));
         model.addAttribute("typeAttributes", template.getAttributes());
