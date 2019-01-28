@@ -1,10 +1,15 @@
 package nl.hu.tosad.webserver.target_database.presentation;
 
 public class NewDatabaseDTO {
+    private String name;
     private String jdbcUrl;
     private String username;
     private String password;
     private Long dialectId;
+
+    public String getName() { return name; }
+
+    public void setName(String name) { this.name = name; }
 
     public String getJdbcUrl(){return jdbcUrl;}
 
@@ -21,4 +26,5 @@ public class NewDatabaseDTO {
     public Long getDialectId(){return dialectId;}
 
     public void setDialectId(Long dialectId) { this.dialectId = dialectId; }
+
 }

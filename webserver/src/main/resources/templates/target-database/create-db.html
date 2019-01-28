@@ -8,22 +8,23 @@
     <!--/*/ <th:block th:include="headertemplate :: head"></th:block> /*/-->
 </head>
 <body>
-<!--/*/ <th:block th:include="headertemplate :: head"></th:block> /*/-->
-    <div>
+<!--/*/<th:block th:include="headertemplate :: header"></th:block> /*/-->
+    <div id="newdbform">
         <h1>Add new database</h1>
         <form action="#" th:action="@{/database/create}" method="post" th:object="${newDatabase}">
-            <label>Choose dialect</label>
-            <select th:remove="all-but-first"
+            <label>Choose dialect:</label>
+            <select class="newDbInput" th:remove="all-but-first"
                     th:field="*{dialectId}"
                     name="di">
                 <option th:each="di : ${dialects}"
                         th:value="${di.getId()}"
                         th:text="${di.getName()}"></option>
-            </select><br>
-            <label>URL</label><input type="text" th:field="*{jdbcUrl}"><br>
-            <label>Username</label><input type="text" th:field="*{username}"><br>
-            <label>Password</label><input type="password" th:field="*{password}"><br>
-            <button type="submit">Save</button>
+            </select><br><br>
+            <label>Name:</label><input class="newDbInput" type="text" th:field="*{name}"><br><br>
+            <label>URL:</label><input class="newDbInput" type="text" th:field="*{jdbcUrl}"><br><br>
+            <label>Username:</label><input class="newDbInput" type="text" th:field="*{username}"><br><br>
+            <label>Password:</label><input class="newDbInput" type="password" th:field="*{password}"><br><br>
+            <button class="button" type="submit">Save</button>
         </form>
     </div>
 </body>
