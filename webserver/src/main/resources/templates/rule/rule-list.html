@@ -10,29 +10,24 @@
 <body>
 <!--/*/<th:block th:include="headertemplate :: header"></th:block> /*/-->
 <h1 align="middle">All business rules</h1>
-<p th:text="${chosenDatabase}"></p>
-    <table align="middle">
-        <tr>
-            <td>ID</td>
-            <td>Name</td>
-            <td>Error message</td>
-            <td>Information</td>
-            <td>Change</td>
-            <td>Delete</td>
-        </tr>
-        <tr th:each="br: ${businessRules}">
-            <td th:text="${br.getId()}"/>
-            <td th:text="${br.getName()}"/>
-            <td th:text="${br.getErrorMessage()}">
-            <td th:text="${br.getDescription()}">
-            <td ><a class="button" th:href="@{/businessrule/{id}(id=${br.getId()})}">Manage</a></td>
-            <td><a class="button" th:href="@{/delete/{id}(id=${br.getId()})}">Delete</a>
-                <!--<form th:action="@{/deleteBusinessrule}" method="post" th:object="${br}">-->
-                    <!--<input type="hidden" th:field="${br.getId()}">-->
-                    <!--<button type="submit" value="Submit">Delete</button>-->
-                <!--</form>-->
-            </td>
-        </tr>
-    </table>
+<p th:text="${database.database.name}"></p>
+<table align="middle">
+    <tr>
+        <td>ID</td>
+        <td>Type</td>
+        <td>Name</td>
+        <td>Description</td>
+        <td>Change</td>
+        <td>Delete</td>
+    </tr>
+    <tr th:each="rule: ${rules}">
+        <td th:text="${rule.id}"/>
+        <td th:text="${rule.businessRuleType.name}"/>
+        <td th:text="${rule.name}">
+        <td th:text="${rule.description}">
+        <td><a class="button" th:href="@{/rule/{id}/edit(id=${rule.id})}">Manage</a></td>
+        <td><a class="button" th:href="@{/rule/{id}/delete(id=${rule.id})}">Delete</a></td>
+    </tr>
+</table>
 </body>
 </html>

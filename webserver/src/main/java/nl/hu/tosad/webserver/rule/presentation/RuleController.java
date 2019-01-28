@@ -41,6 +41,7 @@ public class RuleController {
             @ModelAttribute("database") DatabaseHolder databaseHolder,
             Model model) {
         Long databaseId = databaseHolder.getDatabase().getId();
+
         model.addAttribute("rules", ruleService.getAllBusinessRulesByDatabaseId(databaseId));
         return "rule/rule-list";
     }
@@ -57,7 +58,7 @@ public class RuleController {
         model.addAttribute("columns", targetDatabaseService.getColumnsByTableId(tableId));
         model.addAttribute("type", ruleTypeHolder.getBusinessRuleType());
         model.addAttribute("typeAttributes", template.getAttributes());
-        return "create-rule";
+        return "rule/create-rule";
     }
 
     @PostMapping("/rules/add")
