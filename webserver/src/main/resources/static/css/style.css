@@ -36,3 +36,12 @@ body{
     cursor: pointer;
     margin: 5px;
 }
+
+#newdbform{
+    width: 300px;
+    margin: auto;
+}
+
+.newDbInput{
+    float: right;
+}
