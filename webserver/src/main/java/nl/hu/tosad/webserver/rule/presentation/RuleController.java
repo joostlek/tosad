@@ -8,7 +8,6 @@ import nl.hu.tosad.domain.ruletype.Template;
 import nl.hu.tosad.domain.target_database.DbTable;
 import nl.hu.tosad.domain.target_database.Dialect;
 import nl.hu.tosad.webserver.rule.service.RuleServiceInterface;
-import nl.hu.tosad.webserver.ruletype.presentation.RuleTypeDTO;
 import nl.hu.tosad.webserver.ruletype.presentation.RuleTypeHolder;
 import nl.hu.tosad.webserver.ruletype.service.RuleTypeServiceInterface;
 import nl.hu.tosad.webserver.target_database.presentation.DatabaseHolder;
@@ -49,10 +48,15 @@ public class RuleController {
     @GetMapping("/rules")
     public String ruleList(
             @ModelAttribute("database") DatabaseHolder databaseHolder,
+            @RequestParam(value = "search", required = false) String query,
             Model model) {
         Long databaseId = databaseHolder.getDatabase().getId();
-
-        model.addAttribute("rules", ruleService.getAllBusinessRulesByDatabaseId(databaseId));
+        if (query != null && !query.equals("")) {
+            model.addAttribute("rules", ruleService.searchBusinessRules(databaseId, query));
+            model.addAttribute("query", query);
+        } else {
+            model.addAttribute("rules", ruleService.getAllBusinessRulesByDatabaseId(databaseId));
+        }
         return "rule/rule-list";
     }
 
@@ -142,9 +146,9 @@ public class RuleController {
         return "rule/generate-rule";
     }
 
-    @GetMapping("/generated")
+    @PostMapping("/rules/generate")
     public String generated(Model model) {
-        return "generated-code";
+        return "rule/generated-code";
     }
 
     @GetMapping("/rules/{id}/delete")
@@ -154,28 +158,9 @@ public class RuleController {
         BusinessRule br = ruleService.getBusinessRuleById(id);
         ruleService.deleteBusinessRule(br);
         model.addAttribute("rule", br);
-        return "deleteRuleSucceed";
+        return "rule/delete-rule";
     }
 
-    @PostMapping("/addType")
-    public String addType(@ModelAttribute RuleTypeDTO brtc, Model model) {
-//        Dialect dialect = targetDatabaseService.getDialectById((long) 1);
-//        BusinessRuleType type = businessRuleTypeRepository.findBusinessRuleTypeByCode(brtc.getTypeCode());
-//        Template template = businessRuleTypeRepository.findBusinessRuleTypeByCode(brtc.getTypeCode()).getTemplate(dialect);
-//        model.addAttribute("templateByType", template.getAttributes());
-//        model.addAttribute("type", type);
-//        model.addAttribute("template", template.toString());
-//        model.addAttribute("tables", targetDatabaseService.getAllTables());
-        return "fillRule";
-    }
-    @GetMapping("/rule/search/{value}")
-    public String searchRules(@ModelAttribute("database") DatabaseHolder databaseHolder,
-            Model model, @PathVariable String value) {
-        Long databaseId = databaseHolder.getDatabase().getId();
-
-        model.addAttribute("rules", ruleService.searchBusinessRules(databaseId, value));
-        return "rule/rule-list";
-    }
     private RuleDTO toRuleDTO(BusinessRule rule) {
         Map<String, Object> properties = new HashMap<>();
         properties.put("name", rule.getName());

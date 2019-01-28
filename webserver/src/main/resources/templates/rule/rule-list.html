@@ -12,8 +12,9 @@
 <h1 align="middle">All business rules</h1>
 <p th:text="${database.database.name}"></p>
 
-<form align="middle" action="#" th:action="@{/rule/search/{value} (value=${value})}" method="get">
-    <input type="text" id="value" th:value="${value}" name="value"/>
+<!--/*@thymesVar id="value" type="String"*/-->
+<form align="middle" action="#" th:action="@{/rules}" method="get">
+    <input type="text" id="value" th:value="${query}" name="search"/>
     <input type="submit" value="Search"/>
 
 </form>
