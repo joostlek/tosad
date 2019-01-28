@@ -1,4 +1,4 @@
-package nl.hu.tosad.webserver.target_database.service;
+package nl.hu.tosad.webserver.target_database.data;
 
 import nl.hu.tosad.domain.target_database.Database;
 

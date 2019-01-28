@@ -2,7 +2,6 @@ package nl.hu.tosad.webserver.target_database.data;
 
 import nl.hu.tosad.domain.target_database.Database;
 import nl.hu.tosad.domain.target_database.DbTable;
-import nl.hu.tosad.webserver.target_database.service.DatabaseConnectionFactory;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
