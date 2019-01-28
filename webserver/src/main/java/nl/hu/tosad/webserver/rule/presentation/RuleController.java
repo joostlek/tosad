@@ -91,7 +91,7 @@ public class RuleController {
                 .forEach(e -> {
                     if (e.getValue().equals("column")) {
                         businessRuleBuilder.addValue(new Value(String.format("%s_%s", e.getKey(), e.getValue()), targetDatabaseService.getColumnById(Long.parseLong((String) ruleComponents.get(e.getKey())))));
-                    } else {
+                    } else if (!e.getValue().equals("operator")) {
                         businessRuleBuilder.addValue(new Value((String) ruleComponents.get(e.getKey()), e.getValue(), String.format("%s_%s", e.getKey(), e.getValue())));
                     }
                 });

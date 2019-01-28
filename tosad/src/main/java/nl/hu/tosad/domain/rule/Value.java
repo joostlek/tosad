@@ -99,6 +99,8 @@ public class Value {
             return "\"" + this.value + "\"";
         } else if (type.equalsIgnoreCase("NUMBER")) {
             return this.value;
+        } else if (type.equalsIgnoreCase("COLUMN")) {
+            return this.column.getName();
         }
         return this.value;
     }
