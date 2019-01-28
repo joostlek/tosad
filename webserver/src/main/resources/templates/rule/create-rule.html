@@ -11,6 +11,7 @@
 <body>
 <!--/*/<th:block th:include="headertemplate :: header"></th:block> /*/-->
 <h1 th:align="middle" th:text="${type.getName()}"></h1>
+<h1 th:text="${typeAttributes}"></h1>
 
 <form action="#" th:object="${rule}" th:action="@{/rules/add}" method="post">
     <div>
@@ -57,6 +58,11 @@
                     </div>
 
                     <div th:case="'int'">
+                        <label th:text="${attribute.getKey()}"></label>
+                        <input th:field="*{properties['__${attribute.key}__']}" type="number" required>
+                    </div>
+
+                    <div th:case="'lov'">
                         <label th:text="${attribute.getKey()}"></label>
                         <input th:field="*{properties['__${attribute.key}__']}" type="number" required>
                     </div>
