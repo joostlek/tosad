@@ -44,6 +44,7 @@ public class RuleController {
         Long databaseId = databaseHolder.getDatabase().getId();
 
         model.addAttribute("rules", ruleService.getAllBusinessRulesByDatabaseId(databaseId));
+        System.out.println(ruleService.getAllBusinessRulesByDatabaseId(databaseId));
         return "rule/rule-list";
     }
 
