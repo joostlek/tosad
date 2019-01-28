@@ -26,7 +26,7 @@
         <td th:text="${rule.name}">
         <td th:text="${rule.description}">
         <td><a class="button" th:href="@{/rule/{id}/(id=${rule.id})}">Manage</a></td>
-        <td><a class="button" th:href="@{/rule/{id}/delete(id=${rule.id})}">Delete</a></td>
+        <td><a class="button" th:href="@{/delete/{id}(id=${rule.id})}">Delete</a></td>
     </tr>
 </table>
 </body>

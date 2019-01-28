@@ -127,13 +127,6 @@ public class RuleController {
         return "rule";
     }
 
-//    @DeleteMapping("/deleteBusinessrule/{id}")
-//    public void deleteRule(@PathVariable Long id) throws Exception {
-//         BusinessRule br = businessRuleService.deleteBusinessRule(id);
-//        if (br ==null)
-//            throw new Exception();
-//    }
-
 
     @GetMapping("/delete/{id}")
     public String deleteBR(@PathVariable("id") long id, Model model) {
