@@ -20,6 +20,18 @@
                 th:value="${template.getBusinessRuleType().getCode()}"
                 th:text="${template.getBusinessRuleType().getName()}"></option>
     </select>
+
+    <div>
+        <label>table:</label><br>
+        <select th:field="*{tableId}"
+                th:remove="all-but-first"
+                name="template">
+            <option th:each="table : ${tables}"
+                    th:value="${table.getId()}"
+                    th:text="${table.getName()}"></option>
+        </select>
+    </div>
+
     <button th:align="middle" class="button" type="submit">Next</button>
 </form>
 </div>

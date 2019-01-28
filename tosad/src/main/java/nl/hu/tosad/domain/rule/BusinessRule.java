@@ -61,7 +61,14 @@ public class BusinessRule {
     )
     private List<DbTable> tables;
 
+    public static BusinessRuleBuilderInterface getBuilder() {
+        return new BusinessRuleBuilder();
+    }
+
     public BusinessRule() {
+        this.values = new ArrayList<>();
+        this.tables = new ArrayList<>();
+        this.columns = new ArrayList<>();
     }
 
     public BusinessRule(String name, String description, String errorMessage, BusinessRuleType businessRuleType) {

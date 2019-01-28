@@ -1,8 +1,7 @@
 package nl.hu.tosad.webserver.target_database.presentation;
 
 import nl.hu.tosad.domain.target_database.Database;
-import nl.hu.tosad.domain.target_database.Dialect;
-import nl.hu.tosad.webserver.target_database.service.TargetDatabaseService;
+import nl.hu.tosad.webserver.target_database.service.TargetDatabaseServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,10 +12,10 @@ import org.springframework.web.servlet.view.RedirectView;
 @Controller
 @SessionAttributes("database")
 public class TargetDatabaseController {
-    private final TargetDatabaseService targetDatabaseService;
+    private final TargetDatabaseServiceInterface targetDatabaseService;
 
     @Autowired
-    public TargetDatabaseController(TargetDatabaseService targetDatabaseService) {
+    public TargetDatabaseController(TargetDatabaseServiceInterface targetDatabaseService) {
         this.targetDatabaseService = targetDatabaseService;
     }
 
@@ -47,11 +46,9 @@ public class TargetDatabaseController {
 
     @PostMapping("/database/create")
     public RedirectView newDb(
-            @ModelAttribute NewDatabaseDTO newDatabase) {
-        Long dialectId = newDatabase.getDialectId();
-        Dialect dialect = targetDatabaseService.getDialectById(dialectId);
-        Database db = new Database(newDatabase.getName(), newDatabase.getJdbcUrl(), newDatabase.getUsername(), newDatabase.getPassword());
-        db.setDialect(dialect);
+            @ModelAttribute NewDatabaseDTO newDatabase,
+            RedirectAttributes attributes) {
+        Database db = new Database("", newDatabase.getJdbcUrl(), newDatabase.getUsername(), newDatabase.getPassword());
         targetDatabaseService.saveDatabase(db);
         return new RedirectView("/database");
     }

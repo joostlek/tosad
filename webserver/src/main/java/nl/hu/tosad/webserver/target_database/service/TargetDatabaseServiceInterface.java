@@ -31,5 +31,7 @@ public interface TargetDatabaseServiceInterface {
 
     List<DbTable> getTablesByDatabaseId(Long id);
 
+    List<DbColumn> getColumnsByTableId(Long id);
+
     Database saveDatabase(Database database);
 }

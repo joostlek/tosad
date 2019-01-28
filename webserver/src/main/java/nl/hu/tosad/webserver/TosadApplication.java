@@ -2,7 +2,7 @@ package nl.hu.tosad.webserver;
 
 import nl.hu.tosad.domain.ruletype.Template;
 import nl.hu.tosad.webserver.ruletype.data.TemplateRepository;
-import nl.hu.tosad.webserver.target_database.service.TargetDatabaseService;
+import nl.hu.tosad.webserver.target_database.service.TargetDatabaseServiceInterface;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class TosadApplication implements CommandLineRunner {
     private static final Logger log = LoggerFactory.getLogger(TosadApplication.class);
 
     @Autowired
-    private TargetDatabaseService targetDatabaseService;
+    private TargetDatabaseServiceInterface targetDatabaseService;
 
     @Autowired
     private TemplateRepository templateRepository;

@@ -1,9 +1,11 @@
 package nl.hu.tosad.webserver.ruletype.presentation;
 
 import nl.hu.tosad.domain.ruletype.BusinessRuleType;
+import nl.hu.tosad.domain.target_database.DbTable;
 import nl.hu.tosad.domain.target_database.Dialect;
 import nl.hu.tosad.webserver.ruletype.service.RuleTypeServiceInterface;
 import nl.hu.tosad.webserver.target_database.presentation.DatabaseHolder;
+import nl.hu.tosad.webserver.target_database.service.TargetDatabaseServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,9 +22,12 @@ public class RuleTypeController {
 
     private final RuleTypeServiceInterface ruleTypeService;
 
+    private final TargetDatabaseServiceInterface targetDatabaseService;
+
     @Autowired
-    public RuleTypeController(RuleTypeServiceInterface ruleTypeService) {
+    public RuleTypeController(RuleTypeServiceInterface ruleTypeService, TargetDatabaseServiceInterface targetDatabaseService) {
         this.ruleTypeService = ruleTypeService;
+        this.targetDatabaseService = targetDatabaseService;
     }
 
     @ModelAttribute("ruleType")
@@ -35,6 +40,7 @@ public class RuleTypeController {
                              @ModelAttribute("database") DatabaseHolder databaseHolder) {
         Dialect dialect = databaseHolder.getDatabase().getDialect();
         model.addAttribute("newRuleType", new RuleTypeDTO());
+        model.addAttribute("tables", targetDatabaseService.getTablesByDatabaseId(databaseHolder.getDatabase().getId()));
         model.addAttribute("templates", ruleTypeService.getTemplatesByDialect(dialect));
         return "rule-type/choose-type";
     }
@@ -48,6 +54,10 @@ public class RuleTypeController {
         String ruleTypeCode = ruleTypeDTO.getTypeCode();
         BusinessRuleType businessRuleType = ruleTypeService.getBusinessRuleTypeByCode(ruleTypeCode);
         ruleTypeHolder.setBusinessRuleType(businessRuleType);
+
+        Long tableId = ruleTypeDTO.getTableId();
+        DbTable table = targetDatabaseService.getTableById(tableId);
+        ruleTypeHolder.setTable(table);
 
         attributes.addFlashAttribute("ruleType", ruleTypeHolder);
         attributes.addFlashAttribute("database", databaseHolder);
