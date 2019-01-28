@@ -11,6 +11,12 @@
 <!--/*/<th:block th:include="headertemplate :: header"></th:block> /*/-->
 <h1 align="middle">All business rules</h1>
 <p th:text="${database.database.name}"></p>
+
+<form align="middle" action="#" th:action="@{/rule/search/{value} (value=${value})}" method="get">
+    <input type="text" id="value" th:value="${value}" name="value"/>
+    <input type="submit" value="Search"/>
+
+</form>
 <table align="middle">
     <tr>
         <td>ID</td>

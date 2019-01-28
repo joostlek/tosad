@@ -50,6 +50,11 @@
                             </select>
                         </div>
 
+                        <div th:case="'lov'">
+                            <label th:text="${template.getKey()}"></label>
+                            <input type="number">
+                        </div>
+
                         <div th:case="'statement'">
                             <label th:text="${template.getKey()}"></label>
                             <input type="statement">
