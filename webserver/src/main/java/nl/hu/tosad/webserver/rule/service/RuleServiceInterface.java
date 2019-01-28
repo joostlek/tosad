@@ -15,4 +15,6 @@ public interface RuleServiceInterface {
 
     void deleteBusinessRule(BusinessRule br);
 
+    List<BusinessRule> searchBusinessRules(Long databaseId, String value);
+
 }

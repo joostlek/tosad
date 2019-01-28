@@ -49,7 +49,6 @@ public class RuleController {
         Long databaseId = databaseHolder.getDatabase().getId();
 
         model.addAttribute("rules", ruleService.getAllBusinessRulesByDatabaseId(databaseId));
-        System.out.println(ruleService.getAllBusinessRulesByDatabaseId(databaseId));
         return "rule/rule-list";
     }
 
@@ -159,6 +158,13 @@ public class RuleController {
 //        model.addAttribute("tables", targetDatabaseService.getAllTables());
         return "fillRule";
     }
+    @GetMapping("/rule/search/{value}")
+    public String searchRules(@ModelAttribute("database") DatabaseHolder databaseHolder,
+            Model model, @PathVariable String value) {
+        Long databaseId = databaseHolder.getDatabase().getId();
 
+        model.addAttribute("rules", ruleService.searchBusinessRules(databaseId, value));
+        return "rule/rule-list";
+    }
 
 }

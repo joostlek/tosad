@@ -2,6 +2,7 @@ package nl.hu.tosad.webserver.rule.service;
 
 import nl.hu.tosad.domain.rule.BusinessRule;
 import nl.hu.tosad.webserver.rule.data.BusinessRuleRepository;
+import nl.hu.tosad.domain.target_database.DbTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,25 @@ public class RuleService implements RuleServiceInterface {
         for(BusinessRule br : businessRules){
             if(br.getDatabase().getId() == databaseId){
                 businessRulesFinal.add(br);
+            }
+        }
+        return businessRulesFinal;
+    }
+
+    public List<BusinessRule> searchBusinessRules(Long databaseId, String value) {
+        List<BusinessRule> businessRules = getAllBusinessRulesByDatabaseId(databaseId);
+        List<BusinessRule> businessRulesFinal = new ArrayList<BusinessRule>();
+        for(BusinessRule br: businessRules){
+            if(br.getBusinessRuleType().getName().equals(value) ||
+                br.getName().equals(value)){
+                businessRulesFinal.add(br);
+            }
+            else {
+                for(DbTable table:br.getTables()){
+                    if(table.getName().equals(value)){
+                        businessRulesFinal.add(br);
+                    }
+                }
             }
         }
         return businessRulesFinal;
