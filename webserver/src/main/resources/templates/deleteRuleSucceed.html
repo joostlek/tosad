@@ -3,12 +3,19 @@
 <head>
     <title>Delete rule succeed</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+
+    <!--/*/ <th:block th:include="headertemplate :: head"></th:block> /*/-->
 
 </head>
 <body>
 
-<h3>A business rule has been deleted the ID: </h3>
-<h3 th:text="${rule.getId()}"></h3>
+<!--/*/<th:block th:include="headertemplate :: header"></th:block> /*/-->
+
+<h3 th:align="center">The following business rule has been removed: </h3>
+<h3  th:align="center" th:text="${rule.getId()}"></h3>
+<h3  th:align="center" th:text="${rule.getName()}"></h3>
+<h3  th:align="center" th:text="${rule.getDescription()}"></h3>
 
 </body>
 </html>
