@@ -57,7 +57,7 @@ public class RuleController {
         model.addAttribute("columns", targetDatabaseService.getColumnsByTableId(tableId));
         model.addAttribute("type", ruleTypeHolder.getBusinessRuleType());
         model.addAttribute("typeAttributes", template.getAttributes());
-        return "create-rule";
+        return "database/create-rule";
     }
 
     @PostMapping("/rules/add")
