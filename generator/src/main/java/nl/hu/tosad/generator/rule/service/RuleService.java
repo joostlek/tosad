@@ -77,7 +77,6 @@ public class RuleService implements RuleServiceInterface {
             stringTemplate.add("operator_operator", businessRule.getOperator());
             stringTemplate.add("error", businessRule.getErrorMessage());
             for (Value value : businessRule.getValues()) {
-                System.out.println(value.getPosition());
                 stringTemplate.add(value.getPosition(), value);
             }
             String result = stringTemplate.render();
