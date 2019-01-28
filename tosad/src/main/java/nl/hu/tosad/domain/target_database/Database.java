@@ -4,6 +4,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -36,6 +37,7 @@ public class Database {
     private Dialect dialect;
 
     public Database() {
+        this.tables = new ArrayList<>();
     }
 
     public Database(String name, String jdbcUrl, String username, String password) {
@@ -43,6 +45,7 @@ public class Database {
         this.jdbcUrl = jdbcUrl;
         this.username = username;
         this.password = password;
+        this.tables = new ArrayList<>();
     }
 
     public Long getId() {

@@ -6,10 +6,7 @@ import nl.hu.tosad.domain.target_database.Database;
 import nl.hu.tosad.domain.target_database.DbColumn;
 import nl.hu.tosad.domain.target_database.DbTable;
 import nl.hu.tosad.domain.target_database.Dialect;
-import nl.hu.tosad.webserver.target_database.data.ColumnRepository;
-import nl.hu.tosad.webserver.target_database.data.DatabaseRepository;
-import nl.hu.tosad.webserver.target_database.data.DialectRepository;
-import nl.hu.tosad.webserver.target_database.data.TableRepository;
+import nl.hu.tosad.webserver.target_database.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +15,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.sql.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 @Service
@@ -33,37 +30,30 @@ public class TargetDatabaseService implements TargetDatabaseServiceInterface {
 
     private final DialectRepository dialectRepository;
 
+    private final TargetDatabaseDAOInterface targetDatabaseDAO;
+
     @Autowired
-    public TargetDatabaseService(DatabaseRepository databaseRepository, ColumnRepository columnRepository, TableRepository tableRepository, DialectRepository dialectRepository) {
+    public TargetDatabaseService(DatabaseRepository databaseRepository, ColumnRepository columnRepository, TableRepository tableRepository, DialectRepository dialectRepository, TargetDatabaseDAOInterface targetDatabaseDAO) {
         this.databaseRepository = databaseRepository;
         this.columnRepository = columnRepository;
         this.tableRepository = tableRepository;
         this.dialectRepository = dialectRepository;
+        this.targetDatabaseDAO = targetDatabaseDAO;
     }
 
     @Override
     public Database validateDatabase(Database database) {
-        DatabaseConnectionFactory databaseConnectionFactory = new DatabaseConnectionFactory(database);
-        try {
-            Connection connection = databaseConnectionFactory.createConnection();
-            DatabaseMetaData databaseMetaData = connection.getMetaData();
-            ResultSet resultSet = databaseMetaData.getTables(null, connection.getSchema(), "%", null);
-            while (resultSet.next()) {
-                String tableName = resultSet.getString(3);
-                System.out.println(tableName);
-                if (database.hasTable(tableName)) {
-                    DbTable table = tableRepository.findByNameAndDatabase(tableName, database);
-                    table = validateTable(table);
-                } else {
-                    DbTable table = tableRepository.save(new DbTable(tableName, database));
-                    table = validateTable(table);
-                }
+        List<String> tableNames = targetDatabaseDAO.getTableList(database);
+        for (String tableName : tableNames) {
+            if (database.hasTable(tableName)) {
+                DbTable table = tableRepository.findByNameAndDatabase(tableName, database);
+                table = validateTable(table);
+            } else {
+                DbTable table = tableRepository.save(new DbTable(tableName, database));
+                table = validateTable(table);
             }
-            return databaseRepository.save(database);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
         }
+        return databaseRepository.save(database);
     }
 
     @Override
@@ -83,34 +73,30 @@ public class TargetDatabaseService implements TargetDatabaseServiceInterface {
 
     @Override
     public Database saveDatabase(Database database) {
-        return databaseRepository.save(database);
+        Database newDatabase = databaseRepository.save(database);
+        return this.validateDatabase(newDatabase);
     }
 
     private DbTable validateTable(DbTable table) {
-        DatabaseConnectionFactory databaseConnectionFactory = new DatabaseConnectionFactory(table.getDatabase());
-        try {
-            Connection connection = databaseConnectionFactory.createConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM " + table.getName());
-            ResultSet resultSet = preparedStatement.executeQuery();
-            ResultSetMetaData metaData = resultSet.getMetaData();
-            int i = 1;
-            while (metaData.getColumnCount() >= i) {
-                if (table.hasColumn(metaData.getColumnName(i))) {
-                    DbColumn column = table.getColumn(metaData.getColumnName(i));
-                    if (!column.getType().equals(metaData.getColumnTypeName(i))) {
-                        throw new SQLException("Definition changed");
-                    }
-                } else {
-                    DbColumn column = new DbColumn(metaData.getColumnName(i), metaData.getColumnTypeName(i), table);
-                    columnRepository.save(column);
-                }
-                i++;
-            }
-            return tableRepository.save(table);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
+        Map<String, String> columnDefinition = targetDatabaseDAO.getColumnList(table);
+        columnDefinition
+                .entrySet()
+                .stream()
+                .parallel()
+                .forEach(
+                        e -> {
+                            if (table.hasColumn(e.getKey())) {
+                                DbColumn column = table.getColumn(e.getKey());
+                                if (!column.getType().equals(e.getValue())) {
+                                    throw new RuntimeException("Definition changed");
+                                }
+                            } else {
+                                DbColumn column = new DbColumn(e.getKey(), e.getValue(), table);
+                                columnRepository.save(column);
+                            }
+                        }
+                );
+        return tableRepository.save(table);
     }
 
     @Override
