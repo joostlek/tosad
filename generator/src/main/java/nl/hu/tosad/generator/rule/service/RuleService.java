@@ -74,13 +74,11 @@ public class RuleService implements RuleServiceInterface {
             ST stringTemplate = new ST(template.getText());
             stringTemplate.add("name", businessRule.getTriggerName());
             stringTemplate.add("table", businessRule.getTables().get(0));
-            if (businessRule.getColumns() != null) {
-                stringTemplate.add("column_column", businessRule.getColumns().get(0));
-            }
             stringTemplate.add("operator_operator", businessRule.getOperator());
             stringTemplate.add("error", businessRule.getErrorMessage());
             for (Value value : businessRule.getValues()) {
-                stringTemplate.add(value.getPosition(), value.getValue());
+                System.out.println(value.getPosition());
+                stringTemplate.add(value.getPosition(), value);
             }
             String result = stringTemplate.render();
             sql.add(result);
