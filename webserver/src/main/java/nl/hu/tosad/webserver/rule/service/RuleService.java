@@ -2,20 +2,26 @@ package nl.hu.tosad.webserver.rule.service;
 
 import nl.hu.tosad.domain.rule.BusinessRule;
 import nl.hu.tosad.webserver.rule.data.BusinessRuleRepository;
+import nl.hu.tosad.webserver.rule.data.ValueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class RuleService implements RuleServiceInterface {
 
     private final BusinessRuleRepository businessRuleRepository;
 
+    private final ValueRepository valueRepository;
+
     @Autowired
-    public RuleService(BusinessRuleRepository businessRuleRepository) {
+    public RuleService(BusinessRuleRepository businessRuleRepository, ValueRepository valueRepository) {
         this.businessRuleRepository = businessRuleRepository;
+        this.valueRepository = valueRepository;
     }
 
     @Override
@@ -32,8 +38,8 @@ public class RuleService implements RuleServiceInterface {
     public List<BusinessRule> getAllBusinessRulesByDatabaseId(Long databaseId) {
         List<BusinessRule> businessRules = businessRuleRepository.findAll();
         List<BusinessRule> businessRulesFinal = new ArrayList<>();
-        for(BusinessRule br : businessRules){
-            if(br.getDatabase().getId() == databaseId){
+        for (BusinessRule br : businessRules) {
+            if (br.getDatabase().getId().equals(databaseId)) {
                 businessRulesFinal.add(br);
             }
         }
@@ -45,8 +51,13 @@ public class RuleService implements RuleServiceInterface {
         return businessRuleRepository.findAll();
     }
 
-
+    @Override
     public void deleteBusinessRule(BusinessRule br) {
         businessRuleRepository.delete(br);
+    }
+
+    @Override
+    public void deleteRuleValues(Long ruleId) {
+        valueRepository.deleteValuesByBusinessRuleId(ruleId);
     }
 }

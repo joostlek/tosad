@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script th:src="@{/js/define_rule.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/define_rule.css}">
+    <!--/*/ <th:block th:include="headertemplate :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*/<th:block th:include="headertemplate :: header"></th:block> /*/-->
+<h1 th:align="middle" th:text="${businessRule.getName()}"></h1>
+
+<form action="#" th:object="${rule}" th:action="@{/rules/{id}/edit(id=${businessRule.getId()})}" method="post">
+    <div>
+        <div class="why">
+            <div>
+                <label for="name">Name:</label><br>
+                <input type="text"
+                       id="name"
+                       th:field="*{properties['name']}">
+            </div>
+
+            <div>
+                <label>Type:</label><br>
+                <select th:field="*{properties['type']}"
+                        th:remove="all-but-first"
+                        name="template" disabled>
+                    <option th:value="${ruleType.getCode()}"
+                            th:text="${ruleType.getName()}"></option>
+                </select>
+            </div>
+
+            <div>
+                <label>table:</label><br>
+                <select th:field="*{properties['table']}"
+                        th:remove="all-but-first"
+                        name="template" disabled>
+                    <option th:value="${businessRule.getTables().get(0).getId()}"
+                            th:text="${businessRule.getTables().get(0).getName()}"></option>
+                </select>
+            </div>
+
+            <div th:each="attribute : ${typeAttributes}">
+                <div th:switch="${attribute.getValue()}">
+
+                    <div th:case="'column'">
+                        <label>Column:</label><br>
+                        <select th:field="*{properties['__${attribute.key}__']}"
+                                name="template">
+                            <option th:each="column : ${columns}"
+                                    th:value="${column.getId()}"
+                                    th:text="${column.getName()}"></option>
+                        </select>
+                    </div>
+
+                    <div th:case="'int'">
+                        <label th:text="${attribute.getKey()}"></label>
+                        <input th:field="*{properties['__${attribute.key}__']}" type="number" required>
+                    </div>
+
+                    <div th:case="'operator'">
+                        <label th:text="${attribute.getKey()}"></label>
+                        <select th:field="*{properties['__${attribute.key}__']}"
+                                name="operator"
+                                required>
+                            <option th:each="operator : ${ruleType.getAvailableOperators()}"
+                                    th:value="${operator.getId()}"
+                                    th:text="${operator}"></option>
+                        </select>
+                    </div>
+
+                    <div th:case="'statement'">
+                        <label th:text="${attribute.getKey()}"></label>
+                        <input th:field="*{properties['__${attribute.key}__']}" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <label for="error">error:</label>
+            <input id="error" type="text" th:field="*{properties['error']}" required>
+
+
+            <button class="button" type="submit">Save</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>

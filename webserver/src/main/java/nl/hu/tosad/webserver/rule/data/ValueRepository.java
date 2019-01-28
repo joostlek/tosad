@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ValueRepository extends CrudRepository<Value, Long> {
+    void deleteValuesByBusinessRuleId(Long ruleId);
 }

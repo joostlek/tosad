@@ -15,4 +15,5 @@ public interface RuleServiceInterface {
 
     void deleteBusinessRule(BusinessRule br);
 
+    void deleteRuleValues(Long ruleId);
 }

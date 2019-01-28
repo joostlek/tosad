@@ -132,6 +132,15 @@ public class BusinessRule {
         return values;
     }
 
+    public Value getValue(String position) {
+        for (Value value : this.values) {
+            if (value.getPosition().equals(position)) {
+                return value;
+            }
+        }
+        return null;
+    }
+
     public void setValues(List<Value> values) {
         this.values = values;
     }
@@ -178,6 +187,13 @@ public class BusinessRule {
 
     public void setOperator(Operator operator) {
         this.operator = operator;
+    }
+
+    public void replaceValues(List<Value> values) {
+        for (Value value : values) {
+            value.setBusinessRule(this);
+        }
+        this.values = values;
     }
 
     @Override

@@ -4,6 +4,8 @@ package nl.hu.tosad.domain.rule;
 import nl.hu.tosad.domain.target_database.DbColumn;
 
 import javax.persistence.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Entity
 @Table(name = "VALUE")
@@ -103,5 +105,14 @@ public class Value {
             return this.column.getName();
         }
         return this.value;
+    }
+
+    public String getLabel() {
+        Pattern pattern = Pattern.compile("([a-zA-Z]*)_");
+        Matcher matcher = pattern.matcher(this.position);
+        if (matcher.find()) {
+            return matcher.group(1);
+        }
+        return null;
     }
 }
