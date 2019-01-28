@@ -13,4 +13,6 @@ public interface RuleServiceInterface {
 
     List<BusinessRule> getAllBusinessRules();
 
+    void deleteBusinessRule(BusinessRule br);
+
 }
