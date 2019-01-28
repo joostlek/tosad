@@ -20,9 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @SessionAttributes({"database", "ruleType"})
@@ -147,7 +145,12 @@ public class RuleController {
     }
 
     @PostMapping("/rules/generate")
-    public String generated(Model model) {
+    public String generated(Model model,
+                            @RequestParam("rule") Long[] ruleId) {
+        List<Long> ruleIds = Arrays.asList(ruleId);
+        List<String> queries = targetDatabaseService.generateQueries(ruleIds, false);
+
+        model.addAttribute("queries", queries);
         return "rule/generated-code";
     }
 

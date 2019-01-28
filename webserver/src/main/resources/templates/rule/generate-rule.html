@@ -10,24 +10,24 @@
 <body>
 <!--/*/<th:block th:include="headertemplate :: header"></th:block> /*/-->
 <h1 align="middle">Generate business rules</h1>
+<form th:align="middle" th:action="@{/rules/generate}" method="post">
 <table align="middle">
     <tr>
         <td>ID</td>
+        <td>Type</td>
         <td>Name</td>
-        <td>Error message</td>
         <td>Generate</td>
     </tr>
-    <tr th:each="br: ${businessRules}">
-        <td th:text="${br.getId()}"/>
-        <td th:text="${br.getName()}"/>
-        <td th:text="${br.getErrorMessage()}">
-        <td> <input class="button" type="checkbox" name="generate" > Generate?<br>
-    </td>
+    <tr th:each="rule: ${businessRules}">
+        <td th:text="${rule.businessRuleType.name}"/>
+        <td th:text="${rule.name}"/>
+        <td th:text="${rule.errorMessage}">
+        <td><input class="button" type="checkbox" name="rule" th:value="${rule.id}"><br>
+        </td>
     </tr>
 </table>
-<form th:align="middle">
-    <button  class="button">Generate</button>
-    <button  class="button">Test Generate</button>
+    <button class="button">Generate</button>
+    <button class="button">Test Generate</button>
 </form>
 </body>
 </html>
