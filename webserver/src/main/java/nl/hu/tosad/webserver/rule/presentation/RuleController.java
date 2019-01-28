@@ -106,7 +106,7 @@ public class RuleController {
     public String businessrule(Model model, @PathVariable Long id) {
 //        model.addAttribute("businessRule", businessRuleService.getBusinessRuleById(id));
 //        BusinessRule businessRule = businessRuleService.getBusinessRuleById(id);
-//        Map<String, Object> map = new HashMap<>();
+//        Map<String, Object> map = new HashMap<>();d
 //        for (Value value : businessRule.getValues()) {
 //            map.put(value.getPosition(), value.getValue());
 //        }
@@ -129,9 +129,10 @@ public class RuleController {
 
     @GetMapping("/delete/{id}")
     public String deleteBR(@PathVariable("id") long id, Model model) {
-//        BusinessRule br = businessRuleService.getBusinessRuleById(id);
-//        businessRuleRepository.delete(br);
-        return "RuleList";
+        BusinessRule br = ruleService.getBusinessRuleById(id);
+        ruleService.deleteBusinessRule(br);
+        model.addAttribute("rule", br);
+        return "deleteRuleSucceed";
     }
 
     @PostMapping("/addType")

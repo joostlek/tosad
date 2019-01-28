@@ -13,5 +13,7 @@ public interface BusinessRuleRepository extends CrudRepository<BusinessRule, Lon
 
     List<BusinessRule> findAll();
 
+    void delete(BusinessRule br);
+
 
 }

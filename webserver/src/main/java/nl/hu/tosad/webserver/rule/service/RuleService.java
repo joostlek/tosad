@@ -36,4 +36,9 @@ public class RuleService implements RuleServiceInterface {
     public List<BusinessRule> getAllBusinessRules() {
         return businessRuleRepository.findAll();
     }
+
+
+    public void deleteBusinessRule(BusinessRule br) {
+        businessRuleRepository.delete(br);
+    }
 }
