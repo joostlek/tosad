@@ -37,6 +37,11 @@ public class RuleController {
         this.ruleTypeService = ruleTypeService;
     }
 
+    @GetMapping("/")
+    public RedirectView homePage(RedirectAttributes attributes) {
+        return new RedirectView("/database");
+    }
+
     @GetMapping("/rules")
     public String ruleList(
             @ModelAttribute("database") DatabaseHolder databaseHolder,
