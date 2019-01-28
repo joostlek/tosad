@@ -10,7 +10,6 @@
 <body>
 <!--/*/<th:block th:include="headertemplate :: header"></th:block> /*/-->
 <h1 align="middle">All business rules</h1>
-<p th:text="${chosenDatabase}"></p>
     <table align="middle">
         <tr>
             <td>ID</td>
@@ -20,7 +19,7 @@
             <td>Change</td>
             <td>Delete</td>
         </tr>
-        <tr th:each="br: ${businessRules}">
+        <tr th:each="br: ${rules}">
             <td th:text="${br.getId()}"/>
             <td th:text="${br.getName()}"/>
             <td th:text="${br.getErrorMessage()}">
