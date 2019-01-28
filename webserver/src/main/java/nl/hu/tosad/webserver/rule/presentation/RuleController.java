@@ -106,8 +106,8 @@ public class RuleController {
     }
 
     @GetMapping("/rules/generate")
-    public String generate(Model model){
-        model.addAttribute("businessRules", ruleService.getAllBusinessRulesByDatabaseId(1L));
+    public String generate(Model model, @ModelAttribute("database") DatabaseHolder databaseHolder){
+        model.addAttribute("businessRules", ruleService.getAllBusinessRulesByDatabaseId(databaseHolder.getDatabase().getId()));
         return "generate-rule";
     }
 
@@ -119,6 +119,8 @@ public class RuleController {
         for (Value value : businessRule.getValues()) {
             map.put(value.getPosition(), value.getValue());
         }
+
+
         Template template = businessRule.getBusinessRuleType().getTemplate(businessRule.getDatabase().getDialect());
         model.addAttribute("map", map);
         model.addAttribute("type", businessRule.getBusinessRuleType());
@@ -128,6 +130,10 @@ public class RuleController {
         return "rule";
     }
 
+    @GetMapping("/generated")
+    public String generated(Model model){
+        return "generated-code";
+    }
 
     @GetMapping("/delete/{id}")
     public String deleteBR(@PathVariable("id") long id, Model model) {
