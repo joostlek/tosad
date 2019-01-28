@@ -21,9 +21,13 @@
         <td th:text="${br.getId()}"/>
         <td th:text="${br.getName()}"/>
         <td th:text="${br.getErrorMessage()}">
-        <td> <button class="button">Generate</button></td>
+        <td> <input class="button" type="checkbox" name="generate" > Generate?<br>
+    </td>
     </tr>
 </table>
-
+<form th:align="middle">
+    <button  class="button">Generate</button>
+    <button  class="button">Test Generate</button>
+</form>
 </body>
 </html>

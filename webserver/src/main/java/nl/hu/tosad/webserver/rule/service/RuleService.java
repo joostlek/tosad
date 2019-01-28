@@ -5,6 +5,7 @@ import nl.hu.tosad.webserver.rule.data.BusinessRuleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,7 +30,14 @@ public class RuleService implements RuleServiceInterface {
 
     @Override
     public List<BusinessRule> getAllBusinessRulesByDatabaseId(Long databaseId) {
-        return businessRuleRepository.findAll();
+        List<BusinessRule> businessRules = businessRuleRepository.findAll();
+        List<BusinessRule> businessRulesFinal = new ArrayList<>();
+        for(BusinessRule br : businessRules){
+            if(br.getDatabase().getId() == databaseId){
+                businessRulesFinal.add(br);
+            }
+        }
+        return businessRulesFinal;
     }
 
     @Override

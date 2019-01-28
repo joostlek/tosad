@@ -35,6 +35,20 @@ public class TargetDatabaseController {
         return "target-database/db-list";
     }
 
+    @PostMapping("/database")
+    public RedirectView chooseDb(
+            @ModelAttribute ChosenDatabaseDTO chosenDatabase,
+            @ModelAttribute("database") DatabaseHolder database,
+            RedirectAttributes attributes) {
+        Long databaseId = chosenDatabase.getDatabaseId();
+        if (!targetDatabaseService.databaseExists(databaseId)) {
+            return new RedirectView("/database?error=Database+not+found");
+        }
+        database.setDatabase(targetDatabaseService.getDatabaseById(databaseId));
+        attributes.addFlashAttribute("database", database);
+        return new RedirectView("/rules");
+    }
+
     @GetMapping("/database/create")
     public String dialectList(
             @RequestParam(value = "error", required = false) String errorMessage,
@@ -54,20 +68,6 @@ public class TargetDatabaseController {
         db.setDialect(dialect);
         targetDatabaseService.saveDatabase(db);
         return new RedirectView("/database");
-    }
-
-    @PostMapping("/database")
-    public RedirectView chooseDb(
-            @ModelAttribute ChosenDatabaseDTO chosenDatabase,
-            @ModelAttribute("database") DatabaseHolder database,
-            RedirectAttributes attributes) {
-        Long databaseId = chosenDatabase.getDatabaseId();
-        if (!targetDatabaseService.databaseExists(databaseId)) {
-            return new RedirectView("/database?error=Database+not+found");
-        }
-        database.setDatabase(targetDatabaseService.getDatabaseById(databaseId));
-        attributes.addFlashAttribute("database", database);
-        return new RedirectView("/rules");
     }
 
 }

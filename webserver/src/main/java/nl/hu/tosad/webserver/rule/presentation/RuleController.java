@@ -44,6 +44,7 @@ public class RuleController {
         Long databaseId = databaseHolder.getDatabase().getId();
 
         model.addAttribute("rules", ruleService.getAllBusinessRulesByDatabaseId(databaseId));
+        System.out.println(ruleService.getAllBusinessRulesByDatabaseId(databaseId));
         return "rule/rule-list";
     }
 
@@ -56,7 +57,8 @@ public class RuleController {
         Long tableId = ruleTypeHolder.getTable().getId();
 
         model.addAttribute("rule", new RuleDTO());
-        model.addAttribute("columns", targetDatabaseService.getColumnsByTableId(tableId));
+        model.addAttribute(
+                "columns", targetDatabaseService.getColumnsByTableId(tableId));
         model.addAttribute("type", ruleTypeHolder.getBusinessRuleType());
         model.addAttribute("typeAttributes", template.getAttributes());
         return "rule/create-rule";
@@ -104,8 +106,8 @@ public class RuleController {
     }
 
     @GetMapping("/rules/generate")
-    public String generate(Model model){
-        model.addAttribute("businessRules", ruleService.getAllBusinessRulesByDatabaseId(1L));
+    public String generate(Model model, @ModelAttribute("database") DatabaseHolder databaseHolder){
+        model.addAttribute("businessRules", ruleService.getAllBusinessRulesByDatabaseId(databaseHolder.getDatabase().getId()));
         return "generate-rule";
     }
 
@@ -117,6 +119,8 @@ public class RuleController {
         for (Value value : businessRule.getValues()) {
             map.put(value.getPosition(), value.getValue());
         }
+
+
         Template template = businessRule.getBusinessRuleType().getTemplate(businessRule.getDatabase().getDialect());
         model.addAttribute("map", map);
         model.addAttribute("type", businessRule.getBusinessRuleType());
@@ -126,13 +130,10 @@ public class RuleController {
         return "rule";
     }
 
-//    @DeleteMapping("/deleteBusinessrule/{id}")
-//    public void deleteRule(@PathVariable Long id) throws Exception {
-//         BusinessRule br = businessRuleService.deleteBusinessRule(id);
-//        if (br ==null)
-//            throw new Exception();
-//    }
-
+    @GetMapping("/generated")
+    public String generated(Model model){
+        return "generated-code";
+    }
 
     @GetMapping("/delete/{id}")
     public String deleteBR(@PathVariable("id") long id, Model model) {
