@@ -37,7 +37,7 @@
                 <select th:field="*{properties['type']}"
                         th:remove="all-but-first"
                         name="template" disabled>
-                    <option th:field="${ruleType.getBusinessRuleType().getCode()}"
+                    <option th:value="${ruleType.getBusinessRuleType().getCode()}"
                             th:text="${ruleType.getBusinessRuleType().getName()}"></option>
                 </select>
             </div>
@@ -47,7 +47,7 @@
                 <select th:field="*{properties['table']}"
                         th:remove="all-but-first"
                         name="template" disabled>
-                    <option th:field="${ruleType.getTable().getId()}"
+                    <option th:value="${ruleType.getTable().getId()}"
                             th:text="${ruleType.getTable().getName()}"></option>
                 </select>
             </div>
@@ -61,7 +61,7 @@
                                 th:remove="all-but-first"
                                 name="template">
                             <option th:each="column : ${columns}"
-                                    th:field="${column.getId()}"
+                                    th:value="${column.getId()}"
                                     th:text="${column.getName()}"></option>
                         </select>
                     </div>
@@ -77,7 +77,7 @@
                                 name="operator"
                                 required>
                             <option th:each="operator : ${type.getAvailableOperators()}"
-                                    th:field="${operator.getId()}"
+                                    th:value="${operator.getId()}"
                                     th:text="${operator}"></option>
                         </select>
                     </div>
