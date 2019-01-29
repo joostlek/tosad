@@ -18,16 +18,17 @@
                     th:field="*{dialectId}"
                     name="di">
                 <option th:each="di : ${dialects}"
-                        th:vaue="${di.getId()}"
+                        th:value="${di.getId()}"
                         th:text="${di.getName()}"></option>
             </select><br><br>
             <label>Name:</label><input class="newDbInput" type="text" th:field="*{name}"><br><br>
             <label>URL:</label><input class="newDbInput" type="text" th:field="*{jdbcUrl}"><br><br>
             <label>Username:</label><input class="newDbInput" type="text" th:field="*{username}"><br><br>
             <label>Password:</label><input class="newDbInput" type="password" th:field="*{password}"><br><br>
+            <a th:href="@{/database}" class="button-secondary">Back</a>
             <button class="button-primary" type="submit">Save</button>
         </form>
-        <button onclick="window.location.href='/database'" class="button-primary" type="submit">Back</button>
+
     </div>
 </body>
 </html>

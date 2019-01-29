@@ -6,11 +6,11 @@ import java.util.logging.Logger;
 
 public class ConnectionReceiver extends Thread {
     private int port;
-    private RuleCommand command;
+    private CommandInterface command;
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
-    public ConnectionReceiver(int port, RuleCommand command) {
+    public ConnectionReceiver(int port, CommandInterface command) {
         this.port = port;
         this.command = command;
     }

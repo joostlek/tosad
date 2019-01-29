@@ -56,7 +56,6 @@ public class TargetDatabaseDAO implements TargetDatabaseDAOInterface {
 
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             logger.log(Level.SEVERE, e.getMessage());
             return false;
         }

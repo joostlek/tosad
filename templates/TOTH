@@ -13,3 +13,13 @@ CREATE OR REPLACE TRIGGER trg_toth
     when e_exception then
     raise_application_error(-20000, 'Wat is nu het verschil joh kech');
   end;
+
+  CREATE OR REPLACE TRIGGER <name>
+  before INSERT OR UPDATE of <column1_column>, <column2_column> on <table>
+  FOR EACH ROW
+  declare
+  e_exception exception;
+  l_passed boolean;
+  begin
+  <PLSQL_sql>
+  if (l_passed = false) THEN raise e_exception; END IF; exception when e_exception then raise_application_error(-20000, '<error>'); end;

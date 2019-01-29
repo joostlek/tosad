@@ -36,8 +36,10 @@ public class RuleService implements RuleServiceInterface {
 
         TargetDatabaseRepository targetDatabaseRepository = new TargetDatabaseRepository();
         Database database = targetDatabaseRepository.findDatabaseByBusinessRule(businessRule);
-        targetDatabaseService.execute(sql, database);
-        return sql;
+        if (targetDatabaseService.execute(sql, database)) {
+            return sql;
+        }
+        return new ArrayList<>();
     }
 
     @Override
@@ -74,7 +76,12 @@ public class RuleService implements RuleServiceInterface {
             ST stringTemplate = new ST(template.getText());
             stringTemplate.add("name", businessRule.getTriggerName());
             stringTemplate.add("table", businessRule.getTables().get(0));
-            stringTemplate.add("operator_operator", businessRule.getOperator());
+            if (businessRule.getOperator() != null) {
+                stringTemplate.add("operator_operator", businessRule.getOperator());
+            }
+            if (businessRule.getTables().size() == 2) {
+                stringTemplate.add("table_table", businessRule.getTables().get(1));
+            }
             stringTemplate.add("error", businessRule.getErrorMessage());
             for (Value value : businessRule.getValues()) {
                 stringTemplate.add(value.getPosition(), value);

@@ -10,11 +10,11 @@ import java.util.logging.Logger;
 
 public class SocketProcessor extends Thread {
     private Socket socket;
-    private RuleCommand callback;
+    private CommandInterface callback;
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
-    public SocketProcessor(Socket socket, RuleCommand callback) {
+    public SocketProcessor(Socket socket, CommandInterface callback) {
         this.socket = socket;
         this.callback = callback;
     }
@@ -44,6 +44,11 @@ public class SocketProcessor extends Thread {
         } catch (IOException e) {
             logger.severe(e.getMessage());
             e.printStackTrace();
+            try {
+                socket.close();
+            } catch (IOException e1) {
+                logger.severe(e1.getMessage());
+            }
         }
     }
 }

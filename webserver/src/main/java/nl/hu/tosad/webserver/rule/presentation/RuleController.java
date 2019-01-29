@@ -5,6 +5,7 @@ import nl.hu.tosad.domain.rule.BusinessRuleBuilderInterface;
 import nl.hu.tosad.domain.rule.Value;
 import nl.hu.tosad.domain.ruletype.BusinessRuleType;
 import nl.hu.tosad.domain.ruletype.Template;
+import nl.hu.tosad.domain.target_database.Database;
 import nl.hu.tosad.domain.target_database.DbTable;
 import nl.hu.tosad.domain.target_database.Dialect;
 import nl.hu.tosad.webserver.rule.service.RuleServiceInterface;
@@ -62,11 +63,13 @@ public class RuleController {
     public String addRule(Model model,
                           @ModelAttribute("database") DatabaseHolder databaseHolder,
                           @ModelAttribute("ruleType") RuleTypeHolder ruleTypeHolder) {
-        Template template = ruleTypeHolder.getBusinessRuleType().getTemplate(databaseHolder.getDatabase().getDialect());
+        Database database = databaseHolder.getDatabase();
+        Template template = ruleTypeHolder.getBusinessRuleType().getTemplate(database.getDialect());
 
         Long tableId = ruleTypeHolder.getTable().getId();
 
         model.addAttribute("rule", new RuleDTO());
+        model.addAttribute("tables", database.getTables());
         model.addAttribute("columns", targetDatabaseService.getColumnsByTableId(tableId));
         model.addAttribute("type", ruleTypeHolder.getBusinessRuleType());
         model.addAttribute("typeAttributes", template.getAttributes());
@@ -217,6 +220,10 @@ public class RuleController {
             businessRuleBuilder.setOperator(ruleTypeService.getOperator(Long.parseLong((String) ruleComponents.get("operator"))));
         }
 
+        if (ruleComponents.containsKey("table")) {
+            businessRuleBuilder.addTable(targetDatabaseService.getTableById(Long.parseLong((String) ruleComponents.get("table"))));
+        }
+
         template.getAttributes()
                 .entrySet()
                 .stream()
@@ -224,7 +231,9 @@ public class RuleController {
                 .forEach(e -> {
                     if (e.getValue().equals("column")) {
                         businessRuleBuilder.addValue(new Value(String.format("%s_%s", e.getKey(), e.getValue()), targetDatabaseService.getColumnById(Long.parseLong((String) ruleComponents.get(e.getKey())))));
-                    } else if (!e.getValue().equals("operator")) {
+                    } else if (e.getValue().equals("columno")) {
+                        businessRuleBuilder.addValue(new Value(String.format("%s_%s", e.getKey(), e.getValue()), targetDatabaseService.getTableById(Long.parseLong((String) ruleComponents.get("table"))).getColumn((String) ruleComponents.get(e.getKey()))));
+                    } else if (!e.getValue().equals("operator") && !e.getValue().equals("table")) {
                         businessRuleBuilder.addValue(new Value((String) ruleComponents.get(e.getKey()), e.getValue(), String.format("%s_%s", e.getKey(), e.getValue())));
                     }
                 });

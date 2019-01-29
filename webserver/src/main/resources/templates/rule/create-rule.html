@@ -43,10 +43,10 @@
             </div>
 
             <div>
-                <label>table:</label><br>
+                <label>Table:</label><br>
                 <select th:field="*{properties['table']}"
                         th:remove="all-but-first"
-                        name="template" disabled>
+                        name="table" disabled>
                     <option th:value="${ruleType.getTable().getId()}"
                             th:text="${ruleType.getTable().getName()}"></option>
                 </select>
@@ -56,7 +56,7 @@
                 <div th:switch="${attribute.getValue()}">
 
                     <div th:case="'column'">
-                        <label>Column:</label><br>
+                        <label th:text="${attribute.getKey()}"></label><br>
                         <select th:field="*{properties['__${attribute.key}__']}"
                                 th:remove="all-but-first"
                                 name="template">
@@ -71,6 +71,11 @@
                         <input th:field="*{properties['__${attribute.key}__']}" type="number" required>
                     </div>
 
+                    <div th:case="'columno'">
+                        <label th:text="${attribute.getKey()}"></label>
+                        <input th:field="*{properties['__${attribute.key}__']}" type="text" required>
+                    </div>
+
                     <div th:case="'operator'">
                         <label th:text="${attribute.getKey()}"></label>
                         <select th:field="*{properties['__${attribute.key}__']}"
@@ -79,6 +84,17 @@
                             <option th:each="operator : ${type.getAvailableOperators()}"
                                     th:value="${operator.getId()}"
                                     th:text="${operator}"></option>
+                        </select>
+                    </div>
+
+                    <div th:case="'table'">
+                        <label th:text="${attribute.getKey()}"></label>
+                        <select th:field="*{properties['__${attribute.key}__']}"
+                                name="table"
+                                required>
+                            <option th:each="table : ${tables}"
+                                    th:value="${table.id}"
+                                    th:text="${table.name}"></option>
                         </select>
                     </div>
 
