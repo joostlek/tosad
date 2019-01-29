@@ -119,6 +119,7 @@ public class RuleController {
         Template template = ruleType.getTemplate(databaseHolder.getDatabase().getDialect());
 
         BusinessRule rule = toBusinessRule(ruleDTO, businessRule.getTables().get(0), ruleType, template);
+        businessRule.setName(rule.getName());
         businessRule.setOperator(rule.getOperator());
         businessRule.setErrorMessage(rule.getErrorMessage());
         for (Value value : businessRule.getValues()) {
