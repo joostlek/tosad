@@ -11,8 +11,10 @@
 <body>
 <!--/*/<th:block th:include="headertemplate :: header"></th:block> /*/-->
 <h1 align="middle">All generated business rules</h1>
-<div class="font" th:each="query : ${queries}">
-    <p th:text="${query}">
+<div th:align="middle">
+    <div class="font" th:align="left" th:each="query : ${queries}">
+        <p th:text="${query}">
+    </div>
 </div>
 </body>
 </html>
