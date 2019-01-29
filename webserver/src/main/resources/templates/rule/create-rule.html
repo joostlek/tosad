@@ -6,12 +6,12 @@
     <script th:src="@{/js/define_rule.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/define_rule.css}">
+    <script src="js/define_rule.js" type="text/javascript"></script>
     <!--/*/ <th:block th:include="headertemplate :: head"></th:block> /*/-->
 </head>
 <body>
 <!--/*/<th:block th:include="headertemplate :: header"></th:block> /*/-->
 <h1 th:align="middle" th:text="${type.getName()}"></h1>
-<h1 th:text="${typeAttributes}"></h1>
 
 <form action="#" th:object="${rule}" th:action="@{/rules/add}" method="post">
     <div>
@@ -62,11 +62,6 @@
                         <input th:field="*{properties['__${attribute.key}__']}" type="number" required>
                     </div>
 
-                    <div th:case="'lov'">
-                        <label th:text="${attribute.getKey()}"></label>
-                        <input th:field="*{properties['__${attribute.key}__']}" type="number" required>
-                    </div>
-
                     <div th:case="'operator'">
                         <label th:text="${attribute.getKey()}"></label>
                         <select th:field="*{properties['__${attribute.key}__']}"
@@ -78,9 +73,17 @@
                         </select>
                     </div>
 
+                    <div th:case="'lov'">
+                        <label th:text="${attribute.getKey()}"></label>
+                        <input id="vars" th:field="*{properties['__${attribute.key}__']}" type="text" required>
+                        <div id="newInputDiv"></div>
+                        <input class="button" value="add" type="button" onclick="addInput()">
+                    </div>
+
                     <div th:case="'statement'">
                         <label th:text="${attribute.getKey()}"></label>
                         <input th:field="*{properties['__${attribute.key}__']}" type="text">
+                        <li>
                     </div>
                 </div>
             </div>

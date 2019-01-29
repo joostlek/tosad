@@ -2,14 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Servlet Test</title>
+    <title>Je moeder</title>
+    <script>
+        function addToList(){
+            var text = document.getElementById("vars").value,
+                listNode = document.getElementById("list"),
+                liNode = document.createElement("LI"),
+                txtNode = document.createTextNode(text);
+
+
+           liNode.appendChild(txtNode);
+           listNode.appendChild(liNode);
+           console.log(listNode);
+        }
+    </script>
 </head>
 <body>
-    <form method="post">
-        <label>Value1: </label><input type="text" name="v1"><br>
-        <label>Value2: </label><input type="text" name="v2"><br>
-        <label>Value3: </label><input type="text" name="v3"><br>
-        <input type="submit" value="Ok">
-    </form>
+<input id="vars" type="text">
+
+<ul id="list">
+</ul>
+
+<input value="Ok" id="var" type="button" onclick="addToList()">
+<p>"input1", "input2", "input3"</p>
 </body>
 </html>

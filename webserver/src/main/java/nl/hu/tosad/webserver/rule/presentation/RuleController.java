@@ -3,15 +3,13 @@ package nl.hu.tosad.webserver.rule.presentation;
 import nl.hu.tosad.domain.rule.BusinessRule;
 import nl.hu.tosad.domain.rule.BusinessRuleBuilderInterface;
 import nl.hu.tosad.domain.rule.Value;
-import nl.hu.tosad.domain.ruletype.BusinessRuleType;
 import nl.hu.tosad.domain.ruletype.Template;
-import nl.hu.tosad.domain.target_database.DbTable;
 import nl.hu.tosad.domain.target_database.Dialect;
 import nl.hu.tosad.webserver.rule.service.RuleServiceInterface;
+import nl.hu.tosad.webserver.ruletype.presentation.RuleTypeDTO;
 import nl.hu.tosad.webserver.ruletype.presentation.RuleTypeHolder;
 import nl.hu.tosad.webserver.ruletype.service.RuleTypeServiceInterface;
 import nl.hu.tosad.webserver.target_database.presentation.DatabaseHolder;
-import nl.hu.tosad.webserver.target_database.presentation.DatabaseHolderInterface;
 import nl.hu.tosad.webserver.target_database.service.TargetDatabaseServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @SessionAttributes({"database", "ruleType"})
