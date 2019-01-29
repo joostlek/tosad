@@ -56,6 +56,12 @@ public class BusinessRuleBuilder implements BusinessRuleBuilderInterface {
     }
 
     @Override
+    public BusinessRuleBuilderInterface setDescription(String description) {
+        businessRule.setDescription(description);
+        return this;
+    }
+
+    @Override
     public BusinessRule build() {
         return this.businessRule;
     }

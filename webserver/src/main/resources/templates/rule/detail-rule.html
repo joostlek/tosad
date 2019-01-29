@@ -24,6 +24,13 @@
             </div>
 
             <div>
+                <label for="description">Description:</label><br>
+                <input type="text"
+                       id="description"
+                       th:field="*{properties['description']}">
+            </div>
+
+            <div>
                 <label>Type:</label><br>
                 <select th:field="*{properties['type']}"
                         th:remove="all-but-first"

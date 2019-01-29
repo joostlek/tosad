@@ -208,7 +208,8 @@ public class RuleController {
                 .setName((String) ruleComponents.get("name"))
                 .setErrorMessage((String) ruleComponents.get("error"))
                 .addTable(table)
-                .setType(ruleType);
+                .setType(ruleType)
+                .setDescription((String) ruleComponents.get("description"));
 
         if (ruleComponents.containsKey("operator")) {
             businessRuleBuilder.setOperator(ruleTypeService.getOperator(Long.parseLong((String) ruleComponents.get("operator"))));
