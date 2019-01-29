@@ -17,18 +17,21 @@
         <td>ID</td>
         <td>Type</td>
         <td>Name</td>
+        <td>Error message</td>
         <td>Generate</td>
     </tr>
     <tr th:each="rule: ${businessRules}">
-        <td th:text="${rule.businessRuleType.name}"/>
-        <td th:text="${rule.name}"/>
-        <td th:text="${rule.errorMessage}">
+        <td th:text="${rule.getId()}"/>
+        <td th:text="${rule.getBusinessRuleType().getName()}"/>
+        <td th:text="${rule.getName()}">
+        <td th:text="${rule.getErrorMessage()}">
         <td><input class="button-primary" type="checkbox" th:field="*{ruleIds}" th:value="${rule.id}"><br>
         </td>
     </tr>
 </table>
-    <button class="button-primary" name="action" value="generate">Generate</button>
-    <button class="button-primary" name="action" value="test">Test Generate</button>
+    <br>
+    <button class="button-primary" name="action" value="test">Test Generate</button><br>
+    <button class="button-primary" name="action" value="generate">Generate</button><br>
 </form>
 </body>
 </html>
