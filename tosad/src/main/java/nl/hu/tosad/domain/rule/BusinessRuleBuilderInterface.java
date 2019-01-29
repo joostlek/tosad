@@ -18,6 +18,8 @@ public interface BusinessRuleBuilderInterface {
 
     BusinessRuleBuilderInterface setOperator(Operator operator);
 
+    BusinessRuleBuilderInterface setDescription(String description);
+
     BusinessRuleBuilderInterface setType(BusinessRuleType businessRuleType);
 
     BusinessRule build();
