@@ -1,9 +1,9 @@
 package nl.hu.tosad.webserver.rule.service;
 
 import nl.hu.tosad.domain.rule.BusinessRule;
+import nl.hu.tosad.domain.target_database.DbTable;
 import nl.hu.tosad.webserver.rule.data.BusinessRuleRepository;
 import nl.hu.tosad.webserver.rule.data.ValueRepository;
-import nl.hu.tosad.domain.target_database.DbTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,7 +37,7 @@ public class RuleService implements RuleServiceInterface {
 
     @Override
     public List<BusinessRule> getAllBusinessRulesByDatabaseId(Long databaseId) {
-        List<BusinessRule> businessRules = businessRuleRepository.findAll();
+        List<BusinessRule> businessRules = businessRuleRepository.findAllByOrderById();
         List<BusinessRule> businessRulesFinal = new ArrayList<>();
         for (BusinessRule br : businessRules) {
             if (br.getDatabase().getId().equals(databaseId)) {
@@ -68,7 +68,7 @@ public class RuleService implements RuleServiceInterface {
 
     @Override
     public List<BusinessRule> getAllBusinessRules() {
-        return businessRuleRepository.findAll();
+        return businessRuleRepository.findAllByOrderById();
     }
 
     @Override
