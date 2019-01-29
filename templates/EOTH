@@ -1,17 +1,17 @@
-CREATE OR REPLACE TRIGGER trg_eoth
+CREATE OR REPLACE TRIGGER <name>
   before INSERT OR UPDATE
-  on medewerker
+  on <table>
   FOR EACH ROW
   declare
-      v_waarde number;
       e_exception exception;
   begin
-    select count(*) into v_waarde from medewerker;
-    if (v_waarde > 5) THEN
+    if (<column_column> > <operator> <statement_statement>) THEN
       raise e_exception;
     END IF;
 
     exception
     when e_exception then
-    raise_application_error(-20000, 'Not possible bits');
-  end;
+    raise_application_error(-20000, ''<error>');
+    end;
+
+    CREATE OR REPLACE TRIGGER <name> before INSERT OR UPDATE on <table> FOR EACH ROW declare e_exception exception; begin if (<column_column> > <operator> <statement_statement>) THEN raise e_exception; END IF; exception when e_exception then raise_application_error(-20000, <error>); end;

@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class TargetDatabaseService implements TargetDatabaseServiceInterface {
-    private Logger logger = Logger.getLogger(this.getClass().getName());
-
     private TargetDatabaseDAOInterface targetDatabaseDAO = new TargetDatabaseDAO();
 
     @Override

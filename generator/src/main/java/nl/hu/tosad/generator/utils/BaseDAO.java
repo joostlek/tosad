@@ -89,8 +89,7 @@ public class BaseDAO {
     }
 
     public BusinessRule findById(Long id) {
-        BusinessRule businessRule = getCurrentSession().get(BusinessRule.class, id);
-        return businessRule;
+        return getCurrentSession().get(BusinessRule.class, id);
     }
 
     public void delete(BusinessRule entity) {
@@ -99,8 +98,7 @@ public class BaseDAO {
 
     @SuppressWarnings("unchecked")
     public List<BusinessRule> findAll() {
-        List<BusinessRule> businessRules = getCurrentSession().createQuery("select br from BusinessRule br").list();
-        return businessRules;
+        return getCurrentSession().createQuery("select br from BusinessRule br").list();
     }
 
     public void deleteAll() {
