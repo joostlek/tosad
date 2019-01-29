@@ -45,3 +45,8 @@ body{
 .newDbInput {
     float: right;
 }
+
+.hidden {
+    display: none;
+    visibility: hidden;
+}

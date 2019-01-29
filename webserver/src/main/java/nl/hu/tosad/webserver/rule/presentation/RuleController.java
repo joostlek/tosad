@@ -140,17 +140,32 @@ public class RuleController {
                            @ModelAttribute("database") DatabaseHolder databaseHolder) {
         Long databaseId = databaseHolder.getDatabase().getId();
 
+        model.addAttribute("selectedRules", new GenerateRuleDTO());
         model.addAttribute("businessRules", ruleService.getAllBusinessRulesByDatabaseId(databaseId));
         return "rule/generate-rule";
     }
 
-    @PostMapping("/rules/generate")
-    public String generated(Model model,
-                            @RequestParam("rule") Long[] ruleId) {
-        List<Long> ruleIds = Arrays.asList(ruleId);
+    @PostMapping(value = "/rules/generate", params = "action=test")
+    public String testGeneration(Model model,
+                                 @ModelAttribute GenerateRuleDTO ruleId) {
+        List<Long> ruleIds = Arrays.asList(ruleId.getRuleIds());
         List<String> queries = targetDatabaseService.generateQueries(ruleIds, false);
 
+        model.addAttribute("test", true);
         model.addAttribute("queries", queries);
+        model.addAttribute("selectedRules", ruleId);
+        return "rule/generated-code";
+    }
+
+    @PostMapping(value = "/rules/generate", params = "action=generate")
+    public String generated(Model model,
+                            @ModelAttribute GenerateRuleDTO ruleId) {
+        List<Long> ruleIds = Arrays.asList(ruleId.getRuleIds());
+        List<String> queries = targetDatabaseService.generateQueries(ruleIds, true);
+
+        model.addAttribute("test", false);
+        model.addAttribute("queries", queries);
+        model.addAttribute("selectedRules", ruleId);
         return "rule/generated-code";
     }
 

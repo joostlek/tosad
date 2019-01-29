@@ -4,13 +4,28 @@
 <head>
     <title>Business rule list</title>
     <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/generated-code.css}">
 
     <!--/*/ <th:block th:include="headertemplate :: head"></th:block> /*/-->
 </head>
 <body>
 <!--/*/<th:block th:include="headertemplate :: header"></th:block> /*/-->
-<h1 align="middle">All generated business rules</h1>
+<div th:if="${test}" th:align="middle">
+    <h1 th:align="middle">All generated business rules</h1>
+    <form th:action="@{/rules/generate}" method="post" th:object="${selectedRules}">
+        <input th:each="ruleId : ${selectedRules.ruleIds}"
+               th:value="${ruleId}"
+               th:field="*{ruleIds}"
+               type="checkbox"
+               class="hidden"
+               checked>
+        <button class="button" name="action" value="generate">Execute</button>
+    </form>
+</div>
+<div th:if="!${test}">
+    <h1 th:align="middle">All executed business rules</h1>
+</div>
 <div th:align="middle">
     <div class="font" th:align="left" th:each="query : ${queries}">
         <p th:text="${query}">
