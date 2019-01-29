@@ -12,26 +12,25 @@
 <!--/*/<th:block th:include="headertemplate :: header"></th:block> /*/-->
 <h1 align="middle">Generate business rules</h1>
 <form th:align="middle" th:action="@{/rules/generate}" method="post" th:object="${selectedRules}">
-<table align="middle">
-    <tr>
-        <td>ID</td>
-        <td>Type</td>
-        <td>Name</td>
-        <td>Error message</td>
-        <td>Generate</td>
-    </tr>
-    <tr th:each="rule: ${businessRules}">
-        <td th:text="${rule.getId()}"/>
-        <td th:text="${rule.getBusinessRuleType().getName()}"/>
-        <td th:text="${rule.getName()}">
-        <td th:text="${rule.getErrorMessage()}">
-        <td><input class="button-primary" type="checkbox" th:field="*{ruleIds}" th:value="${rule.id}"><br>
-        </td>
-    </tr>
-</table>
-    <br>
-    <button class="button-primary" name="action" value="test">Test Generate</button><br>
-    <button class="button-primary" name="action" value="generate">Generate</button><br>
+    <table align="middle">
+        <tr>
+            <td>ID</td>
+            <td>Type</td>
+            <td>Name</td>
+            <td>Error message</td>
+            <td>Generate</td>
+        </tr>
+        <tr th:each="rule: ${businessRules}">
+            <td th:text="${rule.getId()}"/>
+            <td th:text="${rule.getBusinessRuleType().getName()}"/>
+            <td th:text="${rule.getName()}">
+            <td th:text="${rule.getErrorMessage()}">
+            <td><input class="button-primary" type="checkbox" th:field="*{ruleIds}" th:value="${rule.id}"><br>
+            </td>
+        </tr>
+    </table>
+    <button class="button-primary" name="action" value="generate">Generate</button>
+    <button class="button-secondary" name="action" value="test">Test Generate</button>
 </form>
 </body>
 </html>
