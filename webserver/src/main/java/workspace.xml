@@ -36,17 +36,22 @@
                                 <name>Rule</name>
                                 <SoftwareUnitDefinitions>
                                     <SoftwareUnitDefinition>
-                                        <name>nl.hu.tosad.webserver.ruletype.presentation.RuleTypeDTO</name>
+                                        <name>nl.hu.tosad.webserver.rule.presentation.RuleController</name>
                                         <type>CLASS</type>
                                     </SoftwareUnitDefinition>
                                     <SoftwareUnitDefinition>
-                                        <name>nl.hu.tosad.webserver.rule.presentation.RuleController</name>
+                                        <name>nl.hu.tosad.webserver.rule.presentation.GenerateRuleDTO</name>
+                                        <type>CLASS</type>
+                                    </SoftwareUnitDefinition>
+                                    <SoftwareUnitDefinition>
+                                        <name>nl.hu.tosad.webserver.rule.presentation.RuleDTO</name>
                                         <type>CLASS</type>
                                     </SoftwareUnitDefinition>
                                 </SoftwareUnitDefinitions>
                                 <PhysicalPaths>
-                                    <path>nl.hu.tosad.webserver.ruletype.presentation.RuleTypeDTO</path>
                                     <path>nl.hu.tosad.webserver.rule.presentation.RuleController</path>
+                                    <path>nl.hu.tosad.webserver.rule.presentation.GenerateRuleDTO</path>
+                                    <path>nl.hu.tosad.webserver.rule.presentation.RuleDTO</path>
                                 </PhysicalPaths>
                             </ModuleStrategy>
                             <ModuleStrategy>
@@ -54,6 +59,30 @@
                                 <description/>
                                 <id>32</id>
                                 <name>Rule Type</name>
+                                <SoftwareUnitDefinitions>
+                                    <SoftwareUnitDefinition>
+                                        <name>nl.hu.tosad.webserver.ruletype.presentation.RuleTypeController</name>
+                                        <type>CLASS</type>
+                                    </SoftwareUnitDefinition>
+                                    <SoftwareUnitDefinition>
+                                        <name>nl.hu.tosad.webserver.ruletype.presentation.RuleTypeDTO</name>
+                                        <type>CLASS</type>
+                                    </SoftwareUnitDefinition>
+                                    <SoftwareUnitDefinition>
+                                        <name>nl.hu.tosad.webserver.ruletype.presentation.RuleTypeHolder</name>
+                                        <type>CLASS</type>
+                                    </SoftwareUnitDefinition>
+                                    <SoftwareUnitDefinition>
+                                        <name>nl.hu.tosad.webserver.ruletype.presentation.RuleTypeHolderInterface</name>
+                                        <type>INTERFACE</type>
+                                    </SoftwareUnitDefinition>
+                                </SoftwareUnitDefinitions>
+                                <PhysicalPaths>
+                                    <path>nl.hu.tosad.webserver.ruletype.presentation.RuleTypeController</path>
+                                    <path>nl.hu.tosad.webserver.ruletype.presentation.RuleTypeDTO</path>
+                                    <path>nl.hu.tosad.webserver.ruletype.presentation.RuleTypeHolder</path>
+                                    <path>nl.hu.tosad.webserver.ruletype.presentation.RuleTypeHolderInterface</path>
+                                </PhysicalPaths>
                             </ModuleStrategy>
                             <ModuleStrategy>
                                 <type>SubSystem</type>
@@ -67,6 +96,20 @@
                                         <type>CLASS</type>
                                     </SoftwareUnitDefinition>
                                     <SoftwareUnitDefinition>
+                                        <name>nl.hu.tosad.webserver.target_database.presentation.DatabaseHolder</name>
+                                        <type>CLASS</type>
+                                    </SoftwareUnitDefinition>
+                                    <SoftwareUnitDefinition>
+                                        <name>
+                                            nl.hu.tosad.webserver.target_database.presentation.DatabaseHolderInterface
+                                        </name>
+                                        <type>INTERFACE</type>
+                                    </SoftwareUnitDefinition>
+                                    <SoftwareUnitDefinition>
+                                        <name>nl.hu.tosad.webserver.target_database.presentation.NewDatabaseDTO</name>
+                                        <type>CLASS</type>
+                                    </SoftwareUnitDefinition>
+                                    <SoftwareUnitDefinition>
                                         <name>
                                             nl.hu.tosad.webserver.target_database.presentation.TargetDatabaseController
                                         </name>
@@ -75,6 +118,10 @@
                                 </SoftwareUnitDefinitions>
                                 <PhysicalPaths>
                                     <path>nl.hu.tosad.webserver.target_database.presentation.ChosenDatabaseDTO</path>
+                                    <path>nl.hu.tosad.webserver.target_database.presentation.DatabaseHolder</path>
+                                    <path>nl.hu.tosad.webserver.target_database.presentation.DatabaseHolderInterface
+                                    </path>
+                                    <path>nl.hu.tosad.webserver.target_database.presentation.NewDatabaseDTO</path>
                                     <path>nl.hu.tosad.webserver.target_database.presentation.TargetDatabaseController
                                     </path>
                                 </PhysicalPaths>
@@ -154,13 +201,12 @@
                                 <name>Target Database</name>
                                 <SoftwareUnitDefinitions>
                                     <SoftwareUnitDefinition>
-                                        <name>nl.hu.tosad.webserver.target_database.service.DatabaseConnectionFactory
-                                        </name>
+                                        <name>nl.hu.tosad.webserver.target_database.service.TargetDatabaseService</name>
                                         <type>CLASS</type>
                                     </SoftwareUnitDefinition>
                                 </SoftwareUnitDefinitions>
                                 <PhysicalPaths>
-                                    <path>nl.hu.tosad.webserver.target_database.service.DatabaseConnectionFactory</path>
+                                    <path>nl.hu.tosad.webserver.target_database.service.TargetDatabaseService</path>
                                 </PhysicalPaths>
                                 <SubModules>
                                     <ModuleStrategy>
@@ -216,10 +262,15 @@
                                         <name>xLibraries.nl.hu.tosad.domain.rule.Value</name>
                                         <type>LIBRARY</type>
                                     </SoftwareUnitDefinition>
+                                    <SoftwareUnitDefinition>
+                                        <name>xLibraries.nl.hu.tosad.domain.rule.BusinessRuleBuilderInterface</name>
+                                        <type>LIBRARY</type>
+                                    </SoftwareUnitDefinition>
                                 </SoftwareUnitDefinitions>
                                 <PhysicalPaths>
                                     <path>xLibraries.nl.hu.tosad.domain.rule.BusinessRule</path>
                                     <path>xLibraries.nl.hu.tosad.domain.rule.Value</path>
+                                    <path>xLibraries.nl.hu.tosad.domain.rule.BusinessRuleBuilderInterface</path>
                                 </PhysicalPaths>
                             </ModuleStrategy>
                             <ModuleStrategy>
@@ -363,12 +414,29 @@
                                         <name>nl.hu.tosad.webserver.target_database.data.TableRepository</name>
                                         <type>INTERFACE</type>
                                     </SoftwareUnitDefinition>
+                                    <SoftwareUnitDefinition>
+                                        <name>nl.hu.tosad.webserver.target_database.data.DatabaseConnectionFactory
+                                        </name>
+                                        <type>CLASS</type>
+                                    </SoftwareUnitDefinition>
+                                    <SoftwareUnitDefinition>
+                                        <name>nl.hu.tosad.webserver.target_database.data.TargetDatabaseDAO</name>
+                                        <type>CLASS</type>
+                                    </SoftwareUnitDefinition>
+                                    <SoftwareUnitDefinition>
+                                        <name>nl.hu.tosad.webserver.target_database.data.TargetDatabaseDAOInterface
+                                        </name>
+                                        <type>INTERFACE</type>
+                                    </SoftwareUnitDefinition>
                                 </SoftwareUnitDefinitions>
                                 <PhysicalPaths>
                                     <path>nl.hu.tosad.webserver.target_database.data.ColumnRepository</path>
                                     <path>nl.hu.tosad.webserver.target_database.data.DatabaseRepository</path>
                                     <path>nl.hu.tosad.webserver.target_database.data.DialectRepository</path>
                                     <path>nl.hu.tosad.webserver.target_database.data.TableRepository</path>
+                                    <path>nl.hu.tosad.webserver.target_database.data.DatabaseConnectionFactory</path>
+                                    <path>nl.hu.tosad.webserver.target_database.data.TargetDatabaseDAO</path>
+                                    <path>nl.hu.tosad.webserver.target_database.data.TargetDatabaseDAOInterface</path>
                                 </PhysicalPaths>
                             </ModuleStrategy>
                         </SubModules>
@@ -660,6 +728,18 @@
                         <dependencies/>
                         <isException>false</isException>
                     </AppliedRule>
+                    <AppliedRule>
+                        <id>69</id>
+                        <type>IsAllowedToUse</type>
+                        <moduleFrom>34</moduleFrom>
+                        <moduleTo>56</moduleTo>
+                        <enabled>true</enabled>
+                        <description/>
+                        <regex/>
+                        <dependencies/>
+                        <isException>true</isException>
+                        <parentAppliedRuleId>52</parentAppliedRuleId>
+                    </AppliedRule>
                 </rules>
             </Architecture>
         </Application>
@@ -672,17 +752,17 @@
             <severities>
                 <severity>
                     <severityKey>Low</severityKey>
-                    <id>8b2cb93e-6eb8-48a3-bf9d-ce7692bcb7d9</id>
+                    <id>5cdea08f-0498-466d-be86-ec891bc10149</id>
                     <color>-65536</color>
                 </severity>
                 <severity>
                     <severityKey>Medium</severityKey>
-                    <id>e0904b20-3e6a-4dc7-b12d-83aef7d28151</id>
+                    <id>73682622-add6-458f-97c4-6e633da39a8a</id>
                     <color>-65536</color>
                 </severity>
                 <severity>
                     <severityKey>High</severityKey>
-                    <id>8945cb1b-fb27-486c-adda-f464c7cc7fc0</id>
+                    <id>e9e8c32c-0c9c-4c11-a89e-03ca6a1830b5</id>
                     <color>-65536</color>
                 </severity>
             </severities>
@@ -690,109 +770,109 @@
                 <severityPerTypePerProgrammingLanguage language="C#">
                     <severityPerType>
                         <typeKey>Call</typeKey>
-                        <severityId>e0904b20-3e6a-4dc7-b12d-83aef7d28151</severityId>
+                        <severityId>73682622-add6-458f-97c4-6e633da39a8a</severityId>
                     </severityPerType>
                     <severityPerType>
                         <typeKey>private</typeKey>
-                        <severityId>8b2cb93e-6eb8-48a3-bf9d-ce7692bcb7d9</severityId>
+                        <severityId>5cdea08f-0498-466d-be86-ec891bc10149</severityId>
                     </severityPerType>
                     <severityPerType>
                         <typeKey>package</typeKey>
-                        <severityId>8b2cb93e-6eb8-48a3-bf9d-ce7692bcb7d9</severityId>
+                        <severityId>5cdea08f-0498-466d-be86-ec891bc10149</severityId>
                     </severityPerType>
                     <severityPerType>
                         <typeKey>Import</typeKey>
-                        <severityId>8b2cb93e-6eb8-48a3-bf9d-ce7692bcb7d9</severityId>
+                        <severityId>5cdea08f-0498-466d-be86-ec891bc10149</severityId>
                     </severityPerType>
                     <severityPerType>
                         <typeKey>Reference</typeKey>
-                        <severityId>e0904b20-3e6a-4dc7-b12d-83aef7d28151</severityId>
+                        <severityId>73682622-add6-458f-97c4-6e633da39a8a</severityId>
                     </severityPerType>
                     <severityPerType>
                         <typeKey>Inheritance</typeKey>
-                        <severityId>e0904b20-3e6a-4dc7-b12d-83aef7d28151</severityId>
+                        <severityId>73682622-add6-458f-97c4-6e633da39a8a</severityId>
                     </severityPerType>
                     <severityPerType>
                         <typeKey>Access</typeKey>
-                        <severityId>e0904b20-3e6a-4dc7-b12d-83aef7d28151</severityId>
+                        <severityId>73682622-add6-458f-97c4-6e633da39a8a</severityId>
                     </severityPerType>
                     <severityPerType>
                         <typeKey>Annotation</typeKey>
-                        <severityId>8b2cb93e-6eb8-48a3-bf9d-ce7692bcb7d9</severityId>
+                        <severityId>5cdea08f-0498-466d-be86-ec891bc10149</severityId>
                     </severityPerType>
                     <severityPerType>
                         <typeKey>default</typeKey>
-                        <severityId>8b2cb93e-6eb8-48a3-bf9d-ce7692bcb7d9</severityId>
+                        <severityId>5cdea08f-0498-466d-be86-ec891bc10149</severityId>
                     </severityPerType>
                     <severityPerType>
                         <typeKey>public</typeKey>
-                        <severityId>e0904b20-3e6a-4dc7-b12d-83aef7d28151</severityId>
+                        <severityId>73682622-add6-458f-97c4-6e633da39a8a</severityId>
                     </severityPerType>
                     <severityPerType>
                         <typeKey>protected</typeKey>
-                        <severityId>e0904b20-3e6a-4dc7-b12d-83aef7d28151</severityId>
+                        <severityId>73682622-add6-458f-97c4-6e633da39a8a</severityId>
                     </severityPerType>
                     <severityPerType>
                         <typeKey>Declaration</typeKey>
-                        <severityId>e0904b20-3e6a-4dc7-b12d-83aef7d28151</severityId>
+                        <severityId>73682622-add6-458f-97c4-6e633da39a8a</severityId>
                     </severityPerType>
                     <severityPerType>
                         <typeKey>class</typeKey>
-                        <severityId>8b2cb93e-6eb8-48a3-bf9d-ce7692bcb7d9</severityId>
+                        <severityId>5cdea08f-0498-466d-be86-ec891bc10149</severityId>
                     </severityPerType>
                 </severityPerTypePerProgrammingLanguage>
                 <severityPerTypePerProgrammingLanguage language="Java">
                     <severityPerType>
                         <typeKey>Call</typeKey>
-                        <severityId>e0904b20-3e6a-4dc7-b12d-83aef7d28151</severityId>
+                        <severityId>73682622-add6-458f-97c4-6e633da39a8a</severityId>
                     </severityPerType>
                     <severityPerType>
                         <typeKey>private</typeKey>
-                        <severityId>8b2cb93e-6eb8-48a3-bf9d-ce7692bcb7d9</severityId>
+                        <severityId>5cdea08f-0498-466d-be86-ec891bc10149</severityId>
                     </severityPerType>
                     <severityPerType>
                         <typeKey>package</typeKey>
-                        <severityId>8b2cb93e-6eb8-48a3-bf9d-ce7692bcb7d9</severityId>
+                        <severityId>5cdea08f-0498-466d-be86-ec891bc10149</severityId>
                     </severityPerType>
                     <severityPerType>
                         <typeKey>Import</typeKey>
-                        <severityId>8b2cb93e-6eb8-48a3-bf9d-ce7692bcb7d9</severityId>
+                        <severityId>5cdea08f-0498-466d-be86-ec891bc10149</severityId>
                     </severityPerType>
                     <severityPerType>
                         <typeKey>Reference</typeKey>
-                        <severityId>e0904b20-3e6a-4dc7-b12d-83aef7d28151</severityId>
+                        <severityId>73682622-add6-458f-97c4-6e633da39a8a</severityId>
                     </severityPerType>
                     <severityPerType>
                         <typeKey>Inheritance</typeKey>
-                        <severityId>e0904b20-3e6a-4dc7-b12d-83aef7d28151</severityId>
+                        <severityId>73682622-add6-458f-97c4-6e633da39a8a</severityId>
                     </severityPerType>
                     <severityPerType>
                         <typeKey>Access</typeKey>
-                        <severityId>e0904b20-3e6a-4dc7-b12d-83aef7d28151</severityId>
+                        <severityId>73682622-add6-458f-97c4-6e633da39a8a</severityId>
                     </severityPerType>
                     <severityPerType>
                         <typeKey>Annotation</typeKey>
-                        <severityId>8b2cb93e-6eb8-48a3-bf9d-ce7692bcb7d9</severityId>
+                        <severityId>5cdea08f-0498-466d-be86-ec891bc10149</severityId>
                     </severityPerType>
                     <severityPerType>
                         <typeKey>default</typeKey>
-                        <severityId>8b2cb93e-6eb8-48a3-bf9d-ce7692bcb7d9</severityId>
-                    </severityPerType>
-                    <severityPerType>
-                        <typeKey>protected</typeKey>
-                        <severityId>e0904b20-3e6a-4dc7-b12d-83aef7d28151</severityId>
+                        <severityId>5cdea08f-0498-466d-be86-ec891bc10149</severityId>
                     </severityPerType>
                     <severityPerType>
                         <typeKey>public</typeKey>
-                        <severityId>e0904b20-3e6a-4dc7-b12d-83aef7d28151</severityId>
+                        <severityId>73682622-add6-458f-97c4-6e633da39a8a</severityId>
+                    </severityPerType>
+                    <severityPerType>
+                        <typeKey>protected</typeKey>
+                        <severityId>73682622-add6-458f-97c4-6e633da39a8a</severityId>
                     </severityPerType>
                     <severityPerType>
                         <typeKey>Declaration</typeKey>
-                        <severityId>e0904b20-3e6a-4dc7-b12d-83aef7d28151</severityId>
+                        <severityId>73682622-add6-458f-97c4-6e633da39a8a</severityId>
                     </severityPerType>
                     <severityPerType>
                         <typeKey>class</typeKey>
-                        <severityId>8b2cb93e-6eb8-48a3-bf9d-ce7692bcb7d9</severityId>
+                        <severityId>5cdea08f-0498-466d-be86-ec891bc10149</severityId>
                     </severityPerType>
                 </severityPerTypePerProgrammingLanguage>
             </severitiesPerTypesPerProgrammingLanguages>
