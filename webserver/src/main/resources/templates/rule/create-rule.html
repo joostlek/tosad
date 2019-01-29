@@ -93,7 +93,7 @@
 
                     <div th:case="'statement'">
                         <label th:text="${attribute.getKey()}"></label>
-                        <input th:field="*{properties['__${attribute.key}__']}" type="text" class="font">
+                        <input th:field="*{properties['__${attribute.key}__']}" type="text" class="font" required>
                     </div>
 
                     <div th:case="'sql'">
