@@ -53,7 +53,7 @@ public class Template {
     }
 
     public Map<String, String> getAttributes() {
-        Pattern pattern = Pattern.compile("(<(([a-zA-Z]*?)_(.*?))(;.*?)?>)");
+        Pattern pattern = Pattern.compile("(<(([a-zA-Z0-9]*?)_(.*?))(;.*?)?>)");
         Matcher matcher = pattern.matcher(text);
         Map<String, String> templateAttributes = new HashMap<>();
         while (matcher.find()) {
@@ -63,7 +63,7 @@ public class Template {
     }
 
     public List<String> getKeys() {
-        Pattern pattern = Pattern.compile("(<(([a-zA-Z]*?)_(.*?))(;.*?)?>)");
+        Pattern pattern = Pattern.compile("(<(([a-zA-Z0-9]*?)_(.*?))(;.*?)?>)");
         Matcher matcher = pattern.matcher(text);
         List<String> keys = new ArrayList<>();
         while (matcher.find()) {
