@@ -26,15 +26,12 @@ public class BaseDAO {
 
     private Transaction currentTransaction;
 
-    public BaseDAO() {
-    }
-
     private static SessionFactory getSessionFactory() {
         Configuration configuration = new Configuration().configure();
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties());
         configuration.addPackage("nl.hu.tosad.domain");
-        SessionFactory sessionFactory = new MetadataSources(builder.build())
+        return new MetadataSources(builder.build())
                 .addAnnotatedClass(BusinessRule.class)
                 .addAnnotatedClass(Value.class)
                 .addAnnotatedClass(BusinessRuleType.class)
@@ -45,8 +42,6 @@ public class BaseDAO {
                 .addAnnotatedClass(DbColumn.class)
                 .addAnnotatedClass(DbTable.class)
                 .addAnnotatedClass(Dialect.class).buildMetadata().buildSessionFactory();
-//        SessionFactory sessionFactory = configuration.buildSessionFactory(builder.build());
-        return sessionFactory;
     }
 
     public Session openCurrentSession() {

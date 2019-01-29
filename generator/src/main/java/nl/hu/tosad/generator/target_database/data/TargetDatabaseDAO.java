@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class TargetDatabaseDAO implements TargetDatabaseDAOInterface {
+    private final static String TRIGGER_NAME = "TRIGGER_NAME";
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
     @Override
@@ -21,7 +22,7 @@ public class TargetDatabaseDAO implements TargetDatabaseDAOInterface {
                 try (Statement statement = connection.createStatement()) {
                     statement.execute(query);
                 }
-                logger.log(Level.INFO, String.format("Executed %s", sql));
+                logger.log(Level.INFO, "Executed {0}", sql);
             }
             connection.close();
             logger.log(Level.INFO, "Done!");
@@ -38,18 +39,23 @@ public class TargetDatabaseDAO implements TargetDatabaseDAOInterface {
         try (Connection connection = connectionFactory.createConnection()) {
             logger.log(Level.INFO, "Created communication with target database");
             for (DbTable table : database.getTables()) {
-                logger.log(Level.INFO, String.format("Drop triggers for table %s", table.getName()));
-                PreparedStatement statement = connection.prepareStatement("SELECT * FROM ALL_TRIGGERS where TABLE_NAME = ?");
-                statement.setString(1, table.getName());
-                ResultSet resultSet = statement.executeQuery();
-                while (resultSet.next()) {
-                    PreparedStatement dropStatement = connection.prepareStatement("DROP TRIGGER \"" + resultSet.getString("TRIGGER_NAME") + "\"");
-                    if (dropStatement.execute()) {
-                        logger.log(Level.INFO, String.format("Dropped trigger %s", resultSet.getString("TRIGGER_NAME")));
-                    } else {
-                        logger.log(Level.SEVERE, String.format("Error dropping trigger %s", resultSet.getString("TRIGGER_NAME")));
+                logger.log(Level.INFO, "Drop triggers for table {0}", table.getName());
+                try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM ALL_TRIGGERS where TABLE_NAME = ?")) {
+                    statement.setString(1, table.getName());
+                    try (ResultSet resultSet = statement.executeQuery();) {
+                        while (resultSet.next()) {
+                            try (PreparedStatement dropStatement = connection.prepareStatement("DROP TRIGGER \"" + resultSet.getString(TRIGGER_NAME) + "\"")) {
+                                if (dropStatement.execute()) {
+                                    logger.log(Level.INFO, "Dropped trigger {0}", resultSet.getString(TRIGGER_NAME));
+                                } else {
+                                    logger.log(Level.SEVERE, "Error dropping trigger {0}", resultSet.getString(TRIGGER_NAME));
+                                }
+                            }
+                        }
                     }
                 }
+
+
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -96,9 +96,9 @@ public class BusinessRule {
 
     public Database getDatabase() {
         Database database = null;
-        if (this.getColumns() != null && this.getColumns().size() != 0) {
+        if (this.getColumns() != null && this.getColumns().isEmpty()) {
             database = this.getColumns().get(0).getTable().getDatabase();
-        } else if (this.getTables() != null && this.getTables().size() != 0) {
+        } else if (this.getTables() != null && this.getTables().isEmpty()) {
             database = this.getTables().get(0).getDatabase();
         }
         return database;
