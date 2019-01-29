@@ -1,13 +1,14 @@
-create or replace trigger ARNG
-  before update or insert or delete
-on <table>, <table>
+CREATE OR REPLACE TRIGGER <name> BEFORE UPDATE OR INSERT OR DELETE
+ON <table_tablestart>, <table_tableend>
 for each row
 declare
+    <statement_statementstart>
 begin
-  if ()){
-  return true;
-  }
-  else return false;
+    <statement_statementend>
 
-  exception when no_data_found then return false;
+    exception
+    when e_exception then
+    raise_application_error(-20000, '<error>');
 end;
+
+CREATE OR REPLACE TRIGGER <name> BEFORE UPDATE OR INSERT OR DELETE ON <table_tablestart>, <table_tableend> for each row declare <statement_statementstart> begin <statement_statementend> exception when e_exception then raise_application_error(-20000, '<error>'); end;
