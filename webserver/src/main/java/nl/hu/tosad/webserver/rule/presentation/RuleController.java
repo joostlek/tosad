@@ -152,6 +152,7 @@ public class RuleController {
         List<Long> ruleIds = Arrays.asList(ruleId.getRuleIds());
         List<String> queries = targetDatabaseService.generateQueries(ruleIds, false);
 
+        model.addAttribute("error", ruleIds.size() != queries.size());
         model.addAttribute("test", true);
         model.addAttribute("queries", queries);
         model.addAttribute("selectedRules", ruleId);
@@ -164,6 +165,7 @@ public class RuleController {
         List<Long> ruleIds = Arrays.asList(ruleId.getRuleIds());
         List<String> queries = targetDatabaseService.generateQueries(ruleIds, true);
 
+        model.addAttribute("error", ruleIds.size() != queries.size());
         model.addAttribute("test", false);
         model.addAttribute("queries", queries);
         model.addAttribute("selectedRules", ruleId);
