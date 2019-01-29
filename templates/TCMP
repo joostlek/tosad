@@ -13,3 +13,5 @@ CREATE OR REPLACE TRIGGER trg_tcmp
     when e_exception then
     raise_application_error(-20000, 'POETS can not have a salary higher than 2000');
   end;
+
+  CREATE OR REPLACE TRIGGER <name> before INSERT OR UPDATE of <columnstart_column>, <columnend_column> on <table> FOR EACH ROW declare e_exception exception; l_passed boolean := false; begin if(:NEW.<columnstart_column> <operator_operator> :NEW.<columnend_column>) THEN l_passed := true; END IF; if (l_passed = false) THEN raise e_exception; END IF; exception when e_exception then raise_application_error(-20000, '<error>'); end;
