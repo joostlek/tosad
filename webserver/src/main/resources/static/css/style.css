@@ -53,11 +53,12 @@ body{
     text-align: center;
     font-size: 14px;
     padding: 8px;
-    width: 100px;
+    width: 98px;
     transition: all 0.5s;
     cursor: pointer;
     margin: 5px;
     font-family: "Roboto Medium", serif;
+    text-decoration: none;
 }
 
 .button-secondary:hover {

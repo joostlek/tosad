@@ -4,13 +4,14 @@
 <head>
     <title>Business rule list</title>
     <link rel="stylesheet" type="text/css" href="../css/normalize.css" th:href="@{/css/style.css}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
 
     <!--/*/ <th:block th:include="headertemplate :: head"></th:block> /*/-->
 </head>
 <body>
 <!--/*/<th:block th:include="headertemplate :: header"></th:block> /*/-->
 <h1 align="middle">All business rules</h1>
-<p th:text="${database.database.name}"></p>
+<h3 th:align="middle" th:text="'Database: ' + ${database.database.name}"></h3>
 
 <!--/*@thymesVar id="value" type="String"*/-->
 <form align="middle" action="#" th:action="@{/rules}" method="get">
@@ -33,7 +34,7 @@
         <td th:text="${rule.name}">
         <td th:text="${rule.description}">
         <td><a class="button-primary" th:href="@{/rules/{id}/edit(id=${rule.id})}">Manage</a></td>
-        <td><a class="button-primary" th:href="@{/rules/{id}/delete(id=${rule.id})}">Delete</a></td>
+        <td><a class="button-secondary " th:href="@{/rules/{id}/delete(id=${rule.id})}">Delete</a></td>
     </tr>
 </table>
 </body>
