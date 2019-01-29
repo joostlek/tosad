@@ -15,3 +15,5 @@ CREATE OR REPLACE TRIGGER trg_icmp
     when e_exception then
     raise_application_error(-20000, 'Not possible bits');
   end;
+
+  CREATE OR REPLACE TRIGGER <name> before INSERT OR UPDATE of <columnstart_column>, <columnend_column> on <table>, <table_table> FOR EACH ROW declare e_exception exception; l_passed boolean := false; begin if (:NEW.<columnstart_column> <operator_operator> <columnend_column>) THEN l_passed := true; END IF; if (l_passed = false) THEN raise e_exception; END IF; exception when e_exception then raise_application_error(-20000, '<error>'); end;

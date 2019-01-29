@@ -12,3 +12,5 @@ before insert or update of kinderen
     when e_exception then
     raise_application_error(-20000, 'Value must be 0 or above');
 end;
+
+CREATE OR REPLACE TRIGGER <name> before insert or update of <column_column> on <table> for each row declare e_exception exception; l_passed boolean := false; begin if(:NEW.<column_column> <operator_operator> <value_int>) THEN l_passed := true; END IF; if (l_passed = false) THEN raise e_exception; END IF; exception when e_exception then raise_application_error(-20000, '<error>'); end;

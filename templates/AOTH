@@ -13,3 +13,5 @@ CREATE OR REPLACE TRIGGER trg_aoth
     when e_exception then
     raise_application_error(-20000, 'First characters must be a number');
   end;
+
+  CREATE OR REPLACE TRIGGER <name> before INSERT OR UPDATE of <column_column> on <table> FOR EACH ROW declare e_exception exception; l_passed boolean := false; begin if (<statement_statement>) THEN l_passed := true; END IF; if (l_passed = false) THEN raise e_exception; END IF; exception when e_exception then raise_application_error(-20000, '<error>'); end;
