@@ -23,9 +23,7 @@
     <div th:if="${test}" th:align="middle">
         <h1 th:align="middle">All generated business rules</h1>
         <button class="button-primary" name="action" value="generate">Execute</button>
-        <div th:if="${error}">
-            <button class="button-secondary" name="action" value="test">Refresh</button>
-        </div>
+        <button th:if="${error}" class="button-secondary" name="action" value="test">Refresh</button>
     </div>
     <div th:if="!${test}">
         <h1 th:align="middle">All executed business rules</h1>

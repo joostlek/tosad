@@ -40,7 +40,7 @@ public class TargetDatabaseDAO implements TargetDatabaseDAOInterface {
                 logger.log(Level.INFO, "Drop triggers for table {0}", table.getName());
                 try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM ALL_TRIGGERS where TABLE_NAME = ?")) {
                     statement.setString(1, table.getName());
-                    try (ResultSet resultSet = statement.executeQuery();) {
+                    try (ResultSet resultSet = statement.executeQuery()) {
                         while (resultSet.next()) {
                             try (PreparedStatement dropStatement = connection.prepareStatement("DROP TRIGGER \"" + resultSet.getString(TRIGGER_NAME) + "\"")) {
                                 if (dropStatement.execute()) {
