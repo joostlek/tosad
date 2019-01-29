@@ -18,7 +18,7 @@
             th:remove="all-but-first"
             name="template">
         <option th:each="template : ${templates}"
-                th:field="${template.getBusinessRuleType().getCode()}"
+                th:value="${template.getBusinessRuleType().getCode()}"
                 th:text="${template.getBusinessRuleType().getName()}"></option>
     </select>
 
@@ -28,8 +28,8 @@
                 th:remove="all-but-first"
                 name="template">
             <option th:each="table : ${tables}"
-                    th:field="${table.getId()}"
-                    th:text="${table.getName()}"></option>
+                    th:value="${table.getId()}"
+                    th:value="${table.getName()}"></option>
         </select>
     </div>
 

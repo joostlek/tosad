@@ -16,7 +16,7 @@
     <h1 th:align="middle">All generated business rules</h1>
     <form th:action="@{/rules/generate}" method="post" th:object="${selectedRules}">
         <input th:each="ruleId : ${selectedRules.ruleIds}"
-               th:field="${ruleId}"
+               th:value="${ruleId}"
                th:field="*{ruleIds}"
                type="checkbox"
                class="hidden"
