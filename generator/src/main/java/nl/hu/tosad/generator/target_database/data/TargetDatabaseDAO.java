@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class TargetDatabaseDAO implements TargetDatabaseDAOInterface {
-    private final static String TRIGGER_NAME = "TRIGGER_NAME";
+    private static final String TRIGGER_NAME = "TRIGGER_NAME";
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
     @Override
@@ -24,7 +24,6 @@ public class TargetDatabaseDAO implements TargetDatabaseDAOInterface {
                 }
                 logger.log(Level.INFO, "Executed {0}", sql);
             }
-            connection.close();
             logger.log(Level.INFO, "Done!");
         } catch (SQLException e) {
             logger.log(Level.SEVERE, e.getMessage());
