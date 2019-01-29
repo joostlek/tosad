@@ -22,14 +22,16 @@
                 <label for="name">Name:</label><br>
                 <input type="text"
                        id="name"
-                       th:field="*{properties['name']}">
+                       th:field="*{properties['name']}"
+                        required>
             </div>
 
             <div>
                 <label for="description">Description:</label><br>
                 <input type="text"
                        id="description"
-                       th:field="*{properties['description']}">
+                       th:field="*{properties['description']}"
+                        required>
             </div>
 
             <div>
