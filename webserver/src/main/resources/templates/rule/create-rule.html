@@ -77,7 +77,7 @@
                         <label th:text="${attribute.getKey()}"></label>
                         <input id="vars" th:field="*{properties['__${attribute.key}__']}" type="text" required>
                         <div id="newInputDiv"></div>
-                        <input class="button" value="add" type="button" onclick="addInput()">
+                        <input class="button-primary" value="add" type="button" onclick="addInput()">
                     </div>
 
                     <div th:case="'statement'">
@@ -92,7 +92,7 @@
             <input id="error" type="text" th:field="*{properties['error']}" required>
 
 
-            <button class="button" type="submit">Save</button>
+            <button class="button-primary" type="submit">Save</button>
         </div>
     </div>
 </form>

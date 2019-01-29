@@ -22,19 +22,51 @@ td {
 body{
     font-family: 'Roboto', serif;
 }
-.button {
+
+.button-primary {
     display: inline-block;
     border-radius: 4px;
-    background-color: #f4511e;
+    background-color: #F4511E;
     border: none;
     color: #FFFFFF;
     text-align: center;
     font-size: 14px;
     padding: 8px;
-    width: 70px;
+    width: 100px;
     transition: all 0.5s;
     cursor: pointer;
     margin: 5px;
+    font-family: "Roboto Medium", serif;
+    text-decoration: none;
+}
+
+.button-primary:hover {
+    background-color: #E54C1C;
+}
+
+.button-secondary {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    border: 1px solid #F4511E;
+    color: #F4511E;
+    text-align: center;
+    font-size: 14px;
+    padding: 8px;
+    width: 100px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+    font-family: "Roboto Medium", serif;
+}
+
+.button-secondary:hover {
+    background-color: #F4511E;
+    color: #FFFFFF;
+}
+
+.id-column {
+    width: 30px;
 }
 
 #newdbform{
