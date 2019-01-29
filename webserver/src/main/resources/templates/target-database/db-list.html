@@ -22,7 +22,7 @@
                 th:field="*{databaseId}"
                 name="db">
             <option th:each="db : ${databases}"
-                    th:field="${db.getId()}"
+                    th:value="${db.getId()}"
                     th:text="${db.getName()}"></option>
         </select>
     </label><br>
