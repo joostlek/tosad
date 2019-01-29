@@ -14,9 +14,10 @@
 <!--/*/<th:block th:include="headertemplate :: header"></th:block> /*/-->
 
 <h3 th:align="center">The following business rule has been removed: </h3>
-<h3  th:align="center" th:text="${rule.getId()}"></h3>
-<h3  th:align="center" th:text="${rule.getName()}"></h3>
-<h3  th:align="center" th:text="${rule.getDescription()}"></h3>
+<h3 th:align="center" th:text="${rule.getId()}"></h3>
+<h3 th:align="center" th:text="${rule.getName()}"></h3>
+<h3 th:align="center" th:text="${rule.getDescription()}"></h3>
+<input th:align="center" field="Back" type="button" class="button-primary" th:href="@{/rules}">
 
 </body>
 </html>

@@ -16,7 +16,7 @@ public class Value {
     private Long id;
 
     @Column(name = "VALUE")
-    private String value;
+    private String field;
 
     @Column(name = "TYPE")
     private String type;
@@ -41,18 +41,18 @@ public class Value {
         this.column = column;
     }
 
-    public Value(String value, String type, String position) {
-        this.value = value;
+    public Value(String field, String type, String position) {
+        this.field = field;
         this.type = type;
         this.position = position;
     }
 
-    public String getValue() {
-        return value;
+    public String getField() {
+        return field;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setField(String field) {
+        this.field = field;
     }
 
     public String getType() {
@@ -98,13 +98,13 @@ public class Value {
     @Override
     public String toString() {
         if (type.equalsIgnoreCase("VARCHAR2")) {
-            return "\"" + this.value + "\"";
+            return "\"" + this.field + "\"";
         } else if (type.equalsIgnoreCase("NUMBER")) {
-            return this.value;
+            return this.field;
         } else if (type.equalsIgnoreCase("COLUMN")) {
             return this.column.getName();
         }
-        return this.value;
+        return this.field;
     }
 
     public String getLabel() {

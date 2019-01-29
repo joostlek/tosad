@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/define_rule.css}">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/generated-code.css}">
     <script src="js/define_rule.js" type="text/javascript"></script>
     <!--/*/ <th:block th:include="headertemplate :: head"></th:block> /*/-->
 </head>
@@ -36,7 +37,7 @@
                 <select th:field="*{properties['type']}"
                         th:remove="all-but-first"
                         name="template" disabled>
-                    <option th:value="${ruleType.getBusinessRuleType().getCode()}"
+                    <option th:field="${ruleType.getBusinessRuleType().getCode()}"
                             th:text="${ruleType.getBusinessRuleType().getName()}"></option>
                 </select>
             </div>
@@ -46,7 +47,7 @@
                 <select th:field="*{properties['table']}"
                         th:remove="all-but-first"
                         name="template" disabled>
-                    <option th:value="${ruleType.getTable().getId()}"
+                    <option th:field="${ruleType.getTable().getId()}"
                             th:text="${ruleType.getTable().getName()}"></option>
                 </select>
             </div>
@@ -60,7 +61,7 @@
                                 th:remove="all-but-first"
                                 name="template">
                             <option th:each="column : ${columns}"
-                                    th:value="${column.getId()}"
+                                    th:field="${column.getId()}"
                                     th:text="${column.getName()}"></option>
                         </select>
                     </div>
@@ -76,7 +77,7 @@
                                 name="operator"
                                 required>
                             <option th:each="operator : ${type.getAvailableOperators()}"
-                                    th:value="${operator.getId()}"
+                                    th:field="${operator.getId()}"
                                     th:text="${operator}"></option>
                         </select>
                     </div>
@@ -85,12 +86,12 @@
                         <label th:text="${attribute.getKey()}"></label>
                         <input id="vars" th:field="*{properties['__${attribute.key}__']}" type="text" required>
                         <div id="newInputDiv"></div>
-                        <input class="button-primary" value="add" type="button" onclick="addInput()">
+                        <input class="button-primary" field="add" type="button" onclick="addInput()">
                     </div>
 
                     <div th:case="'statement'">
                         <label th:text="${attribute.getKey()}"></label>
-                        <input th:field="*{properties['__${attribute.key}__']}" type="text">
+                        <input th:field="*{properties['__${attribute.key}__']}" type="text"  class="font">
                         <li>
                     </div>
                 </div>

@@ -97,7 +97,7 @@ public class RuleController {
         BusinessRule rule = ruleService.getBusinessRuleById(id);
 
         businessRule.getValues().forEach(value -> {
-            System.out.println(value.getValue());
+            System.out.println(value.getField());
         });
 
         model.addAttribute("businessRule", rule);
@@ -126,7 +126,7 @@ public class RuleController {
             if (value.getType().equalsIgnoreCase("COLUMN")) {
                 value.setColumn(rule.getValue(value.getPosition()).getColumn());
             } else {
-                value.setValue(rule.getValue(value.getPosition()).getValue());
+                value.setField(rule.getValue(value.getPosition()).getField());
             }
         }
         businessRule.setDescription(rule.getDescription());

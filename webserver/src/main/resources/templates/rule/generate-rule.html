@@ -23,12 +23,12 @@
         <td th:text="${rule.businessRuleType.name}"/>
         <td th:text="${rule.name}"/>
         <td th:text="${rule.errorMessage}">
-        <td><input class="button-primary" type="checkbox" th:field="*{ruleIds}" th:value="${rule.id}"><br>
+        <td><input class="button-primary" type="checkbox" th:field="*{ruleIds}" th:field="${rule.id}"><br>
         </td>
     </tr>
 </table>
-    <button class="button-primary" name="action" value="generate">Generate</button>
-    <button class="button-primary" name="action" value="test">Test Generate</button>
+    <button class="button-primary" name="action" field="generate">Generate</button>
+    <button class="button-primary" name="action" field="test">Test Generate</button>
 </form>
 </body>
 </html>

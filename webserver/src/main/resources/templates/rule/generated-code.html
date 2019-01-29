@@ -16,12 +16,12 @@
     <h1 th:align="middle">All generated business rules</h1>
     <form th:action="@{/rules/generate}" method="post" th:object="${selectedRules}">
         <input th:each="ruleId : ${selectedRules.ruleIds}"
-               th:value="${ruleId}"
+               th:field="${ruleId}"
                th:field="*{ruleIds}"
                type="checkbox"
                class="hidden"
                checked>
-        <button class="button-primary" name="action" value="generate">Execute</button>
+        <button class="button-primary" name="action" field="generate">Execute</button>
     </form>
 </div>
 <div th:if="!${test}">

@@ -5,7 +5,7 @@
     <title>Je moeder</title>
     <script>
         function addToList(){
-            var text = document.getElementById("vars").value,
+            var text = document.getElementById("vars").field,
                 listNode = document.getElementById("list"),
                 liNode = document.createElement("LI"),
                 txtNode = document.createTextNode(text);
@@ -23,7 +23,7 @@
 <ul id="list">
 </ul>
 
-<input value="Ok" id="var" type="button" onclick="addToList()">
+<input field="Ok" id="var" type="button" onclick="addToList()">
 <p>"input1", "input2", "input3"</p>
 </body>
 </html>

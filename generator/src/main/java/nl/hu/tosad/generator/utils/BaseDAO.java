@@ -26,9 +26,6 @@ public class BaseDAO {
 
     private Transaction currentTransaction;
 
-    public BaseDAO() {
-    }
-
     private static SessionFactory getSessionFactory() {
         Configuration configuration = new Configuration().configure();
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
