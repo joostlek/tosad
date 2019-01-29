@@ -86,7 +86,7 @@
                         <label th:text="${attribute.getKey()}"></label>
                         <input id="vars" th:field="*{properties['__${attribute.key}__']}" type="text" required>
                         <div id="newInputDiv"></div>
-                        <input class="button-primary" field="add" type="button" onclick="addInput()">
+                        <input class="button-primary" value="add" type="button" onclick="addInput()">
                     </div>
 
                     <div th:case="'statement'">

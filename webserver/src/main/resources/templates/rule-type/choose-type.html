@@ -29,7 +29,7 @@
                 name="template">
             <option th:each="table : ${tables}"
                     th:value="${table.getId()}"
-                    th:value="${table.getName()}"></option>
+                    th:text="${table.getName()}"></option>
         </select>
     </div>
 
