@@ -28,7 +28,7 @@ public class RuleService implements RuleServiceInterface {
 
     @Override
     public List<String> convertBusinessRulesWet(List<Long> businessRuleIds) {
-        if (businessRuleIds.size() == 0) {
+        if (businessRuleIds.isEmpty()) {
             return new ArrayList<>();
         }
         List<String> sql = this.convertBusinessRulesDry(businessRuleIds);
