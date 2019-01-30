@@ -87,3 +87,7 @@ body{
 #vars {
     margin-top: 5px;
 }
+
+#ruleListTable{
+    margin-bottom: 30px;
+}
