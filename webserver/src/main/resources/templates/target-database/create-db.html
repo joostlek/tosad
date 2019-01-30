@@ -6,10 +6,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="../css/normalize.css" th:href="@{/css/style.css}">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
-    <!--/*/ <th:block th:include="headertemplate :: head"></th:block> /*/-->
 </head>
 <body>
-<!--/*/<th:block th:include="headertemplate :: header"></th:block> /*/-->
     <div id="newdbform">
         <h1>Add new database</h1>
         <form action="#" th:action="@{/database/create}" method="post" th:object="${newDatabase}">
