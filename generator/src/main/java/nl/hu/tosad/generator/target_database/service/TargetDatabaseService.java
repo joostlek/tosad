@@ -5,15 +5,16 @@ import nl.hu.tosad.generator.target_database.data.TargetDatabaseDAO;
 import nl.hu.tosad.generator.target_database.data.TargetDatabaseDAOInterface;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 public class TargetDatabaseService implements TargetDatabaseServiceInterface {
     private TargetDatabaseDAOInterface targetDatabaseDAO = new TargetDatabaseDAO();
 
     @Override
     public boolean execute(List<String> sql, Database database) {
-        this.dropExistingTriggers(database);
-        return targetDatabaseDAO.execute(sql, database);
+        if (this.dropExistingTriggers(database)) {
+            return targetDatabaseDAO.execute(sql, database);
+        }
+        return false;
     }
 
     private boolean dropExistingTriggers(Database database) {

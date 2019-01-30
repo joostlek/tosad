@@ -2,6 +2,7 @@ package nl.hu.tosad.generator.rule.communication;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ConnectionReceiver extends Thread {
@@ -17,7 +18,7 @@ public class ConnectionReceiver extends Thread {
 
     @Override
     public void run() {
-        logger.info("Started socket on port " + port);
+        logger.log(Level.INFO, "Started socket on port {0}", port);
         while (true) {
             try (ServerSocket serverSocket = new ServerSocket(port)) {
                 new SocketProcessor(serverSocket.accept(), command).start();

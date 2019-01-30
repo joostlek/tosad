@@ -74,7 +74,7 @@ public class RuleService implements RuleServiceInterface {
 
     public List<BusinessRule> searchBusinessRules(Long databaseId, String value) {
         List<BusinessRule> businessRules = getAllBusinessRulesByDatabaseId(databaseId);
-        List<BusinessRule> businessRulesFinal = new ArrayList<BusinessRule>();
+        List<BusinessRule> businessRulesFinal = new ArrayList<>();
         for (BusinessRule br : businessRules) {
             if (br.getBusinessRuleType().getName().equals(value) ||
                     br.getName().equals(value)) {

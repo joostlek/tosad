@@ -1,6 +1,5 @@
 package nl.hu.tosad.webserver.ruletype.data;
 
-import nl.hu.tosad.domain.rule.BusinessRule;
 import nl.hu.tosad.domain.ruletype.BusinessRuleType;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

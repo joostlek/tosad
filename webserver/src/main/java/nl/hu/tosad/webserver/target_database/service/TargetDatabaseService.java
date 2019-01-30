@@ -77,7 +77,7 @@ public class TargetDatabaseService implements TargetDatabaseServiceInterface {
         return this.validateDatabase(newDatabase);
     }
 
-    private DbTable validateTable(DbTable table) {
+    private void validateTable(DbTable table) {
         Map<String, String> columnDefinition = targetDatabaseDAO.getColumnList(table);
         columnDefinition
                 .entrySet()
@@ -88,7 +88,7 @@ public class TargetDatabaseService implements TargetDatabaseServiceInterface {
                             if (table.hasColumn(e.getKey())) {
                                 DbColumn column = table.getColumn(e.getKey());
                                 if (!column.getType().equals(e.getValue())) {
-                                    throw new RuntimeException("Definition changed");
+                                    throw new DefinitionChangedException();
                                 }
                             } else {
                                 DbColumn column = new DbColumn(e.getKey(), e.getValue(), table);
@@ -96,7 +96,7 @@ public class TargetDatabaseService implements TargetDatabaseServiceInterface {
                             }
                         }
                 );
-        return tableRepository.save(table);
+        tableRepository.save(table);
     }
 
     @Override
@@ -153,11 +153,10 @@ public class TargetDatabaseService implements TargetDatabaseServiceInterface {
             scanner.close();
             inputStream.close();
             pw.close();
-            s.close();
             String[] sqlQueries = gson.fromJson(sql, String[].class);
             return Arrays.asList(sqlQueries);
         } catch (IOException e) {
-            throw new RuntimeException("");
+            throw new SocketProblemException();
         }
     }
 }
