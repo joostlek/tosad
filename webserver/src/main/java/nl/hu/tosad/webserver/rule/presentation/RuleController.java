@@ -93,6 +93,7 @@ public class RuleController {
         try {
             ruleService.saveBusinessRule(toBusinessRule(ruleDTO, ruleTypeHolder.getTable(), ruleTypeHolder.getBusinessRuleType(), template));
         } catch (RuntimeException ex) {
+            ex.printStackTrace();
             return new RedirectView("/rules/add?error=" + ex.getMessage());
         }
 

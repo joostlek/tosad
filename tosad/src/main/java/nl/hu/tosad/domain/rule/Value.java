@@ -98,7 +98,7 @@ public class Value {
     @Override
     public String toString() {
         if (type.equalsIgnoreCase("VARCHAR2")) {
-            return "\"" + this.field + "\"";
+            return "\'" + this.field + "\'";
         } else if (type.equalsIgnoreCase("NUMBER")) {
             return this.field;
         } else if (type.equalsIgnoreCase("COLUMN")) {

@@ -20,6 +20,7 @@ public class RuleService implements RuleServiceInterface {
     private static final String NUMBER = "NUMBER";
     private static final String VARCHAR2 = "VARCHAR2";
     private static final String COLUMN = "COLUMN";
+    private static final String COLUMNO = "COLUMNO";
     private final BusinessRuleRepository businessRuleRepository;
     private final ValueRepository valueRepository;
 
@@ -36,22 +37,24 @@ public class RuleService implements RuleServiceInterface {
 
     @Override
     public BusinessRule saveBusinessRule(BusinessRule businessRule) {
-        DbColumn column = businessRule.getValue("column_column").getColumn();
-        for (Value value : businessRule.getValues()) {
-            System.out.println(value);
-            if (VARCHAR2.equals(column.getType())) {
-                value.setType(VARCHAR2);
-            } else if (COLUMN.equals(column.getType()) && !value.getPosition().equals("column_column")) {
-                if (!value.getColumn().getType().equals(column.getType())) {
-                    throw new RuntimeException("Column not te same type");
+        Value value1 = businessRule.getValue("column_column");
+        if (value1 != null) {
+            DbColumn column = value1.getColumn();
+            for (Value value : businessRule.getValues()) {
+                if (value.getType().equalsIgnoreCase(COLUMN) || value.getType().equalsIgnoreCase(COLUMNO)) {
+                    if (!value.getColumn().getType().equals(column.getType())) {
+                        throw new RuntimeException("Column not the same type");
+                    }
+                } else if (VARCHAR2.equals(column.getType()) && !value.getType().equalsIgnoreCase("statement")) {
+                    value.setType(VARCHAR2);
+                } else if (NUMBER.equals(column.getType()) && !value.getType().equalsIgnoreCase("statement")) {
+                    try {
+                        Long.parseLong(value.getField());
+                    } catch (RuntimeException ex) {
+                        throw new RuntimeException(value.getLabel() + " is not a number!");
+                    }
+                    value.setType(NUMBER);
                 }
-            } else if (NUMBER.equals(column.getType())) {
-                try {
-                    Long.parseLong(value.getField());
-                } catch (RuntimeException ex) {
-                    throw new RuntimeException(value.getLabel() + " is not a number!");
-                }
-                value.setType(NUMBER);
             }
         }
         return businessRuleRepository.save(businessRule);

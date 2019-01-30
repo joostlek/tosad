@@ -79,7 +79,7 @@
                         <input th:field="*{properties['__${attribute.key}__']}" type="number" required>
                     </div>
 
-                    <div th:case="'VARCHAR2'">
+                    <div th:case="'value'">
                         <label th:text="${attribute.getKey()}"></label>
                         <input th:field="*{properties['__${attribute.key}__']}" type="text" required>
                     </div>
