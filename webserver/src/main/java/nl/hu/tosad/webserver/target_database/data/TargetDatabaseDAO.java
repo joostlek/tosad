@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 @Repository
 public class TargetDatabaseDAO implements TargetDatabaseDAOInterface {
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     @Override
     public List<String> getTableList(Database database) {
@@ -26,7 +28,7 @@ public class TargetDatabaseDAO implements TargetDatabaseDAOInterface {
             }
             return strings;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.severe(e.getMessage());
             return new ArrayList<>();
         }
     }
@@ -45,7 +47,7 @@ public class TargetDatabaseDAO implements TargetDatabaseDAOInterface {
                 i++;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.severe(e.getMessage());
         }
         return columnDefinition;
     }

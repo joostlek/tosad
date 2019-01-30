@@ -14,8 +14,11 @@ import org.stringtemplate.v4.ST;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class RuleService implements RuleServiceInterface {
+
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     private RuleRepositoryInterface ruleRepositoryInterface;
 
@@ -49,7 +52,7 @@ public class RuleService implements RuleServiceInterface {
             try {
                 businessRules.add(ruleRepositoryInterface.getBusinessRuleById(id));
             } catch (RuntimeException e) {
-                e.printStackTrace();
+                logger.severe(e.getMessage());
             }
         }
         return businessRules;
