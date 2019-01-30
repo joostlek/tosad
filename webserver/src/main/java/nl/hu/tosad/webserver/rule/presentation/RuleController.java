@@ -45,10 +45,9 @@ public class RuleController {
     }
 
     @GetMapping("/rules")
-    public String ruleList(
-            @ModelAttribute("database") DatabaseHolder databaseHolder,
-            @RequestParam(value = "search", required = false) String query,
-            Model model) {
+    public String ruleList(@ModelAttribute("database") DatabaseHolder databaseHolder,
+                           @RequestParam(value = "search", required = false) String query,
+                           Model model) {
         Long databaseId = databaseHolder.getDatabase().getId();
         if (query != null && !query.equals("")) {
             model.addAttribute("rules", ruleService.searchBusinessRules(databaseId, query));
@@ -61,12 +60,17 @@ public class RuleController {
 
     @GetMapping("/rules/add")
     public String addRule(Model model,
+                          @RequestParam(value = "error", required = false) String error,
                           @ModelAttribute("database") DatabaseHolder databaseHolder,
                           @ModelAttribute("ruleType") RuleTypeHolder ruleTypeHolder) {
         Database database = databaseHolder.getDatabase();
         Template template = ruleTypeHolder.getBusinessRuleType().getTemplate(database.getDialect());
 
         Long tableId = ruleTypeHolder.getTable().getId();
+
+        if (error != null) {
+            model.addAttribute("error", error);
+        }
 
         model.addAttribute("rule", new RuleDTO());
         model.addAttribute("tables", database.getTables());
@@ -99,10 +103,15 @@ public class RuleController {
     @GetMapping("/rules/{id}/edit")
     public String rule(Model model,
                        @ModelAttribute("database") DatabaseHolderInterface databaseHolder,
+                       @RequestParam(value = "error", required = false) String error,
                        @PathVariable Long id) {
         BusinessRule businessRule = ruleService.getBusinessRuleById(id);
         Template template = businessRule.getBusinessRuleType().getTemplate(businessRule.getDatabase().getDialect());
         BusinessRule rule = ruleService.getBusinessRuleById(id);
+
+        if (error != null) {
+            model.addAttribute("error", error);
+        }
 
         model.addAttribute("businessRule", rule);
         model.addAttribute("bRuleType", businessRule.getBusinessRuleType());
