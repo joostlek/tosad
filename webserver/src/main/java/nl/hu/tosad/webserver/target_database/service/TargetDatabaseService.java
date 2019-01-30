@@ -125,17 +125,18 @@ public class TargetDatabaseService implements TargetDatabaseServiceInterface {
     }
 
     @Override
-    public List<Dialect> getAllDialects(){return dialectRepository.findAll();}
+    public List<Dialect> getAllDialects() {
+        return dialectRepository.findAll();
+    }
 
     @Override
-    public List<Database> getAllDatabases(){
+    public List<Database> getAllDatabases() {
         return databaseRepository.findAll();
     }
 
     @Override
     public List<String> generateQueries(List<Long> businessRuleIds, boolean wet) {
-        try {
-            Socket s = new Socket(System.getenv("GEN_URL"), wet ? Integer.parseInt(System.getenv("GEN_PORT_WET")) : Integer.parseInt(System.getenv("GEN_PORT_DRY")));
+        try (Socket s = new Socket(System.getenv("GEN_URL"), wet ? Integer.parseInt(System.getenv("GEN_PORT_WET")) : Integer.parseInt(System.getenv("GEN_PORT_DRY")))) {
             OutputStream os = s.getOutputStream();
             PrintWriter pw = new PrintWriter(os);
             Gson gson = new Gson();

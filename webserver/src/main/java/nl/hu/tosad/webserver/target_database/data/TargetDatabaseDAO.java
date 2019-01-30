@@ -38,14 +38,17 @@ public class TargetDatabaseDAO implements TargetDatabaseDAOInterface {
         DatabaseConnectionFactory databaseConnectionFactory = new DatabaseConnectionFactory(table.getDatabase());
         Map<String, String> columnDefinition = new HashMap<>();
         try (Connection connection = databaseConnectionFactory.createConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM " + table.getName());
-            ResultSet resultSet = preparedStatement.executeQuery();
-            ResultSetMetaData metaData = resultSet.getMetaData();
-            int i = 1;
-            while (metaData.getColumnCount() >= i) {
-                columnDefinition.put(metaData.getColumnName(i), metaData.getColumnTypeName(i));
-                i++;
+            try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM " + table.getName())) {
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    ResultSetMetaData metaData = resultSet.getMetaData();
+                    int i = 1;
+                    while (metaData.getColumnCount() >= i) {
+                        columnDefinition.put(metaData.getColumnName(i), metaData.getColumnTypeName(i));
+                        i++;
+                    }
+                }
             }
+
         } catch (SQLException e) {
             logger.severe(e.getMessage());
         }
