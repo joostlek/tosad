@@ -8,7 +8,6 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/define_rule.css}">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
     <link rel="stylesheet" type="text/css" th:href="@{/css/generated-code.css}">
-    <script src="js/define_rule.js" type="text/javascript"></script>
     <!--/*/ <th:block th:include="headertemplate :: head"></th:block> /*/-->
 </head>
 <body>
@@ -73,6 +72,11 @@
                         <input th:field="*{properties['__${attribute.key}__']}" type="number" required>
                     </div>
 
+                    <div th:case="'value'">
+                        <label th:text="${attribute.getKey()}"></label>
+                        <input th:field="*{properties['__${attribute.key}__']}" type="text" required>
+                    </div>
+
                     <div th:case="'columno'">
                         <label th:text="${attribute.getKey()}"></label>
                         <input th:field="*{properties['__${attribute.key}__']}" type="text" required>
@@ -100,9 +104,9 @@
                         </select>
                     </div>
 
-                    <div th:case="'lov'">
+                    <div th:case="'list'">
                         <label th:text="${attribute.getKey()}"></label>
-                        <input id="vars" th:field="*{properties['__${attribute.key}__']}" type="text" required>
+                        <input id="vars" th:field="*{list[0]}" type="text" required>
                         <div id="newInputDiv"></div>
                         <input class="button-primary" value="add" type="button" onclick="addInput()">
                     </div>

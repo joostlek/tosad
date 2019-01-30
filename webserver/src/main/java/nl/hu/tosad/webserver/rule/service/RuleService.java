@@ -1,6 +1,8 @@
 package nl.hu.tosad.webserver.rule.service;
 
 import nl.hu.tosad.domain.rule.BusinessRule;
+import nl.hu.tosad.domain.rule.Value;
+import nl.hu.tosad.domain.target_database.DbColumn;
 import nl.hu.tosad.domain.target_database.DbTable;
 import nl.hu.tosad.webserver.rule.data.BusinessRuleRepository;
 import nl.hu.tosad.webserver.rule.data.ValueRepository;
@@ -15,8 +17,10 @@ import java.util.List;
 @Transactional
 public class RuleService implements RuleServiceInterface {
 
+    private static final String NUMBER = "NUMBER";
+    private static final String VARCHAR2 = "VARCHAR2";
+    private static final String COLUMN = "COLUMN";
     private final BusinessRuleRepository businessRuleRepository;
-
     private final ValueRepository valueRepository;
 
     @Autowired
@@ -32,6 +36,24 @@ public class RuleService implements RuleServiceInterface {
 
     @Override
     public BusinessRule saveBusinessRule(BusinessRule businessRule) {
+        DbColumn column = businessRule.getValue("column_column").getColumn();
+        for (Value value : businessRule.getValues()) {
+            System.out.println(value);
+            if (VARCHAR2.equals(column.getType())) {
+                value.setType(VARCHAR2);
+            } else if (COLUMN.equals(column.getType()) && !value.getPosition().equals("column_column")) {
+                if (!value.getColumn().getType().equals(column.getType())) {
+                    throw new RuntimeException("Column not te same type");
+                }
+            } else if (NUMBER.equals(column.getType())) {
+                try {
+                    Long.parseLong(value.getField());
+                } catch (RuntimeException ex) {
+                    throw new RuntimeException(value.getLabel() + " is not a number!");
+                }
+                value.setType(NUMBER);
+            }
+        }
         return businessRuleRepository.save(businessRule);
     }
 
@@ -50,14 +72,13 @@ public class RuleService implements RuleServiceInterface {
     public List<BusinessRule> searchBusinessRules(Long databaseId, String value) {
         List<BusinessRule> businessRules = getAllBusinessRulesByDatabaseId(databaseId);
         List<BusinessRule> businessRulesFinal = new ArrayList<BusinessRule>();
-        for(BusinessRule br: businessRules){
-            if(br.getBusinessRuleType().getName().equals(value) ||
-                br.getName().equals(value)){
+        for (BusinessRule br : businessRules) {
+            if (br.getBusinessRuleType().getName().equals(value) ||
+                    br.getName().equals(value)) {
                 businessRulesFinal.add(br);
-            }
-            else {
-                for(DbTable table:br.getTables()){
-                    if(table.getName().equals(value)){
+            } else {
+                for (DbTable table : br.getTables()) {
+                    if (table.getName().equals(value)) {
                         businessRulesFinal.add(br);
                     }
                 }

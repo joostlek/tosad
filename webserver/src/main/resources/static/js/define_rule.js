@@ -12,11 +12,15 @@
 //     listNode.appendChild(liNode);
 // }
 
+let i = 1;
+
 function addInput(){
-    var inputDiv = document.getElementById("newInputDiv"),
+    let inputDiv = document.getElementById("newInputDiv"),
         inputNode = document.createElement("input");
 
-    inputNode.setAttribute("th:field", "*{properties['__${attribute.key}__']}");
+    inputNode.setAttribute("name", "list[" + i + "]");
     inputNode.setAttribute("type", "text");
+    inputNode.setAttribute("id", "vars");
     inputDiv.appendChild(inputNode);
+    i++;
 }

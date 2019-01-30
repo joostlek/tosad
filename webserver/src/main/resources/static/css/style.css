@@ -83,3 +83,7 @@ body{
     display: none;
     visibility: hidden;
 }
+
+#vars {
+    margin-top: 5px;
+}

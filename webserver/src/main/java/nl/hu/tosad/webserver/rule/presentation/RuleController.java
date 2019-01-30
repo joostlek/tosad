@@ -84,10 +84,15 @@ public class RuleController {
                                    RedirectAttributes attributes) {
         Dialect dialect = databaseHolder.getDatabase().getDialect();
         Template template = ruleTypeHolder.getBusinessRuleType().getTemplate(dialect);
-
-        ruleService.saveBusinessRule(toBusinessRule(ruleDTO, ruleTypeHolder.getTable(), ruleTypeHolder.getBusinessRuleType(), template));
-
         attributes.addFlashAttribute("database", databaseHolder);
+
+        try {
+            ruleService.saveBusinessRule(toBusinessRule(ruleDTO, ruleTypeHolder.getTable(), ruleTypeHolder.getBusinessRuleType(), template));
+        } catch (RuntimeException ex) {
+            return new RedirectView("/rules/add?error=" + ex.getMessage());
+        }
+
+
         return new RedirectView("/rules");
     }
 
@@ -98,10 +103,6 @@ public class RuleController {
         BusinessRule businessRule = ruleService.getBusinessRuleById(id);
         Template template = businessRule.getBusinessRuleType().getTemplate(businessRule.getDatabase().getDialect());
         BusinessRule rule = ruleService.getBusinessRuleById(id);
-
-        businessRule.getValues().forEach(value -> {
-            System.out.println(value.getField());
-        });
 
         model.addAttribute("businessRule", rule);
         model.addAttribute("bRuleType", businessRule.getBusinessRuleType());
@@ -133,9 +134,13 @@ public class RuleController {
             }
         }
         businessRule.setDescription(rule.getDescription());
-        ruleService.saveBusinessRule(businessRule);
-
         attributes.addFlashAttribute("database", databaseHolder);
+        try {
+            ruleService.saveBusinessRule(businessRule);
+        } catch (RuntimeException ex) {
+            return new RedirectView("/rules/" + id + "/edit?error=" + ex.getMessage());
+        }
+
         return new RedirectView("/rules");
     }
 
@@ -187,22 +192,25 @@ public class RuleController {
 
     private RuleDTO toRuleDTO(BusinessRule rule) {
         Map<String, Object> properties = new HashMap<>();
+        List<String> strings = new ArrayList<>();
         properties.put("name", rule.getName());
         properties.put("error", rule.getErrorMessage());
         properties.put("description", rule.getDescription());
-        properties.put("list", new ArrayList<>());
         if (rule.getOperator() != null) {
             properties.put("operator", rule.getOperator().getId());
         }
         for (Value value : rule.getValues()) {
             if (value.getType().equalsIgnoreCase("COLUMN")) {
                 properties.put(value.getLabel(), value.getColumn().getId());
+            } else if (value.getPosition().endsWith("_list")) {
+                strings.add(value.getField());
             } else {
                 properties.put(value.getLabel(), value);
             }
         }
         RuleDTO ruleDTO = new RuleDTO();
         ruleDTO.setProperties(properties);
+        ruleDTO.setList(strings);
         return ruleDTO;
     }
 
@@ -230,14 +238,23 @@ public class RuleController {
                 .parallel()
                 .forEach(e -> {
                     if (e.getValue().equals("column")) {
-                        businessRuleBuilder.addValue(new Value(String.format("%s_%s", e.getKey(), e.getValue()), targetDatabaseService.getColumnById(Long.parseLong((String) ruleComponents.get(e.getKey())))));
+                        businessRuleBuilder.addValue(new Value(getPosition(e.getKey(), e.getValue()), targetDatabaseService.getColumnById(Long.parseLong((String) ruleComponents.get(e.getKey())))));
                     } else if (e.getValue().equals("columno")) {
-                        businessRuleBuilder.addValue(new Value(String.format("%s_%s", e.getKey(), e.getValue()), targetDatabaseService.getTableById(Long.parseLong((String) ruleComponents.get("table"))).getColumn((String) ruleComponents.get(e.getKey()))));
+                        businessRuleBuilder.addValue(new Value(getPosition(e.getKey(), e.getValue()), targetDatabaseService.getTableById(Long.parseLong((String) ruleComponents.get("table"))).getColumn((String) ruleComponents.get(e.getKey()))));
+                    } else if (e.getValue().equals("list")) {
+                        List<String> strings = ruleDTO.getList();
+                        for (String listItem : strings) {
+                            businessRuleBuilder.addValue(new Value(listItem, "list", getPosition(e.getKey(), e.getValue())));
+                        }
                     } else if (!e.getValue().equals("operator") && !e.getValue().equals("table")) {
-                        businessRuleBuilder.addValue(new Value((String) ruleComponents.get(e.getKey()), e.getValue(), String.format("%s_%s", e.getKey(), e.getValue())));
+                        businessRuleBuilder.addValue(new Value((String) ruleComponents.get(e.getKey()), e.getValue(), getPosition(e.getKey(), e.getValue())));
                     }
                 });
         return businessRuleBuilder.build();
+    }
+
+    private String getPosition(String label, String type) {
+        return String.format("%s_%s", label, type);
     }
 
 }
