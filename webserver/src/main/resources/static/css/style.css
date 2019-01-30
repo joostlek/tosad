@@ -83,3 +83,7 @@ body{
     display: none;
     visibility: hidden;
 }
+
+#ruleListTable{
+    margin-bottom: 30px;
+}
