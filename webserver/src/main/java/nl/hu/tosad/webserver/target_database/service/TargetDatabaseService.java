@@ -47,10 +47,10 @@ public class TargetDatabaseService implements TargetDatabaseServiceInterface {
         for (String tableName : tableNames) {
             if (database.hasTable(tableName)) {
                 DbTable table = tableRepository.findByNameAndDatabase(tableName, database);
-                table = validateTable(table);
+                validateTable(table);
             } else {
                 DbTable table = tableRepository.save(new DbTable(tableName, database));
-                table = validateTable(table);
+                validateTable(table);
             }
         }
         return databaseRepository.save(database);
