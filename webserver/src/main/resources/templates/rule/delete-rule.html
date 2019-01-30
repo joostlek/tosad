@@ -13,11 +13,10 @@
 
 <!--/*/<th:block th:include="headertemplate :: header"></th:block> /*/-->
 
-<h3 th:align="center">The following business rule has been removed: </h3>
-<h3 th:align="center" th:text="${rule.getId()}"></h3>
-<h3 th:align="center" th:text="${rule.getName()}"></h3>
-<h3 th:align="center" th:text="${rule.getDescription()}"></h3>
-<a th:align="center" value="Back" type="button" class="button-primary" th:href="@{/rules}">
-</a>
+<h3 th:align="middle">The following business rule has been removed: </h3>
+<h3 th:align="middle" th:text="${rule.getId()}"></h3>
+<h3 th:align="middle" th:text="${rule.getName()}"></h3>
+<h3 th:align="middle" th:text="${rule.getDescription()}"></h3>
+<a th:align="middle" class="button-primary" th:href="@{/rules}">Back</a>
 </body>
 </html>
