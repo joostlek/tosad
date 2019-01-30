@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 @Repository
 public class TargetDatabaseDAO implements TargetDatabaseDAOInterface {
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     @Override
     public List<String> getTableList(Database database) {
@@ -26,7 +28,7 @@ public class TargetDatabaseDAO implements TargetDatabaseDAOInterface {
             }
             return strings;
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.severe(e.getMessage());
             return new ArrayList<>();
         }
     }
@@ -36,16 +38,19 @@ public class TargetDatabaseDAO implements TargetDatabaseDAOInterface {
         DatabaseConnectionFactory databaseConnectionFactory = new DatabaseConnectionFactory(table.getDatabase());
         Map<String, String> columnDefinition = new HashMap<>();
         try (Connection connection = databaseConnectionFactory.createConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM " + table.getName());
-            ResultSet resultSet = preparedStatement.executeQuery();
-            ResultSetMetaData metaData = resultSet.getMetaData();
-            int i = 1;
-            while (metaData.getColumnCount() >= i) {
-                columnDefinition.put(metaData.getColumnName(i), metaData.getColumnTypeName(i));
-                i++;
+            try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM " + table.getName())) {
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    ResultSetMetaData metaData = resultSet.getMetaData();
+                    int i = 1;
+                    while (metaData.getColumnCount() >= i) {
+                        columnDefinition.put(metaData.getColumnName(i), metaData.getColumnTypeName(i));
+                        i++;
+                    }
+                }
             }
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.severe(e.getMessage());
         }
         return columnDefinition;
     }

@@ -43,7 +43,6 @@ public class SocketProcessor extends Thread {
             socket.close();
         } catch (IOException e) {
             logger.severe(e.getMessage());
-            e.printStackTrace();
             try {
                 socket.close();
             } catch (IOException e1) {
