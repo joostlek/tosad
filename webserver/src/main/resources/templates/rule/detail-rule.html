@@ -5,12 +5,18 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <script th:src="@{/js/define_rule.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/error.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/define_rule.css}">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
     <!--/*/ <th:block th:include="headertemplate :: head"></th:block> /*/-->
 </head>
 <body>
 <!--/*/<th:block th:include="headertemplate :: header"></th:block> /*/-->
+
+<div th:if="${error}" class="error-message">
+    <p th:text="${error}"></p>
+</div>
+
 <h1 th:align="middle" th:text="${businessRule.getName()}"></h1>
 
 <form action="#" th:object="${rule}" th:action="@{/rules/{id}/edit(id=${businessRule.getId()})}" method="post">
